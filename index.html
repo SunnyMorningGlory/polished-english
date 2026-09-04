@@ -226,10 +226,10 @@
     .tab {
       flex: 1;
       min-width: 100px;
-      padding: 0.9rem 0.5rem;
+      padding: 0.8rem 0.4rem;
       text-align: center;
       cursor: pointer;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
       color: var(--text-muted);
       border: none;
@@ -238,6 +238,10 @@
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       white-space: nowrap;
       font-family: -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
     }
     .tab:hover {
       color: var(--navy);
@@ -249,7 +253,7 @@
       background: var(--navy-bg);
       font-weight: 700;
     }
-    .tab-icon { display: block; font-size: 1.4rem; margin-bottom: 0.15rem; }
+    .tab-icon { font-size: 1.3rem; line-height: 1; display: block; }
 
     /* ===== CARD STYLES ===== */
     .card {
