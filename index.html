@@ -1,0 +1,2192 @@
+<!DOCTYPE html>
+<html lang="en" class="extra-large-font">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfect English — Speak English Without Mistakes</title>
+  <meta name="description" content="Free English tutor for non-native professionals. Fix common mistakes, practice workplace conversations, and build error-free English. Hospitality, office, and retail settings. By Sonat Birnecker Hart.">
+
+  <!-- ===== SOCIAL MEDIA PREVIEW ===== -->
+  <meta property="og:title" content="Perfect English — Speak English Without Mistakes">
+  <meta property="og:description" content="Free English tutor for non-native professionals. Fix common mistakes, practice workplace conversations, and build error-free English.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Perfect English — Speak English Without Mistakes">
+  <meta name="twitter:description" content="Free, offline English tutor for non-native professionals in hospitality, office, and retail settings.">
+
+  <!-- ===== SECURITY HEADERS ===== -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none';">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="no-referrer">
+
+  <!-- ===== PWA SUPPORT ===== -->
+  <meta name="theme-color" content="#1e3a5f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Perfect English">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <!-- ===== FONT SIZE PREFERENCE RESTORATION ===== -->
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('perfectEnglishFontSize');
+        if (saved) {
+          var html = document.documentElement;
+          html.classList.remove('large-font', 'extra-large-font', 'huge-font');
+          if (saved === 'large') html.classList.add('large-font');
+          else if (saved === 'huge') html.classList.add('huge-font');
+          else html.classList.add('extra-large-font');
+        }
+      } catch(e) {}
+    })();
+  </script>
+
+  <!-- ========================================================================
+       LEGAL NOTICE
+       ========================================================================
+       This application is an educational tool for improving conversational
+       English. It does NOT guarantee fluency or elimination of all errors.
+       It uses the browser's built-in speech synthesis and recognition,
+       which may vary by device.
+
+       Provided "AS IS" without warranty. © 2026 Sonat Birnecker Hart, Apache License 2.0.
+       ======================================================================== -->
+
+  <style>
+    /* ========================================================================
+       DESIGN PRINCIPLES:
+       - Premium navy/gold palette with depth and layering
+       - Glassmorphism tab bar, gradient surfaces, soft shadows
+       - Serif display font for headings (Georgia stack)
+       - Micro-interactions: hover lifts, press scales, smooth transitions
+       - Large text for accessibility (min 18px body, 24px+ headings)
+       - Mobile-first responsive design — works 100% offline
+       ======================================================================== */
+
+    :root {
+      --navy: #162d4d;
+      --navy-light: #1e3a5f;
+      --navy-lighter: #2d5a87;
+      --navy-bg: #eef4fa;
+      --navy-glow: rgba(22, 45, 77, 0.12);
+      --gold: #c5a028;
+      --gold-light: #e0c040;
+      --gold-gradient: linear-gradient(135deg, #d4b034, #c5a028);
+      --gold-bg: #fefce8;
+      --red: #c8102e;
+      --red-light: #dc2626;
+      --red-bg: #fef2f2;
+      --green: #15803d;
+      --green-light: #16a34a;
+      --green-bg: #f0fdf4;
+      --teal: #0d9488;
+      --teal-bg: #f0fdfa;
+      --white: #ffffff;
+      --bg: #f4f6f9;
+      --bg-gradient: linear-gradient(180deg, #f0f3f8 0%, #f8fafc 100%);
+      --card-bg: #ffffff;
+      --text: #1a2738;
+      --text-muted: #5a6b82;
+      --border: #d9e1ec;
+      --border-light: #e8eef5;
+      --shadow-sm: 0 1px 2px rgba(22, 45, 77, 0.06);
+      --shadow-md: 0 4px 16px rgba(22, 45, 77, 0.08);
+      --shadow-lg: 0 8px 32px rgba(22, 45, 77, 0.12);
+      --shadow-xl: 0 12px 48px rgba(22, 45, 77, 0.16);
+      --shadow-gold: 0 4px 20px rgba(197, 160, 40, 0.25);
+      --large-text: 22px;
+      --heading-size: 36px;
+      --button-height: 56px;
+      --radius-sm: 10px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: var(--large-text);
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, 'Inter', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    h1, h2, h3 {
+      font-family: Georgia, 'Times New Roman', 'Playfair Display', serif;
+      letter-spacing: -0.01em;
+    }
+
+    .container {
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    /* ===== TOP BAR ===== */
+    .top-bar {
+      height: 5px;
+      width: 100%;
+      display: flex;
+      background: var(--navy);
+    }
+    .top-bar div:nth-child(1) { background: linear-gradient(90deg, var(--navy), var(--navy-light)); flex: 2; }
+    .top-bar div:nth-child(2) { background: linear-gradient(90deg, var(--gold), var(--gold-light)); flex: 1; }
+
+    /* ===== HEADER ===== */
+    header {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      background:
+        radial-gradient(ellipse at top, rgba(197, 160, 40, 0.08), transparent 70%),
+        linear-gradient(135deg, #f8fafc 0%, #ffffff 40%, var(--navy-bg) 100%);
+      border-bottom: 1px solid var(--border-light);
+      position: relative;
+      overflow: hidden;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 120px; height: 3px;
+      background: var(--gold-gradient);
+      border-radius: 2px;
+    }
+
+    header h1 {
+      font-size: var(--heading-size);
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+      font-weight: 700;
+      text-shadow: 0 1px 2px rgba(22, 45, 77, 0.06);
+    }
+
+    header .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* ===== FONT SIZE CONTROL ===== */
+    .font-controls {
+      display: flex;
+      justify-content: center;
+      gap: 0.4rem;
+      margin-top: 1.2rem;
+      align-items: center;
+    }
+    .font-controls button {
+      padding: 0.35rem 0.7rem;
+      min-height: 40px;
+      font-size: 0.85rem;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.8);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      box-shadow: var(--shadow-sm);
+    }
+    .font-controls button:hover {
+      border-color: var(--navy);
+      color: var(--navy);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* ===== NAV TABS — glassmorphism ===== */
+    .tabs {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+    .tab {
+      flex: 1;
+      min-width: 100px;
+      padding: 0.9rem 0.5rem;
+      text-align: center;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border: none;
+      background: transparent;
+      border-bottom: 3px solid transparent;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+      font-family: -apple-system, sans-serif;
+    }
+    .tab:hover {
+      color: var(--navy);
+      background: rgba(238, 244, 250, 0.5);
+    }
+    .tab.active {
+      color: var(--navy);
+      border-bottom-color: var(--gold);
+      background: var(--navy-bg);
+      font-weight: 700;
+    }
+    .tab-icon { display: block; font-size: 1.4rem; margin-bottom: 0.15rem; }
+
+    /* ===== CARD STYLES ===== */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 1.8rem;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border-light);
+    }
+    .card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: var(--navy);
+      font-weight: 700;
+    }
+    .card h3 {
+      font-size: 1.2rem;
+      margin: 1.2rem 0 0.4rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ===== BUTTONS ===== */
+    button {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      padding: 0.75rem 1.4rem;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: var(--button-height);
+      line-height: 1.3;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      color: white;
+      box-shadow: var(--shadow-md);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--navy-light), var(--navy-lighter));
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+    .btn-primary:active { transform: translateY(0); box-shadow: var(--shadow-sm); }
+    .btn-gold {
+      background: var(--gold-gradient);
+      color: #1a2738;
+      box-shadow: var(--shadow-gold);
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(197, 160, 40, 0.35);
+    }
+    .btn-gold:active { transform: translateY(0); }
+    .btn-red {
+      background: linear-gradient(135deg, var(--red), var(--red-light));
+      color: white;
+      box-shadow: var(--shadow-md);
+    }
+    .btn-red:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .btn-green {
+      background: linear-gradient(135deg, var(--green), var(--green-light));
+      color: white;
+      box-shadow: 0 4px 16px rgba(21, 128, 61, 0.2);
+    }
+    .btn-green:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(21, 128, 61, 0.3); }
+    .btn-secondary {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-secondary:hover {
+      border-color: var(--navy-light);
+      color: var(--navy);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+    .btn-voice {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      color: white;
+      box-shadow: var(--shadow-md);
+    }
+    .btn-voice.recording {
+      background: linear-gradient(135deg, var(--red), var(--red-light));
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1; box-shadow: 0 0 0 0 rgba(200,16,46,0.3);} 50%{opacity:0.9; box-shadow: 0 0 0 12px rgba(200,16,46,0);} }
+
+    .button-row {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    .button-row button { flex: 1; min-width: 130px; }
+
+    /* ===== LESSON CARDS ===== */
+    .lesson-list { display: grid; gap: 0.8rem; }
+    .lesson-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 1.2rem 1.4rem;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .lesson-item .lesson-icon {
+      display: block;
+      line-height: 1.2;
+    }
+    .lesson-item h3 {
+      display: block;
+      margin-top: 0.3rem;
+    }
+    .lesson-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold-gradient);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .lesson-item:hover {
+      border-color: var(--navy-light);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+    .lesson-item:hover::before { opacity: 1; }
+    .lesson-item h3 {
+      margin: 0 0 0.2rem;
+      color: var(--navy);
+      font-size: 1.1rem;
+      font-family: Georgia, serif;
+      font-weight: 700;
+    }
+    .lesson-item .lesson-meta {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.4;
+    }
+    .lesson-item .lesson-icon { font-size: 1.8rem; margin-bottom: 0.4rem; line-height: 1; }
+    .lesson-item.completed { border-color: var(--green-light); }
+    .lesson-item.completed::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(135deg, var(--green), var(--green-light));
+      opacity: 1;
+    }
+    .lesson-item.completed::after {
+      content: '✓';
+      color: var(--green);
+      font-weight: 800;
+      position: absolute;
+      right: 1.4rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+    }
+
+    /* ===== ERROR/CORRECTION CARDS ===== */
+    .error-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.6rem;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .error-card:hover { box-shadow: var(--shadow-sm); }
+    .error-card .ec-wrong {
+      background: linear-gradient(135deg, var(--red-bg), #fff5f5);
+      border-left: 4px solid var(--red);
+      border-radius: var(--radius-sm);
+      padding: 0.7rem 1rem;
+      margin-bottom: 0.4rem;
+    }
+    .error-card .ec-wrong-label {
+      color: var(--red);
+      font-weight: 700;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    .error-card .ec-wrong-text {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin-top: 0.15rem;
+      text-decoration: line-through;
+      text-decoration-color: rgba(200, 16, 46, 0.3);
+    }
+    .error-card .ec-right {
+      background: linear-gradient(135deg, var(--green-bg), #f7fef9);
+      border-left: 4px solid var(--green);
+      border-radius: var(--radius-sm);
+      padding: 0.7rem 1rem;
+      margin-bottom: 0.4rem;
+    }
+    .error-card .ec-right-label {
+      color: var(--green);
+      font-weight: 700;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    .error-card .ec-right-text {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin-top: 0.15rem;
+      font-weight: 600;
+    }
+    .error-card .ec-rule {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      padding: 0.3rem 0.2rem 0;
+      line-height: 1.5;
+    }
+    .error-card .ec-rule strong { color: var(--navy); }
+    .error-card .ec-speak {
+      display: inline-flex;
+      min-height: 38px;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.85rem;
+      border-radius: var(--radius-sm);
+      margin-top: 0.4rem;
+    }
+
+    /* ===== FLASHCARDS ===== */
+    .flashcard-area {
+      text-align: center;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .flashcard {
+      width: 100%;
+      max-width: 500px;
+      min-height: 260px;
+      background: linear-gradient(145deg, var(--navy), var(--navy-light));
+      border-radius: var(--radius-xl);
+      padding: 2.2rem 2rem;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-xl), inset 0 1px 0 rgba(255,255,255,0.1);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .flashcard::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold-gradient);
+    }
+    .flashcard::after {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.04), transparent 50%);
+      pointer-events: none;
+    }
+    .flashcard.flipped {
+      background: linear-gradient(145deg, var(--green), #0f6b30);
+    }
+    .flashcard.flipped::before {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    }
+    .flashcard:hover { transform: scale(1.03) translateY(-2px); }
+    .flashcard .fc-category {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      opacity: 0.6;
+      margin-bottom: 0.6rem;
+      font-weight: 600;
+    }
+    .flashcard .fc-wrong {
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-decoration: line-through;
+      text-decoration-color: rgba(255,255,255,0.4);
+      margin-bottom: 0.3rem;
+      text-align: center;
+      font-family: Georgia, serif;
+    }
+    .flashcard .fc-right {
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 0.3rem;
+      font-family: Georgia, serif;
+    }
+    .flashcard .fc-rule {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      text-align: center;
+      max-width: 400px;
+      line-height: 1.5;
+    }
+    .flashcard .fc-hint {
+      font-size: 0.8rem;
+      opacity: 0.5;
+      margin-top: 0.8rem;
+    }
+
+    /* ===== QUIZ ===== */
+    .quiz-area { max-width: 600px; margin: 0 auto; }
+    .quiz-progress {
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .quiz-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--navy), var(--gold));
+      border-radius: 3px;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .quiz-question {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text);
+      line-height: 1.55;
+      font-family: Georgia, serif;
+    }
+    .quiz-options { display: grid; gap: 0.6rem; }
+    .quiz-option {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.2rem;
+      cursor: pointer;
+      font-size: 1.05rem;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 52px;
+      font-family: -apple-system, sans-serif;
+      font-weight: 500;
+    }
+    .quiz-option:hover {
+      border-color: var(--navy-light);
+      background: var(--navy-bg);
+      transform: translateX(2px);
+    }
+    .quiz-option.correct {
+      border-color: var(--green);
+      border-width: 2px;
+      background: var(--green-bg);
+      box-shadow: 0 2px 12px rgba(21, 128, 61, 0.15);
+    }
+    .quiz-option.wrong {
+      border-color: var(--red);
+      border-width: 2px;
+      background: var(--red-bg);
+    }
+    .quiz-option.disabled { pointer-events: none; }
+    .quiz-feedback {
+      padding: 0.8rem 1.2rem;
+      border-radius: var(--radius-md);
+      margin-top: 0.8rem;
+      font-size: 0.95rem;
+      display: none;
+      line-height: 1.5;
+    }
+    .quiz-feedback.show { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    .quiz-feedback.correct {
+      background: var(--green-bg);
+      color: var(--green);
+      border: 1px solid rgba(21, 128, 61, 0.3);
+    }
+    .quiz-feedback.wrong {
+      background: var(--red-bg);
+      color: var(--red);
+      border: 1px solid rgba(200, 16, 46, 0.3);
+    }
+
+    /* ===== VOICE PRACTICE ===== */
+    .voice-area { max-width: 600px; margin: 0 auto; }
+    .voice-warning {
+      background: var(--gold-bg);
+      border: 1px solid rgba(197, 160, 40, 0.4);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.2rem;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      color: #713f12;
+    }
+    .voice-target {
+      background: linear-gradient(145deg, var(--navy-bg), #f0f5fa);
+      border: 1px solid var(--border-light);
+      border-left: 4px solid var(--navy);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .voice-target .vt-phrase {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+      font-family: Georgia, serif;
+    }
+    .voice-target .vt-context {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+    .voice-status {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .voice-result {
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-top: 0.5rem;
+      min-height: 2rem;
+    }
+    .voice-recognized {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0.7rem 1rem;
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      text-align: center;
+      display: none;
+    }
+    .voice-recognized.show { display: block; animation: fadeIn 0.3s ease; }
+
+    /* ===== SCENARIO CARDS ===== */
+    .scenario-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 1.3rem 1.4rem;
+      margin-bottom: 0.7rem;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .scenario-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--gold-gradient);
+      opacity:  0;
+      transition: opacity 0.25s;
+    }
+    .scenario-card:hover {
+      border-color: var(--navy-light);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+    .scenario-card:hover::before { opacity: 1; }
+    .scenario-card h3 {
+      color: var(--navy);
+      margin: 0.3rem 0 0.2rem;
+      font-size: 1.1rem;
+      font-family: Georgia, serif;
+      font-weight: 700;
+    }
+    .scenario-card .sc-setting {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 0.3rem;
+    }
+    .scenario-card .sc-roles {
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+    .scenario-card .sc-goals {
+      margin-top: 0.4rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .scenario-detail { display: none; }
+    .scenario-detail.active { display: block; }
+    .scenario-phrases {
+      background: linear-gradient(145deg, var(--navy-bg), #f2f6fb);
+      border-left: 3px solid var(--navy);
+      border-radius: var(--radius-sm);
+      padding: 0.8rem 1.2rem;
+      margin-bottom: 0.6rem;
+    }
+    .scenario-phrases .sp-label {
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 0.15rem;
+    }
+    .scenario-phrases .sp-phrase {
+      padding: 0.15rem 0;
+      font-size: 1.02rem;
+    }
+
+    /* ===== PROGRESS ===== */
+    .progress-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 1.2rem;
+      background: linear-gradient(145deg, var(--navy-bg), #f2f6fb);
+      border-radius: var(--radius-md);
+      margin-bottom: 0.5rem;
+      font-size: 1.05rem;
+    }
+    .progress-stat .ps-label { color: var(--text); }
+    .progress-stat .ps-value {
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 1.25rem;
+      font-family: Georgia, serif;
+    }
+    .progress-bar {
+      height: 10px;
+      background: var(--border);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 0.3rem;
+      margin-bottom: 0.8rem;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--navy), var(--gold));
+      border-radius: 5px;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ===== SETTING CARDS ===== */
+    .setting-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+    .setting-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 1.2rem 1rem;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: center;
+    }
+    .setting-card:hover {
+      border-color: var(--navy-light);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+    }
+    .setting-card.active {
+      border-color: var(--navy);
+      background: linear-gradient(145deg, var(--navy-bg), #f2f6fb);
+      box-shadow: var(--shadow-md);
+    }
+    .setting-card .sc-icon { font-size: 2.2rem; margin-bottom: 0.2rem; }
+    .setting-card h3 {
+      color: var(--navy);
+      margin: 0.3rem 0 0.15rem;
+      font-size: 1rem;
+      font-family: Georgia, serif;
+      font-weight: 700;
+    }
+    .setting-card .sc-desc {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      line-height: 1.3;
+    }
+
+    /* ===== TABLES ===== */
+    .mistake-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 1rem;
+    }
+    .mistake-table th {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      color: white;
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .mistake-table td {
+      padding: 0.5rem 0.8rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .mistake-table tr:nth-child(even) td { background: var(--navy-bg); }
+    .mistake-table .td-wrong { color: var(--red); }
+    .mistake-table .td-right { color: var(--green); font-weight: 600; }
+
+    /* ===== CATEGORY FILTERS ===== */
+    .category-filters {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .category-filters button {
+      padding: 0.35rem 0.9rem;
+      font-size: 0.85rem;
+      min-height: 40px;
+      border-radius: 20px;
+      background: #fff;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .category-filters button:hover {
+      border-color: var(--navy-light);
+      color: var(--navy);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+    .category-filters button.active {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      color: white;
+      border-color: var(--navy);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* ===== BADGE ===== */
+    .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      color: white;
+      padding: 0.1rem 0.55rem;
+      border-radius: 12px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      font-family: -apple-system, sans-serif;
+      vertical-align: middle;
+    }
+    .badge.gold { background: var(--gold-gradient); color: #1a2738; }
+    .badge.green { background: linear-gradient(135deg, var(--green), var(--green-light)); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      border-top: 1px solid var(--border-light);
+      background: linear-gradient(180deg, transparent, var(--navy-bg));
+    }
+    footer a { color: var(--navy); text-decoration: none; font-weight: 600; }
+
+    /* ===== RULE BOX ===== */
+    .rule-box {
+      background: linear-gradient(145deg, var(--gold-bg), #fffcf0);
+      border: 1px solid rgba(197, 160, 40, 0.3);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.2rem;
+      margin: 0.8rem 0;
+      font-size: 0.95rem;
+      color: #5a4a12;
+      line-height: 1.5;
+    }
+    .rule-box strong { color: var(--navy); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      :root { --large-text: 18px; --heading-size: 28px; }
+      .card { padding: 1.2rem; }
+      .flashcard { min-height: 220px; padding: 1.5rem; }
+      .flashcard .fc-wrong { font-size: 1.2rem; }
+      .flashcard .fc-right { font-size: 1.15rem; }
+      .setting-cards { grid-template-columns: 1fr; }
+    }
+
+    /* ===== FONT SIZE CLASSES ===== */
+    html.large-font { --large-text: 18px; --heading-size: 28px; }
+    html.extra-large-font { --large-text: 22px; --heading-size: 36px; }
+    html.huge-font { --large-text: 26px; --heading-size: 42px; }
+
+    /* ===== HIDDEN ===== */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
+    .hidden { display: none !important; }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--navy-light); }
+  </style>
+</head>
+<body>
+  <div class="top-bar"><div></div><div></div></div>
+
+  <header>
+    <h1>✦ Perfect English</h1>
+    <p class="subtitle">Fix common mistakes. Practice workplace conversations. Speak English with confidence — in hospitality, office, and retail settings.</p>
+    <div class="font-controls">
+      <button class="btn-secondary" onclick="setFontSize('large')">A−</button>
+      <button class="btn-secondary" onclick="setFontSize('extra-large')">A</button>
+      <button class="btn-secondary" onclick="setFontSize('huge')">A+</button>
+    </div>
+  </header>
+
+  <!-- ===== NAV TABS ===== -->
+  <div class="container">
+    <div class="tabs">
+      <button class="tab active" data-tab="lessons" onclick="switchTab('lessons')">
+        <span class="tab-icon">📖</span> Mistakes
+      </button>
+      <button class="tab" data-tab="flashcards" onclick="switchTab('flashcards')">
+        <span class="tab-icon">🗂️</span> Flashcards
+      </button>
+      <button class="tab" data-tab="quiz" onclick="switchTab('quiz')">
+        <span class="tab-icon">✅</span> Quiz
+      </button>
+      <button class="tab" data-tab="voice" onclick="switchTab('voice')">
+        <span class="tab-icon">🎤</span> Speak
+      </button>
+      <button class="tab" data-tab="scenarios" onclick="switchTab('scenarios')">
+        <span class="tab-icon">🎭</span> Scenarios
+      </button>
+      <button class="tab" data-tab="progress" onclick="switchTab('progress')">
+        <span class="tab-icon">📊</span> Progress
+      </button>
+    </div>
+
+    <!-- ===== LESSONS (MISTAKES) TAB ===== -->
+    <div class="tab-content active" id="tab-lessons">
+      <div class="card">
+        <h2>Common Mistakes</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">Browse error categories. Each shows the wrong way, the correct way, and the rule. Tap any phrase to hear it spoken.</p>
+        <div class="lesson-list" id="lessonList"></div>
+      </div>
+
+      <!-- Lesson detail view (hidden by default) -->
+      <div class="card hidden" id="lessonDetail">
+        <button class="btn-secondary" onclick="showLessonList()" style="margin-bottom: 1rem;">← Back to mistakes</button>
+        <h2 id="lessonTitle"></h2>
+        <p id="lessonDescription" style="color: var(--text-muted); margin-bottom: 1.5rem;"></p>
+        <div id="lessonContent"></div>
+        <div class="button-row">
+          <button class="btn-green" onclick="completeLesson()">Mark as complete ✓</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== FLASHCARDS TAB ===== -->
+    <div class="tab-content" id="tab-flashcards">
+      <div class="card">
+        <h2>Flashcards</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">See the mistake, then tap to flip and see the correction. Swipe through to memorize the rules.</p>
+        <div class="category-filters" id="flashcardFilters">
+          <button class="active" onclick="setFlashcardCategory('all')">All</button>
+        </div>
+        <div class="flashcard-area">
+          <div class="flashcard" id="flashcard" onclick="flipFlashcard()">
+            <div class="fc-category" id="fcCategory"></div>
+            <div class="fc-wrong" id="fcWrong"></div>
+            <div class="fc-right" id="fcRight"></div>
+            <div class="fc-rule" id="fcRule"></div>
+            <div class="fc-hint" id="fcHint">Tap to flip • Tap speaker to hear</div>
+          </div>
+          <div class="button-row" style="margin-top:1.5rem;">
+            <button class="btn-primary" onclick="prevFlashcard()">← Prev</button>
+            <button class="btn-voice" onclick="speakFlashcard()">🔊 Hear</button>
+            <button class="btn-gold" onclick="nextFlashcard()">Next →</button>
+          </div>
+          <p id="flashcardCounter" style="color: var(--text-muted); margin-top:1rem; font-size: 0.9rem;"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== QUIZ TAB ===== -->
+    <div class="tab-content" id="tab-quiz">
+      <div class="card">
+        <h2>Quiz: Spot the Error</h2>
+        <div id="quizStart">
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Choose the correct version of each sentence. Find and fix the mistake!</p>
+          <div class="category-filters" id="quizFilters">
+            <button class="active" onclick="setQuizCategory('all')">All categories</button>
+          </div>
+          <button class="btn-primary" onclick="startQuiz()">Start Quiz →</button>
+        </div>
+        <div id="quizArea" class="quiz-area hidden">
+          <div class="quiz-progress">
+            <div class="quiz-progress-bar" id="quizProgressBar" style="width: 0%"></div>
+          </div>
+          <div class="quiz-question" id="quizQuestion"></div>
+          <div class="quiz-options" id="quizOptions"></div>
+          <div class="quiz-feedback" id="quizFeedback"></div>
+          <div class="button-row" id="quizNextRow" style="display:none;">
+            <button class="btn-primary" onclick="nextQuizQuestion()">Next →</button>
+          </div>
+        </div>
+        <div id="quizResults" class="hidden">
+          <h3 style="text-align: center; color: var(--navy); margin-bottom: 1rem;">Quiz Complete!</h3>
+          <div id="quizScore" style="text-align: center; font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;"></div>
+          <div class="button-row">
+            <button class="btn-primary" onclick="startQuiz()">Try Again</button>
+            <button class="btn-secondary" onclick="switchTab('lessons')">Back to mistakes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== VOICE PRACTICE TAB ===== -->
+    <div class="tab-content" id="tab-voice">
+      <div class="card">
+        <h2>🎤 Speak the Correct Way</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">Listen to the correct phrase, then practice saying it out loud. Your browser will check your pronunciation.</p>
+        <div class="voice-warning" id="voiceWarning">
+          ⚠️ Voice recognition may not be available in all browsers. For best results, use Chrome or Edge on a device with a microphone.
+        </div>
+        <div class="voice-area">
+          <div class="voice-target">
+            <div class="vt-phrase" id="voiceTargetPhrase"></div>
+            <div class="vt-context" id="voiceTargetContext"></div>
+          </div>
+          <button class="btn-primary" onclick="speakVoiceTarget()" style="margin-bottom: 0.5rem;">🔊 Listen first</button>
+          <div class="voice-status" id="voiceStatus">Tap "Start speaking" to practice</div>
+          <button class="btn-voice" id="voiceRecordBtn" onclick="startVoicePractice()">🎤 Start speaking</button>
+          <div class="voice-result" id="voiceResult"></div>
+          <div class="voice-recognized" id="voiceRecognized"></div>
+          <div class="button-row" style="margin-top: 1rem;">
+            <button class="btn-secondary" onclick="prevVoicePhrase()">← Prev</button>
+            <button class="btn-gold" onclick="nextVoicePhrase()">Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SCENARIOS TAB ===== -->
+    <div class="tab-content" id="tab-scenarios">
+      <div class="card">
+        <h2>🎭 Workplace Scenarios</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">Real-life workplace situations. Choose a setting, then explore the scenarios and key phrases for each.</p>
+        <div class="setting-cards">
+          <div class="setting-card active" onclick="setScenarioSetting('hospitality')" id="setHospitality">
+            <div class="sc-icon">🏨</div>
+            <h3>Hospitality</h3>
+            <div class="sc-desc">Hotels, restaurants, bars & cafés</div>
+          </div>
+          <div class="setting-card" onclick="setScenarioSetting('office')" id="setOffice">
+            <div class="sc-icon">💼</div>
+            <h3>Office</h3>
+            <div class="sc-desc">Meetings, emails, presentations</div>
+          </div>
+          <div class="setting-card" onclick="setScenarioSetting('retail')" id="setRetail">
+            <div class="sc-icon">🛒</div>
+            <h3>Retail</h3>
+            <div class="sc-desc">Stores, customer service, checkout</div>
+          </div>
+        </div>
+        <div id="scenarioList"></div>
+        <div id="scenarioDetail" class="hidden">
+          <button class="btn-secondary" onclick="showScenarioList()" style="margin-bottom: 1rem;">← Back to scenarios</button>
+          <h2 id="scenarioTitle"></h2>
+          <p id="scenarioSetting" style="color: var(--text-muted); margin-bottom: 0.5rem;"></p>
+          <p id="scenarioDesc" style="margin-bottom: 1rem;"></p>
+          <div id="scenarioContent"></div>
+          <div class="button-row">
+            <button class="btn-primary" onclick="speakScenario()">🔊 Hear key phrases</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PROGRESS TAB ===== -->
+    <div class="tab-content" id="tab-progress">
+      <div class="card">
+        <h2>📊 Your Progress</h2>
+        <div id="progressDisplay"></div>
+        <div class="button-row" style="margin-top: 1.5rem;">
+          <button class="btn-red" onclick="resetProgress()">Reset Progress</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Perfect English — Free & offline. For non-native English speakers in professional workplaces.</p>
+    <p style="margin-top: 0.3rem;">© 2026 Sonat Birnecker Hart · <a href="https://github.com/SunnyMorningGlory/perfect-english" target="_blank" rel="noopener">GitHub</a> · Apache 2.0 License</p>
+    <p style="margin-top: 0.3rem; font-size: 0.8rem;">Educational tool only. Does not guarantee fluency. Uses browser speech features (varies by device).</p>
+  </footer>
+
+  <script>
+    // ========================================================================
+    // DATA: ERROR CATEGORIES (LESSONS)
+    // ========================================================================
+    var CATEGORIES = [
+      {
+        id: 'double-comparatives',
+        icon: '⚖️',
+        title: 'Double Comparatives',
+        description: 'The "more better" mistake — using two comparative forms when you only need one.',
+        errors: [
+          { wrong: 'This is more better.', right: 'This is better.', rule: '"Better" is already the comparative of "good." Never add "more."', context: 'General' },
+          { wrong: 'She is more smarter than me.', right: 'She is smarter than I am.', rule: 'Short adjectives that end in "-er" (smart→smarter) never take "more."', context: 'General' },
+          { wrong: 'This option is more cheaper.', right: 'This option is cheaper.', rule: 'Use "more" only with long adjectives (more expensive, more important).', context: 'Retail' },
+          { wrong: 'It is more hotter today.', right: 'It is hotter today.', rule: 'One comparative method per adjective — not two.', context: 'General' },
+          { wrong: 'He is more taller than his brother.', right: 'He is taller than his brother.', rule: '"Tall → taller" already has the comparative ending.', context: 'General' },
+        ]
+      },
+      {
+        id: 'articles',
+        icon: '🔤',
+        title: 'Articles (a, an, the)',
+        description: 'The most persistent error for speakers of languages without articles — adding, dropping, or misusing a/an/the.',
+        errors: [
+          { wrong: 'I went to store.', right: 'I went to the store.', rule: 'Specific noun → use "the."', context: 'General' },
+          { wrong: 'She is nurse.', right: 'She is a nurse.', rule: 'Singular profession → use "a."', context: 'General' },
+          { wrong: 'I read book yesterday.', right: 'I read a book yesterday.', rule: 'Singular countable noun → needs an article.', context: 'General' },
+          { wrong: 'I traveled to the Spain.', right: 'I traveled to Spain.', rule: 'Most country names take no article.', context: 'General' },
+          { wrong: 'The education is important.', right: 'Education is important.', rule: 'Uncountable nouns used generally → no article.', context: 'Office' },
+          { wrong: 'I have the headache.', right: 'I have a headache.', rule: 'Illnesses use "a," not "the."', context: 'General' },
+        ]
+      },
+      {
+        id: 'subject-verb-agreement',
+        icon: '👥',
+        title: 'Subject–Verb Agreement',
+        description: 'Missing the third-person singular "s" or mismatching singular/plural subjects with verbs.',
+        errors: [
+          { wrong: 'She go to the meeting.', right: 'She goes to the meeting.', rule: 'Third-person singular (he/she/it) adds "s" in present tense.', context: 'Office' },
+          { wrong: 'One of the planes are late.', right: 'One of the planes is late.', rule: 'The subject is "one" (singular), not "planes."', context: 'General' },
+          { wrong: 'Each of the cars are fast.', right: 'Each of the cars is fast.', rule: '"Each" is always singular.', context: 'Retail' },
+          { wrong: 'The list of factors are important.', right: 'The list of factors is important.', rule: 'The subject is "list," not "factors."', context: 'Office' },
+          { wrong: 'People is coming.', right: 'People are coming.', rule: '"People" is plural — use "are."', context: 'General' },
+          { wrong: 'The police is here.', right: 'The police are here.', rule: '"Police" is always plural.', context: 'General' },
+        ]
+      },
+      {
+        id: 'verb-tenses',
+        icon: '⏰',
+        title: 'Verb Tense Errors',
+        description: 'Confusing present perfect with past simple, mixing up "since" and "for," and other tense problems.',
+        errors: [
+          { wrong: 'I have seen him yesterday.', right: 'I saw him yesterday.', rule: 'Specific past time → use past simple, not present perfect.', context: 'General' },
+          { wrong: 'I am living here since five years.', right: 'I have been living here for five years.', rule: 'Duration from past to now → present perfect + "for."', context: 'General' },
+          { wrong: 'I\'ve been in America since 3 months.', right: 'I\'ve been in America for 3 months.', rule: '"Since" = point in time; "for" = duration.', context: 'General' },
+          { wrong: 'Tomorrow we go shopping.', right: 'Tomorrow we will go shopping.', rule: 'Future plans → use "will" or "going to."', context: 'General' },
+          { wrong: 'I am working here since 2019.', right: 'I have been working here since 2019.', rule: '"Since" + point in time → present perfect, not present continuous.', context: 'Office' },
+          { wrong: 'I have been knowing her for years.', right: 'I have known her for years.', rule: 'Stative verbs (know, like, want) don\'t use continuous form.', context: 'General' },
+        ]
+      },
+      {
+        id: 'prepositions',
+        icon: '📍',
+        title: 'Preposition Problems',
+        description: 'Adding unnecessary prepositions or using the wrong one — "discuss about," "married with," "different than."',
+        errors: [
+          { wrong: 'Let\'s discuss about the project.', right: 'Let\'s discuss the project.', rule: '"Discuss" takes a direct object — no "about."', context: 'Office' },
+          { wrong: 'We discussed about the results.', right: 'We discussed the results.', rule: 'Same rule — "discuss" never takes "about."', context: 'Office' },
+          { wrong: 'He married with a French girl.', right: 'He married a French girl.', rule: '"Marry" takes a direct object — no "with."', context: 'General' },
+          { wrong: 'I am good in English.', right: 'I am good at English.', rule: '"Good at" not "good in" for skills.', context: 'General' },
+          { wrong: 'Similar than the previous study.', right: 'Similar to the previous study.', rule: '"Similar to" not "similar than."', context: 'Office' },
+          { wrong: 'I am waiting him.', right: 'I am waiting for him.', rule: '"Wait" needs "for" before the object.', context: 'General' },
+          { wrong: 'She is on the car.', right: 'She is in the car.', rule: 'Inside a vehicle → "in." On top of it → "on."', context: 'General' },
+        ]
+      },
+      {
+        id: 'countable-uncountable',
+        icon: '📦',
+        title: 'Countable vs. Uncountable',
+        description: 'Adding "s" to uncountable nouns or using "much" with countable nouns.',
+        errors: [
+          { wrong: 'I need an advice.', right: 'I need some advice.', rule: '"Advice" is uncountable — no "an," no plural.', context: 'Office' },
+          { wrong: 'She gave me many informations.', right: 'She gave me a lot of information.', rule: '"Information" is uncountable.', context: 'Office' },
+          { wrong: 'I have many experiences in marketing.', right: 'I have a lot of experience in marketing.', rule: '"Experience" (general) is uncountable.', context: 'Office' },
+          { wrong: 'There were less people at the event.', right: 'There were fewer people at the event.', rule: '"Fewer" for countable; "less" for uncountable.', context: 'General' },
+          { wrong: 'We have many softwares.', right: 'We have a lot of software.', rule: '"Software" is uncountable.', context: 'Office' },
+          { wrong: 'Thank you for your hard works.', right: 'Thank you for your hard work.', rule: '"Work" is uncountable in this sense.', context: 'Office' },
+        ]
+      },
+      {
+        id: 'say-tell',
+        icon: '💬',
+        title: 'Say vs. Tell',
+        description: 'Mixing up "say" and "tell" — "tell" needs a person, "say" usually doesn\'t.',
+        errors: [
+          { wrong: 'She said me the answer.', right: 'She told me the answer.', rule: '"Tell" requires a person as object.', context: 'Office' },
+          { wrong: 'He told that he was tired.', right: 'He said that he was tired.', rule: '"Say" doesn\'t take a direct person object.', context: 'General' },
+          { wrong: 'Can you say me the time?', right: 'Can you tell me the time?', rule: 'Use "tell" when addressing a person directly.', context: 'Hospitality' },
+        ]
+      },
+      {
+        id: 'bored-boring',
+        icon: '😐',
+        title: 'Bored vs. Boring',
+        description: 'Confusing -ed and -ing adjectives — one describes how you feel, the other describes the thing.',
+        errors: [
+          { wrong: 'This movie is very bored.', right: 'This movie is very boring.', rule: '"-ing" describes the thing; "-ed" describes your feeling.', context: 'General' },
+          { wrong: 'I am so boring today.', right: 'I am so bored today.', rule: 'You feel "bored"; you are not "boring" (unless you\'re dull!).', context: 'General' },
+          { wrong: 'The meeting was very excited.', right: 'The meeting was very exciting.', rule: 'The meeting is exciting; the participants are excited.', context: 'Office' },
+          { wrong: 'I am very interesting in this.', right: 'I am very interested in this.', rule: 'You are "interested in" something; the thing is "interesting."', context: 'Office' },
+        ]
+      },
+      {
+        id: 'word-pairs',
+        icon: '🔀',
+        title: 'Word Confusion Pairs',
+        description: 'Commonly mixed-up words: borrow/lend, personal/personnel, comfortable/convenient, and more.',
+        errors: [
+          { wrong: 'I loaned the book from the library.', right: 'I borrowed the book from the library.', rule: '"Borrow" = take from someone; "lend" = give to someone.', context: 'General' },
+          { wrong: 'He took leave for personnel reasons.', right: 'He took leave for personal reasons.', rule: '"Personal" = private; "personnel" = staff.', context: 'Office' },
+          { wrong: 'Is that chair convenient for you?', right: 'Is that chair comfortable for you?', rule: '"Comfortable" = physically nice; "convenient" = suitable timing/location.', context: 'General' },
+          { wrong: 'Irregardless of what you want...', right: 'Regardless of what you want...', rule: '"Irregardless" is not standard English. Always use "regardless."', context: 'General' },
+          { wrong: 'Can I drive because I passed the test?', right: 'I can drive because I passed the test.', rule: '"Can" = ability; "may" = permission.', context: 'General' },
+        ]
+      },
+      {
+        id: 'politeness',
+        icon: '🤝',
+        title: 'Politeness: "Would You Like"',
+        description: 'The most impactful change in service English — replacing direct "you want" with polite "would you like."',
+        errors: [
+          { wrong: 'You want water?', right: 'Would you like some water?', rule: '"You want" sounds like an interrogation. "Would you like" is always polite.', context: 'Hospitality' },
+          { wrong: 'What you want?', right: 'What would you like?', rule: 'Add "would" for politeness in service situations.', context: 'Hospitality' },
+          { wrong: 'Give me your card.', right: 'May I take your card, please?', rule: 'Turn commands into questions + add "please."', context: 'Hospitality' },
+          { wrong: 'Sit here.', right: 'Please have a seat.', rule: 'Use "please" + soften commands into invitations.', context: 'Hospitality' },
+          { wrong: 'Wait.', right: 'One moment, please.', rule: '"Wait" sounds abrupt. "One moment" is professional.', context: 'Hospitality' },
+          { wrong: 'You want dessert?', right: 'Would you like to see the dessert menu?', rule: 'Always offer with "would you like" in service settings.', context: 'Hospitality' },
+        ]
+      },
+      {
+        id: 'business-english',
+        icon: '💼',
+        title: 'Business English Errors',
+        description: 'Workplace-specific mistakes: "presentate," "headquarters," "look forward to hearing," and more.',
+        errors: [
+          { wrong: 'I look forward to hear from you.', right: 'I look forward to hearing from you.', rule: '"Look forward to" is always followed by "-ing."', context: 'Office' },
+          { wrong: 'I will presentate the results.', right: 'I will present the results.', rule: '"Presentate" is not a word. The verb is "present."', context: 'Office' },
+          { wrong: 'Our headquarter is in Chicago.', right: 'Our headquarters is in Chicago.', rule: '"Headquarters" always has an "s" — it\'s still singular.', context: 'Office' },
+          { wrong: 'He is responsible of the project.', right: 'He is responsible for the project.', rule: '"Responsible for" not "responsible of."', context: 'Office' },
+          { wrong: 'Please revert back to me.', right: 'Please get back to me.', rule: '"Revert" means "return to a previous state" — not "reply."', context: 'Office' },
+          { wrong: 'Kindly do the needful.', right: 'Please take care of this.', rule: '"Do the needful" is outdated — use clear, modern English.', context: 'Office' },
+        ]
+      },
+      {
+        id: 'pronunciation',
+        icon: '🗣️',
+        title: 'Pronunciation Pitfalls',
+        description: 'Words that are often mispronounced, causing confusion — even when grammar is correct.',
+        errors: [
+          { wrong: 'DEZ-ert (meaning sweet food)', right: 'deh-ZERT (dessert)', rule: 'Stress the 2nd syllable for dessert; "DEZ-ert" = a sandy desert.', context: 'Hospitality' },
+          { wrong: 'men-OO (menu)', right: 'MEN-yoo (menu)', rule: 'Stress the 1st syllable: MEN-yoo.', context: 'Hospitality' },
+          { wrong: 're-ceipt (with "p")', right: 'reh-SEET (receipt)', rule: 'The "p" is silent in "receipt."', context: 'Retail' },
+          { wrong: 'sal-mon (with "l")', right: 'SAM-un (salmon)', rule: 'The "l" is silent in "salmon."', context: 'Hospitality' },
+          { wrong: 'e-xe-CU-tive', right: 'ig-ZEK-u-tive', rule: 'Stress the 2nd syllable, not the "u."', context: 'Office' },
+        ]
+      },
+    ];
+
+    // ========================================================================
+    // DATA: FLASHCARDS (derived from categories)
+    // ========================================================================
+    var ALL_FLASHCARDS = [];
+    CATEGORIES.forEach(function(cat) {
+      cat.errors.forEach(function(e) {
+        ALL_FLASHCARDS.push({
+          wrong: e.wrong,
+          right: e.right,
+          rule: e.rule,
+          category: cat.title
+        });
+      });
+    });
+
+    // ========================================================================
+    // DATA: QUIZ QUESTIONS
+    // ========================================================================
+    var QUIZ_QUESTIONS = [
+      { question: 'Choose the correct sentence:', options: ['This is more better.', 'This is better.', 'This is more good.', 'This is best.'], answer: 1, explanation: '"Better" is already the comparative of "good" — never add "more."' },
+      { question: 'Choose the correct sentence:', options: ['Let\'s discuss about the project.', 'Let\'s discuss the project.', 'Let\'s discuss for the project.', 'Let\'s discuss on the project.'], answer: 1, explanation: '"Discuss" takes a direct object — no preposition needed.' },
+      { question: 'Choose the correct sentence:', options: ['I went to store.', 'I went to the store.', 'I went store.', 'I went to a store.'], answer: 1, explanation: 'Specific noun → use "the."' },
+      { question: 'Choose the correct sentence:', options: ['She go to the meeting.', 'She going to the meeting.', 'She goes to the meeting.', 'She gone to the meeting.'], answer: 2, explanation: 'Third-person singular needs "s": she goes.' },
+      { question: 'Choose the correct sentence:', options: ['I have seen him yesterday.', 'I seen him yesterday.', 'I saw him yesterday.', 'I was see him yesterday.'], answer: 2, explanation: 'Specific past time → past simple: "saw."' },
+      { question: 'Choose the correct sentence:', options: ['I am living here since five years.', 'I have been living here for five years.', 'I live here since five years.', 'I am living here for five years.'], answer: 1, explanation: 'Duration from past to now → present perfect + "for."' },
+      { question: 'Choose the correct sentence:', options: ['You want water?', 'Would you like some water?', 'Give me water.', 'You like water?'], answer: 1, explanation: '"Would you like" is polite; "You want" sounds rude.' },
+      { question: 'Choose the correct sentence:', options: ['This movie is very bored.', 'This movie is very boring.', 'This movie is very bore.', 'This movie is very boredom.'], answer: 1, explanation: '"-ing" describes the thing; the movie is boring, you are bored.' },
+      { question: 'Choose the correct sentence:', options: ['I need an advice.', 'I need some advice.', 'I need advices.', 'I need a advice.'], answer: 1, explanation: '"Advice" is uncountable — no "an," no plural.' },
+      { question: 'Choose the correct sentence:', options: ['She said me the answer.', 'She told me the answer.', 'She say me the answer.', 'She told to me the answer.'], answer: 1, explanation: '"Tell" requires a person as object: "told me."' },
+      { question: 'Choose the correct sentence:', options: ['I look forward to hear from you.', 'I look forward to hearing from you.', 'I look forward hearing from you.', 'I look forward to heard from you.'], answer: 1, explanation: '"Look forward to" is always followed by "-ing."' },
+      { question: 'Choose the correct sentence:', options: ['One of the planes are late.', 'One of the planes is late.', 'One of the plane is late.', 'One of the planes were late.'], answer: 1, explanation: 'The subject is "one" (singular) → "is."' },
+      { question: 'Choose the correct sentence:', options: ['I\'ve been in America since 3 months.', 'I\'ve been in America for 3 months.', 'I\'m in America since 3 months.', 'I was in America for 3 months.'], answer: 1, explanation: '"For" = duration; "since" = point in time.' },
+      { question: 'Choose the correct sentence:', options: ['There were less people at the event.', 'There were fewer people at the event.', 'There was fewer people at the event.', 'There were less persons at the event.'], answer: 1, explanation: '"Fewer" for countable nouns; "less" for uncountable.' },
+      { question: 'Choose the correct sentence:', options: ['He is responsible of the project.', 'He is responsible for the project.', 'He is responsible about the project.', 'He is responsible with the project.'], answer: 1, explanation: '"Responsible for" — not "of," "about," or "with."' },
+      { question: 'Choose the correct sentence:', options: ['I will presentate the results.', 'I will present the results.', 'I will presentation the results.', 'I will presenting the results.'], answer: 1, explanation: '"Presentate" is not a word. The verb is "present."' },
+      { question: 'Choose the correct sentence:', options: ['Irregardless of the cost...', 'Regardless of the cost...', 'Regardless of cost...', 'Both 1 and 2 are correct.'], answer: 1, explanation: '"Irregardless" is not standard English. Use "regardless."' },
+      { question: 'Choose the correct sentence:', options: ['I have many experiences in marketing.', 'I have a lot of experience in marketing.', 'I have much experiences in marketing.', 'I have many experience in marketing.'], answer: 1, explanation: '"Experience" (general) is uncountable.' },
+      { question: 'Choose the correct sentence:', options: ['Our headquarter is in Chicago.', 'Our headquarters is in Chicago.', 'Our headquarters are in Chicago.', 'Our headquarter are in Chicago.'], answer: 1, explanation: '"Headquarters" always has an "s" and is treated as singular.' },
+      { question: 'Choose the correct sentence:', options: ['I am waiting him.', 'I am waiting for him.', 'I am wait him.', 'I am awaiting him.'], answer: 1, explanation: '"Wait" needs "for" before its object.' },
+    ];
+
+    // ========================================================================
+    // DATA: VOICE PRACTICE PHRASES
+    // ========================================================================
+    var VOICE_PHRASES = [
+      { phrase: 'Would you like some water?', context: 'Hospitality — offering a drink' },
+      { phrase: 'Let me confirm your order.', context: 'Hospitality — confirming an order' },
+      { phrase: 'I look forward to hearing from you.', context: 'Office — email closing' },
+      { phrase: 'Could you elaborate on that?', context: 'Office — asking for clarification in a meeting' },
+      { phrase: 'I apologize for the inconvenience.', context: 'Retail — handling a complaint' },
+      { phrase: 'Would you like a bag?', context: 'Retail — checkout' },
+      { phrase: 'How is everything? Is the food to your liking?', context: 'Hospitality — checking back after serving' },
+      { phrase: 'I see your point, but I have a different perspective.', context: 'Office — disagreeing politely in a meeting' },
+      { phrase: 'Let me check if we have that in stock.', context: 'Retail — checking inventory' },
+      { phrase: 'While I can\'t process a refund, I can offer you store credit.', context: 'Retail — offering an alternative' },
+      { phrase: 'I have been working here for three years.', context: 'Office — talking about experience' },
+      { phrase: 'I\'m afraid we\'re currently out of stock on that item.', context: 'Retail — delivering bad news politely' },
+    ];
+
+    // ========================================================================
+    // DATA: SCENARIOS
+    // ========================================================================
+    var SCENARIOS = {
+      hospitality: [
+        {
+          id: 'h1',
+          title: 'Difficult Check-In',
+          setting: 'Hotel front desk, 10 PM',
+          description: 'A guest arrives with a reservation but the system shows no booking. The guest is tired and frustrated.',
+          roles: 'Role A: Front desk agent • Role B: Guest',
+          goals: 'Apologizing professionally, offering solutions, using "would" and "could" forms, staying calm under pressure.',
+          phrases: [
+            { label: 'Apologizing', text: 'I apologize for the confusion.' },
+            { label: 'Offering to help', text: 'Let me see what I can do.' },
+            { label: 'Asking to wait', text: 'Would you mind waiting a few minutes while I check with my manager?' },
+            { label: 'Offering a solution', text: 'I can offer you a complimentary upgrade for the inconvenience.' },
+            { label: 'Greeting (evening)', text: 'Good evening! Welcome to our hotel.' },
+            { label: 'Never say', text: 'It\'s not my fault. / I don\'t know.' },
+          ]
+        },
+        {
+          id: 'h2',
+          title: 'Food Allergy Question',
+          setting: 'Restaurant',
+          description: 'A customer asks if a dish contains dairy. You\'re not 100% sure and need to check with the kitchen.',
+          roles: 'Role A: Server • Role B: Customer with a dairy allergy',
+          goals: 'Admitting uncertainty professionally, using "let me check," confirming safety.',
+          phrases: [
+            { label: 'Admitting uncertainty', text: 'Let me double-check with the kitchen.' },
+            { label: 'Showing care', text: 'I want to make sure I give you the right information.' },
+            { label: 'Asking the chef', text: 'Would you like me to ask the chef about the ingredients?' },
+            { label: 'Offering an alternative', text: 'We also have several dairy-free options on the menu.' },
+            { label: 'Checking back', text: 'How is everything? Is the food to your liking?' },
+          ]
+        },
+        {
+          id: 'h3',
+          title: 'Handling a Complaint',
+          setting: 'Hotel or restaurant',
+          description: 'A guest complains that their room/service is unacceptable. Use the 3-step complaint formula.',
+          roles: 'Role A: Staff member • Role B: Upset guest',
+          goals: 'The 3-step formula: apologize, offer a solution, follow up.',
+          phrases: [
+            { label: 'Step 1: Apologize', text: 'I\'m so sorry about that. I understand how frustrating this is.' },
+            { label: 'Step 2: Offer a solution', text: 'Let me get this fixed right away. I\'ll send someone up immediately.' },
+            { label: 'Step 3: Follow up', text: 'Is everything okay now? Is there anything else I can do?' },
+            { label: 'Professional response', text: 'I apologize for the inconvenience. We\'ll fix this right away.' },
+            { label: 'Never say', text: 'That\'s not my fault. / That\'s how we make it.' },
+          ]
+        },
+        {
+          id: 'h4',
+          title: 'Taking an Order',
+          setting: 'Restaurant',
+          description: 'Take a party\'s order, confirm it, and handle special requests professionally.',
+          roles: 'Role A: Server • Role B: Customer',
+          goals: 'Using "would you like," confirming orders, handling dietary restrictions.',
+          phrases: [
+            { label: 'Offering', text: 'Would you like to start with something to drink?' },
+            { label: 'Asking preferences', text: 'How would you like your steak cooked?' },
+            { label: 'Confirming', text: 'Let me confirm your order. So that\'s one steak, medium-rare, with vegetables...' },
+            { label: 'Checking special requests', text: 'And no onions on the burger, correct?' },
+            { label: 'Wrapping up', text: 'Is that everything for now? I\'ll get that started for you.' },
+          ]
+        },
+      ],
+      office: [
+        {
+          id: 'o1',
+          title: 'Status Update Meeting',
+          setting: 'Weekly team meeting',
+          description: 'Present your project status. You\'re behind schedule and need to explain why without sounding like you\'re making excuses.',
+          roles: 'Role A: You (team member) • Role B: Manager',
+          goals: 'Using present perfect, future tense, professional hedging, polite pushback.',
+          phrases: [
+            { label: 'Reporting status', text: 'Here\'s where we stand. We\'ve completed the first phase.' },
+            { label: 'Explaining delays', text: 'We\'ve run into a delay because of a supplier issue.' },
+            { label: 'Committing to a timeline', text: 'I\'ll have a revised timeline by end of day.' },
+            { label: 'Contributing to discussion', text: 'Can I add something here?' },
+            { label: 'Disagreeing politely', text: 'I see your point, but I have a different perspective.' },
+          ]
+        },
+        {
+          id: 'o2',
+          title: 'The Email Misunderstanding',
+          setting: 'Office',
+          description: 'You sent an email that a colleague interpreted as rude or aggressive. They\'ve mentioned it to your manager.',
+          roles: 'Role A: You • Role B: Colleague who felt offended',
+          goals: 'De-escalation, clarifying intent, apologizing for tone without apologizing for content.',
+          phrases: [
+            { label: 'Apologizing for tone', text: 'I\'m sorry if my email came across as harsh. That wasn\'t my intention at all.' },
+            { label: 'Clarifying', text: 'Let me clarify what I meant by that.' },
+            { label: 'De-escalating', text: 'I value our working relationship and I\'d like to make sure we\'re on the same page.' },
+            { label: 'Moving forward', text: 'Going forward, I\'ll make sure to be clearer in my communication.' },
+          ]
+        },
+        {
+          id: 'o3',
+          title: 'The Budget Request',
+          setting: 'Meeting with department head',
+          description: 'Request additional budget for your project. Present the case clearly and handle pushback.',
+          roles: 'Role A: You (project lead) • Role B: Department head (skeptical)',
+          goals: 'Structuring an argument, using evidence, handling pushback professionally.',
+          phrases: [
+            { label: 'Making the request', text: 'Based on the data, I\'d like to request additional budget for this project.' },
+            { label: 'Justifying', text: 'The ROI on this investment would be significant.' },
+            { label: 'Handling pushback', text: 'I understand the concern, but I believe this is the right approach.' },
+            { label: 'Offering compromise', text: 'If the full amount isn\'t possible, we could phase it over two quarters.' },
+          ]
+        },
+        {
+          id: 'o4',
+          title: 'The Networking Event',
+          setting: 'Office holiday party / industry event',
+          description: 'Meet new people, make small talk, and exchange contact information naturally.',
+          roles: 'Role A: You • Role B: New contact',
+          goals: 'Small talk, natural conversation flow, professional but casual register.',
+          phrases: [
+            { label: 'Opening', text: 'So, what do you do?' },
+            { label: 'Showing interest', text: 'That\'s fascinating — I\'d love to hear more about that.' },
+            { label: 'Connecting', text: 'I work in a related field. We should connect on LinkedIn.' },
+            { label: 'Closing', text: 'It was great meeting you. Let\'s stay in touch.' },
+          ]
+        },
+      ],
+      retail: [
+        {
+          id: 'r1',
+          title: 'The Angry Return',
+          setting: 'Retail customer service desk',
+          description: 'A customer bought a product 3 weeks ago. It broke. They\'re angry and want a refund but don\'t have a receipt.',
+          roles: 'Role A: Customer (angry) • Role B: Sales associate',
+          goals: 'De-escalation, offering alternatives, using "I can" instead of "I can\'t."',
+          phrases: [
+            { label: 'Empathizing', text: 'I completely understand your frustration.' },
+            { label: 'Offering alternative', text: 'While I can\'t process a refund without a receipt, I can offer you store credit for the full amount.' },
+            { label: 'Softening "no"', text: 'While that\'s outside our return window, let me see what I can do.' },
+            { label: 'Never say', text: 'You\'re wrong. / That\'s not my department. / I can\'t help you.' },
+            { label: 'Professional close', text: 'Is there anything else I can help you with today?' },
+          ]
+        },
+        {
+          id: 'r2',
+          title: 'The Stock-Out',
+          setting: 'Retail store floor',
+          description: 'A customer came specifically for an advertised item. It\'s sold out. Offer alternatives without losing the sale.',
+          roles: 'Role A: Customer (disappointed) • Role B: Sales associate',
+          goals: 'Delivering bad news gracefully, offering multiple solutions.',
+          phrases: [
+            { label: 'Delivering news', text: 'I\'m afraid we\'re out of stock on that right now.' },
+            { label: 'Checking other stores', text: 'But I can check our other location for you.' },
+            { label: 'Offering notification', text: 'I\'d be happy to set up a notification for when it comes back in.' },
+            { label: 'Suggesting alternative', text: 'We also have a similar model that many customers prefer.' },
+            { label: 'Staying positive', text: 'Let me see what options we have for you.' },
+          ]
+        },
+        {
+          id: 'r3',
+          title: 'The Upsell',
+          setting: 'Electronics or department store',
+          description: 'A customer wants a basic product. Suggest a slightly better option without being pushy.',
+          roles: 'Role A: Customer • Role B: Sales associate',
+          goals: 'Polite suggestion, highlighting benefits, no pressure.',
+          phrases: [
+            { label: 'Suggesting', text: 'Would you like me to show you a model that\'s a bit more powerful?' },
+            { label: 'Highlighting benefits', text: 'Many customers find that the upgraded version lasts longer.' },
+            { label: 'No pressure', text: 'It\'s entirely up to you — both are great options.' },
+            { label: 'Explaining difference', text: 'The main difference is that this one has...' },
+          ]
+        },
+        {
+          id: 'r4',
+          title: 'The Phone Inquiry',
+          setting: 'Retail store phone call',
+          description: 'A customer calls to ask if a product is in stock and how much it costs.',
+          roles: 'Role A: Customer (on phone) • Role B: Employee',
+          goals: 'Phone etiquette, clear pronunciation, accurate information.',
+          phrases: [
+            { label: 'Answering', text: 'Thank you for calling [store name], this is [name]. How can I help you?' },
+            { label: 'Checking stock', text: 'Let me check on that for you. One moment, please.' },
+            { label: 'Confirming', text: 'Yes, we have that in stock. It\'s $49.99.' },
+            { label: 'Offering to hold', text: 'I\'d be happy to put that on hold for you.' },
+          ]
+        },
+      ],
+    };
+
+    // ========================================================================
+    // STATE
+    // ========================================================================
+    var currentFlashcardIdx = 0;
+    var flashcardFlipped = false;
+    var currentFlashcardCategory = 'all';
+    var currentQuizQuestions = [];
+    var currentQuizIdx = 0;
+    var quizScore = 0;
+    var currentQuizCategory = 'all';
+    var currentVoiceIdx = 0;
+    var voiceRecognition = null;
+    var voiceRecording = false;
+    var currentScenarioSetting = 'hospitality';
+    var scenarioSpeakIdx = 0;
+
+    // ========================================================================
+    // PROGRESS (localStorage)
+    // ========================================================================
+    function getProgress() {
+      try {
+        return JSON.parse(localStorage.getItem('perfectEnglishProgress')) || {
+          completedLessons: [], flashcardsReviewed: 0, quizBestScore: null, voicePracticed: 0, scenariosViewed: []
+        };
+      } catch(e) {
+        return { completedLessons: [], flashcardsReviewed: 0, quizBestScore: null, voicePracticed: 0, scenariosViewed: [] };
+      }
+    }
+    function saveProgress(prog) {
+      try { localStorage.setItem('perfectEnglishProgress', JSON.stringify(prog)); } catch(e) {}
+    }
+    function addFlashcardReview() {
+      var p = getProgress(); p.flashcardsReviewed++; saveProgress(p);
+    }
+    function addVoicePractice() {
+      var p = getProgress(); p.voicePracticed++; saveProgress(p);
+    }
+    function setQuizBestScore(score) {
+      var p = getProgress();
+      if (p.quizBestScore === null || score > p.quizBestScore) {
+        p.quizBestScore = score; saveProgress(p);
+      }
+    }
+    function addScenarioViewed(scenarioId) {
+      var p = getProgress();
+      if (p.scenariosViewed.indexOf(scenarioId) < 0) {
+        p.scenariosViewed.push(scenarioId); saveProgress(p);
+      }
+    }
+
+    // ========================================================================
+    // FONT SIZE
+    // ========================================================================
+    function setFontSize(size) {
+      var html = document.documentElement;
+      html.classList.remove('large-font', 'extra-large-font', 'huge-font');
+      if (size === 'large') html.classList.add('large-font');
+      else if (size === 'huge') html.classList.add('huge-font');
+      else html.classList.add('extra-large-font');
+      try { localStorage.setItem('perfectEnglishFontSize', size); } catch(e) {}
+    }
+
+    // ========================================================================
+    // TAB SWITCHING
+    // ========================================================================
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+      document.querySelectorAll('.tab-content').forEach(function(tc) { tc.classList.remove('active'); });
+      document.querySelector('[data-tab="' + tabName + '"]').classList.add('active');
+      document.getElementById('tab-' + tabName).classList.add('active');
+      if (tabName === 'progress') updateProgressDisplay();
+      if (tabName === 'flashcards') renderFlashcard();
+      if (tabName === 'voice') renderVoicePhrase();
+      if (tabName === 'scenarios') renderScenarios();
+    }
+
+    // ========================================================================
+    // TEXT TO SPEECH
+    // ========================================================================
+    // Cached preferred voice — picked once on load
+    var _preferredVoice = null;
+    function pickBestVoice() {
+      if (!('speechSynthesis' in window)) return;
+      var voices = speechSynthesis.getVoices();
+      if (!voices || voices.length === 0) return;
+      // Prefer high-quality natural English voices
+      var preferred = [
+        'Google US English', 'Samantha', 'Alex', 'Karen', 'Daniel',
+        'Microsoft Aria', 'Microsoft Jenny', 'Microsoft Guy',
+        'Google UK English Female', 'Google UK English Male'
+      ];
+      for (var i = 0; i < preferred.length; i++) {
+        for (var j = 0; j < voices.length; j++) {
+          if (voices[j].name === preferred[i]) {
+            _preferredVoice = voices[j];
+            return;
+          }
+        }
+      }
+      // Fallback: first en-US/en voice
+      for (var k = 0; k < voices.length; k++) {
+        if (voices[k].lang && voices[k].lang.indexOf('en') === 0) {
+          _preferredVoice = voices[k];
+          return;
+        }
+      }
+      _preferredVoice = voices[0];
+    }
+    // Load voices (may be async in some browsers)
+    if ('speechSynthesis' in window) {
+      pickBestVoice();
+      speechSynthesis.onvoiceschanged = function() { pickBestVoice(); };
+    }
+
+    function speak(text, opts) {
+      if ('speechSynthesis' in window) {
+        speechSynthesis.cancel();
+        var utter = new SpeechSynthesisUtterance(text);
+        utter.lang = 'en-US';
+        utter.rate = 0.95;   // natural pace — not too slow
+        utter.pitch = 1.0;
+        utter.volume = 1;
+        if (_preferredVoice) utter.voice = _preferredVoice;
+        if (opts && opts.onend) utter.onend = opts.onend;
+        speechSynthesis.speak(utter);
+      } else {
+        alert('Sorry, your browser does not support text-to-speech. Try Chrome, Edge, or Safari.');
+      }
+    }
+
+    // ========================================================================
+    // LESSONS (MISTAKES)
+    // ========================================================================
+    function renderLessonList() {
+      var list = document.getElementById('lessonList');
+      var prog = getProgress();
+      list.innerHTML = '';
+      CATEGORIES.forEach(function(cat) {
+        var completed = prog.completedLessons.indexOf(cat.id) >= 0;
+        var div = document.createElement('div');
+        div.className = 'lesson-item' + (completed ? ' completed' : '');
+        div.onclick = function() { openLesson(cat.id); };
+        div.innerHTML =
+          '<div class="lesson-icon">' + cat.icon + '</div>' +
+          '<h3>' + cat.title + ' <span class="badge">' + cat.errors.length + '</span></h3>' +
+          '<div class="lesson-meta">' + cat.description + '</div>';
+        list.appendChild(div);
+      });
+    }
+
+    function openLesson(catId) {
+      var cat = CATEGORIES.find(function(c) { return c.id === catId; });
+      if (!cat) return;
+      document.getElementById('lessonList').parentElement.style.display = 'none';
+      document.getElementById('lessonDetail').classList.remove('hidden');
+      document.getElementById('lessonTitle').textContent = cat.icon + ' ' + cat.title;
+      document.getElementById('lessonDescription').textContent = cat.description;
+      var content = document.getElementById('lessonContent');
+      content.innerHTML = '';
+      cat.errors.forEach(function(e, i) {
+        var div = document.createElement('div');
+        div.className = 'error-card';
+        div.innerHTML =
+          '<div class="ec-wrong"><div class="ec-wrong-label">✗ Incorrect</div><div class="ec-wrong-text">' + escapeHtml(e.wrong) + '</div></div>' +
+          '<div class="ec-right"><div class="ec-right-label">✓ Correct</div><div class="ec-right-text">' + escapeHtml(e.right) + '</div></div>' +
+          '<div class="ec-rule"><strong>Rule:</strong> ' + escapeHtml(e.rule) + '</div>';
+        var btn = document.createElement('button');
+        btn.className = 'btn-gold ec-speak';
+        btn.textContent = '🔊 Hear correct version';
+        (function(text) {
+          btn.addEventListener('click', function(ev) {
+            ev.stopPropagation();
+            speak(text);
+          });
+        })(e.right);
+        div.appendChild(btn);
+        content.appendChild(div);
+      });
+      window.scrollTo(0, 0);
+    }
+
+    function showLessonList() {
+      document.getElementById('lessonDetail').classList.add('hidden');
+      document.getElementById('lessonList').parentElement.style.display = '';
+      renderLessonList();
+    }
+
+    function completeLesson() {
+      var titleEl = document.getElementById('lessonTitle');
+      var title = titleEl.textContent.replace(/^[^\w]+\s/, '');
+      var cat = CATEGORIES.find(function(c) { return c.title === title; });
+      if (!cat) return;
+      var prog = getProgress();
+      if (prog.completedLessons.indexOf(cat.id) < 0) {
+        prog.completedLessons.push(cat.id);
+        saveProgress(prog);
+      }
+      alert('Lesson completed! Great work! 🎉');
+      showLessonList();
+    }
+
+    function escapeHtml(text) {
+      var div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // ========================================================================
+    // FLASHCARDS
+    // ========================================================================
+    function getFlashcardCards() {
+      if (currentFlashcardCategory === 'all') return ALL_FLASHCARDS;
+      return ALL_FLASHCARDS.filter(function(c) { return c.category === currentFlashcardCategory; });
+    }
+
+    function renderFlashcardFilters() {
+      var container = document.getElementById('flashcardFilters');
+      var cats = ['all'].concat(CATEGORIES.map(function(c) { return c.title; }));
+      container.innerHTML = '';
+      cats.forEach(function(cat) {
+        var btn = document.createElement('button');
+        btn.textContent = cat === 'all' ? 'All' : cat;
+        if (cat === currentFlashcardCategory) btn.classList.add('active');
+        btn.onclick = function() { setFlashcardCategory(cat); };
+        container.appendChild(btn);
+      });
+    }
+
+    function setFlashcardCategory(cat) {
+      currentFlashcardCategory = cat;
+      currentFlashcardIdx = 0;
+      flashcardFlipped = false;
+      renderFlashcardFilters();
+      renderFlashcard();
+    }
+
+    function renderFlashcard() {
+      var cards = getFlashcardCards();
+      if (currentFlashcardIdx >= cards.length) currentFlashcardIdx = 0;
+      if (currentFlashcardIdx < 0) currentFlashcardIdx = cards.length - 1;
+      var c = cards[currentFlashcardIdx];
+      if (!c) return;
+      var card = document.getElementById('flashcard');
+      card.classList.toggle('flipped', flashcardFlipped);
+      document.getElementById('fcCategory').textContent = c.category;
+      if (flashcardFlipped) {
+        document.getElementById('fcWrong').textContent = '';
+        document.getElementById('fcRight').textContent = c.right;
+        document.getElementById('fcRule').textContent = c.rule;
+        document.getElementById('fcHint').textContent = '🔊 Tap speaker to hear • Tap card to flip back';
+      } else {
+        document.getElementById('fcWrong').textContent = c.wrong;
+        document.getElementById('fcRight').textContent = '';
+        document.getElementById('fcRule').textContent = '';
+        document.getElementById('fcHint').textContent = 'Tap to flip and see the correction';
+      }
+      document.getElementById('flashcardCounter').textContent = (currentFlashcardIdx + 1) + ' / ' + cards.length;
+    }
+
+    function flipFlashcard() {
+      flashcardFlipped = !flashcardFlipped;
+      renderFlashcard();
+    }
+    function nextFlashcard() {
+      flashcardFlipped = false;
+      currentFlashcardIdx++;
+      addFlashcardReview();
+      renderFlashcard();
+    }
+    function prevFlashcard() {
+      flashcardFlipped = false;
+      currentFlashcardIdx--;
+      renderFlashcard();
+    }
+    function speakFlashcard() {
+      var cards = getFlashcardCards();
+      speak(cards[currentFlashcardIdx].right);
+    }
+
+    // ========================================================================
+    // QUIZ
+    // ========================================================================
+    function renderQuizFilters() {
+      var container = document.getElementById('quizFilters');
+      container.innerHTML = '';
+      var cats = [{key: 'all', label: 'All categories'}];
+      CATEGORIES.forEach(function(c) { cats.push({key: c.title, label: c.title}); });
+      cats.forEach(function(c) {
+        var btn = document.createElement('button');
+        btn.textContent = c.label;
+        if (c.key === currentQuizCategory) btn.classList.add('active');
+        btn.onclick = function() { setQuizCategory(c.key); };
+        container.appendChild(btn);
+      });
+    }
+
+    function setQuizCategory(cat) {
+      currentQuizCategory = cat;
+      renderQuizFilters();
+    }
+
+    function startQuiz() {
+      var questions = QUIZ_QUESTIONS.slice();
+      // Shuffle
+      for (var i = questions.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = questions[i]; questions[i] = questions[j]; questions[j] = temp;
+      }
+      currentQuizQuestions = questions.slice(0, 10);
+      currentQuizIdx = 0;
+      quizScore = 0;
+      document.getElementById('quizStart').classList.add('hidden');
+      document.getElementById('quizResults').classList.add('hidden');
+      document.getElementById('quizArea').classList.remove('hidden');
+      renderQuizQuestion();
+    }
+
+    function renderQuizQuestion() {
+      var q = currentQuizQuestions[currentQuizIdx];
+      if (!q) { showQuizResults(); return; }
+      document.getElementById('quizProgressBar').style.width = ((currentQuizIdx / currentQuizQuestions.length) * 100) + '%';
+      document.getElementById('quizQuestion').textContent = q.question;
+      var optionsContainer = document.getElementById('quizOptions');
+      optionsContainer.innerHTML = '';
+      q.options.forEach(function(opt, i) {
+        var btn = document.createElement('button');
+        btn.className = 'quiz-option';
+        btn.textContent = opt;
+        btn.onclick = function() { answerQuiz(i); };
+        optionsContainer.appendChild(btn);
+      });
+      document.getElementById('quizFeedback').classList.remove('show', 'correct', 'wrong');
+      document.getElementById('quizNextRow').style.display = 'none';
+    }
+
+    function answerQuiz(idx) {
+      var q = currentQuizQuestions[currentQuizIdx];
+      var options = document.querySelectorAll('.quiz-option');
+      options.forEach(function(o) { o.classList.add('disabled'); });
+      if (idx === q.answer) {
+        options[idx].classList.add('correct');
+        quizScore++;
+        var fb = document.getElementById('quizFeedback');
+        fb.textContent = '✓ Correct! ' + q.explanation;
+        fb.classList.add('show', 'correct');
+      } else {
+        options[idx].classList.add('wrong');
+        options[q.answer].classList.add('correct');
+        var fb2 = document.getElementById('quizFeedback');
+        fb2.textContent = '✗ Not quite. ' + q.explanation;
+        fb2.classList.add('show', 'wrong');
+      }
+      document.getElementById('quizNextRow').style.display = '';
+    }
+
+    function nextQuizQuestion() {
+      currentQuizIdx++;
+      if (currentQuizIdx >= currentQuizQuestions.length) {
+        showQuizResults();
+      } else {
+        renderQuizQuestion();
+      }
+    }
+
+    function showQuizResults() {
+      document.getElementById('quizArea').classList.add('hidden');
+      document.getElementById('quizResults').classList.remove('hidden');
+      var pct = Math.round((quizScore / currentQuizQuestions.length) * 100);
+      document.getElementById('quizScore').innerHTML =
+        'You scored ' + quizScore + ' / ' + currentQuizQuestions.length + ' (' + pct + '%)';
+      setQuizBestScore(pct);
+    }
+
+    // ========================================================================
+    // VOICE PRACTICE
+    // ========================================================================
+    function renderVoicePhrase() {
+      var p = VOICE_PHRASES[currentVoiceIdx];
+      if (!p) return;
+      document.getElementById('voiceTargetPhrase').textContent = p.phrase;
+      document.getElementById('voiceTargetContext').textContent = p.context;
+      document.getElementById('voiceStatus').textContent = 'Tap "Start speaking" to practice';
+      document.getElementById('voiceResult').textContent = '';
+      document.getElementById('voiceRecognized').classList.remove('show');
+    }
+
+    function speakVoiceTarget() {
+      var p = VOICE_PHRASES[currentVoiceIdx];
+      if (p) speak(p.phrase);
+    }
+
+    function startVoicePractice() {
+      var p = VOICE_PHRASES[currentVoiceIdx];
+      if (!p) return;
+      var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SR) {
+        alert('Voice recognition is not available in this browser. Please use Chrome or Edge.');
+        return;
+      }
+      if (voiceRecognition) { try { voiceRecognition.stop(); } catch(e) {} }
+      voiceRecognition = new SR();
+      voiceRecognition.lang = 'en-US';
+      voiceRecognition.interimResults = false;
+      voiceRecognition.maxAlternatives = 5;
+      var btn = document.getElementById('voiceRecordBtn');
+      btn.classList.add('recording');
+      btn.textContent = '🔴 Listening...';
+      document.getElementById('voiceStatus').textContent = 'Speak now: "' + p.phrase + '"';
+      voiceRecognition.onresult = function(event) {
+        var heard = event.results[0][0].transcript.toLowerCase().trim();
+        var target = p.phrase.toLowerCase().replace(/[^\w\s]/g, '').trim();
+        var heardClean = heard.replace(/[^\w\s]/g, '').trim();
+        document.getElementById('voiceRecognized').textContent = 'Heard: "' + heard + '"';
+        document.getElementById('voiceRecognized').classList.add('show');
+        // Simple word-by-word comparison
+        var targetWords = target.split(/\s+/);
+        var heardWords = heardClean.split(/\s+/);
+        var matchCount = 0;
+        targetWords.forEach(function(w) {
+          if (heardWords.indexOf(w) >= 0) matchCount++;
+        });
+        var accuracy = Math.round((matchCount / targetWords.length) * 100);
+        var resultEl = document.getElementById('voiceResult');
+        if (accuracy >= 70) {
+          resultEl.textContent = '✓ Great! ' + accuracy + '% match';
+          resultEl.style.color = 'var(--green)';
+        } else if (accuracy >= 40) {
+          resultEl.textContent = '~ Close! ' + accuracy + '% match — try again';
+          resultEl.style.color = 'var(--gold)';
+        } else {
+          resultEl.textContent = '✗ ' + accuracy + '% match — listen and try again';
+          resultEl.style.color = 'var(--red)';
+        }
+        addVoicePractice();
+        btn.classList.remove('recording');
+        btn.textContent = '🎤 Start speaking';
+        document.getElementById('voiceStatus').textContent = 'Tap "Listen first" to hear it again, or "Next" for another phrase';
+      };
+      voiceRecognition.onerror = function(event) {
+        document.getElementById('voiceStatus').textContent = 'Voice recognition error: ' + event.error + '. Please try again.';
+        btn.classList.remove('recording');
+        btn.textContent = '🎤 Start speaking';
+      };
+      voiceRecognition.onend = function() {
+        btn.classList.remove('recording');
+        btn.textContent = '🎤 Start speaking';
+      };
+      try {
+        voiceRecognition.start();
+      } catch(e) {
+        document.getElementById('voiceStatus').textContent = 'Could not start voice recognition. Please try again.';
+        btn.classList.remove('recording');
+        btn.textContent = '🎤 Start speaking';
+      }
+    }
+
+    function nextVoicePhrase() {
+      currentVoiceIdx++;
+      if (currentVoiceIdx >= VOICE_PHRASES.length) currentVoiceIdx = 0;
+      renderVoicePhrase();
+    }
+    function prevVoicePhrase() {
+      currentVoiceIdx--;
+      if (currentVoiceIdx < 0) currentVoiceIdx = VOICE_PHRASES.length - 1;
+      renderVoicePhrase();
+    }
+
+    // ========================================================================
+    // SCENARIOS
+    // ========================================================================
+    function setScenarioSetting(setting) {
+      currentScenarioSetting = setting;
+      document.querySelectorAll('.setting-card').forEach(function(c) { c.classList.remove('active'); });
+      document.getElementById('set' + setting.charAt(0).toUpperCase() + setting.slice(1)).classList.add('active');
+      renderScenarios();
+    }
+
+    function renderScenarios() {
+      var list = document.getElementById('scenarioList');
+      var detail = document.getElementById('scenarioDetail');
+      list.innerHTML = '';
+      detail.classList.add('hidden');
+      list.style.display = '';
+      var scenarios = SCENARIOS[currentScenarioSetting] || [];
+      scenarios.forEach(function(s) {
+        var card = document.createElement('div');
+        card.className = 'scenario-card';
+        card.onclick = function() { openScenario(s.id); };
+        card.innerHTML =
+          '<h3>🎭 ' + escapeHtml(s.title) + '</h3>' +
+          '<div class="sc-setting">' + escapeHtml(s.setting) + '</div>' +
+          '<div class="sc-roles">' + escapeHtml(s.roles) + '</div>' +
+          '<div class="sc-goals">Language goals: ' + escapeHtml(s.goals) + '</div>';
+        list.appendChild(card);
+      });
+    }
+
+    function openScenario(scenarioId) {
+      var scenarios = SCENARIOS[currentScenarioSetting] || [];
+      var s = scenarios.find(function(x) { return x.id === scenarioId; });
+      if (!s) return;
+      document.getElementById('scenarioList').style.display = 'none';
+      document.getElementById('scenarioDetail').classList.remove('hidden');
+      document.getElementById('scenarioTitle').textContent = '🎭 ' + s.title;
+      document.getElementById('scenarioSetting').textContent = s.setting;
+      document.getElementById('scenarioDesc').textContent = s.description;
+      var content = document.getElementById('scenarioContent');
+      content.innerHTML = '';
+      // Add roles
+      var rolesDiv = document.createElement('div');
+      rolesDiv.className = 'rule-box';
+      rolesDiv.innerHTML = '<strong>Roles:</strong> ' + escapeHtml(s.roles) + '<br><strong>Goals:</strong> ' + escapeHtml(s.goals);
+      content.appendChild(rolesDiv);
+      // Add key phrases
+      s.phrases.forEach(function(p) {
+        var div = document.createElement('div');
+        div.className = 'scenario-phrases';
+        div.innerHTML =
+          '<div class="sp-label">' + escapeHtml(p.label) + '</div>' +
+          '<div class="sp-phrase">' + escapeHtml(p.text) + '</div>';
+        var btn = document.createElement('button');
+        btn.className = 'btn-gold ec-speak';
+        btn.textContent = '🔊 Hear';
+        (function(text) {
+          btn.addEventListener('click', function(ev) {
+            ev.stopPropagation();
+            speak(text);
+          });
+        })(p.text);
+        div.appendChild(btn);
+        content.appendChild(div);
+      });
+      addScenarioViewed(scenarioId);
+      window.scrollTo(0, 0);
+    }
+
+    function showScenarioList() {
+      document.getElementById('scenarioDetail').classList.add('hidden');
+      document.getElementById('scenarioList').style.display = '';
+      renderScenarios();
+    }
+
+    function speakScenario() {
+      var scenarios = SCENARIOS[currentScenarioSetting] || [];
+      var title = document.getElementById('scenarioTitle').textContent.replace(/^[^\w]+\s/, '');
+      var s = scenarios.find(function(x) { return x.title === title; });
+      if (!s) return;
+      // Queue phrases so each starts after the previous ends (no canceling)
+      s.phrases.forEach(function(p, i) {
+        setTimeout(function() {
+          if ('speechSynthesis' in window) {
+            speechSynthesis.cancel();
+            var utter = new SpeechSynthesisUtterance(p.text);
+            utter.lang = 'en-US';
+            utter.rate = 0.95;
+            if (_preferredVoice) utter.voice = _preferredVoice;
+            speechSynthesis.speak(utter);
+          }
+        }, i * 4000);
+      });
+    }
+
+    // ========================================================================
+    // PROGRESS
+    // ========================================================================
+    function updateProgressDisplay() {
+      var prog = getProgress();
+      var totalLessons = CATEGORIES.length;
+      var totalFlashcards = ALL_FLASHCARDS.length;
+      var totalScenarios = 0;
+      Object.keys(SCENARIOS).forEach(function(k) { totalScenarios += SCENARIOS[k].length; });
+      var lessonPct = Math.round((prog.completedLessons.length / totalLessons) * 100);
+      var scenarioPct = Math.round((prog.scenariosViewed.length / totalScenarios) * 100);
+      var display = document.getElementById('progressDisplay');
+      display.innerHTML =
+        '<div class="progress-stat"><span class="ps-label">Lessons completed</span><span class="ps-value">' + prog.completedLessons.length + ' / ' + totalLessons + '</span></div>' +
+        '<div class="progress-bar"><div class="progress-bar-fill" style="width: ' + lessonPct + '%"></div></div>' +
+        '<div style="height: 1rem;"></div>' +
+        '<div class="progress-stat"><span class="ps-label">Flashcards reviewed</span><span class="ps-value">' + prog.flashcardsReviewed + '</span></div>' +
+        '<div class="progress-stat" style="margin-top: 0.75rem;"><span class="ps-label">Best quiz score</span><span class="ps-value">' + (prog.quizBestScore !== null ? prog.quizBestScore + '%' : '—') + '</span></div>' +
+        '<div class="progress-stat"><span class="ps-label">Voice phrases practiced</span><span class="ps-value">' + prog.voicePracticed + '</span></div>' +
+        '<div class="progress-stat"><span class="ps-label">Scenarios explored</span><span class="ps-value">' + prog.scenariosViewed.length + ' / ' + totalScenarios + '</span></div>' +
+        '<div class="progress-bar"><div class="progress-bar-fill" style="width: ' + scenarioPct + '%"></div></div>';
+    }
+
+    function resetProgress() {
+      if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
+        try { localStorage.removeItem('perfectEnglishProgress'); } catch(e) {}
+        updateProgressDisplay();
+        renderLessonList();
+        alert('Progress has been reset.');
+      }
+    }
+
+    // ========================================================================
+    // INITIALIZATION
+    // ========================================================================
+    renderLessonList();
+    renderFlashcardFilters();
+    renderFlashcard();
+    renderQuizFilters();
+    renderVoicePhrase();
+    renderScenarios();
+
+  </script>
+</body>
+</html>
