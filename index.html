@@ -955,6 +955,45 @@
     }
     .rule-box strong { color: var(--navy); }
 
+    /* ===== STREAK + DAILY GOAL + ENCOURAGEMENT ===== */
+    .streak-banner {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: var(--radius-lg);
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      box-shadow: var(--shadow-gold);
+      animation: fadeIn 0.5s ease;
+    }
+    .streak-banner .streak-left { display: flex; align-items: center; gap: 0.6rem; }
+    .streak-banner .streak-flame { font-size: 2.2rem; animation: flicker 2s infinite ease-in-out; }
+    @keyframes flicker { 0%,100%{transform:scale(1);} 50%{transform:scale(1.08);} }
+    .streak-banner .streak-number { font-size: 2rem; font-weight: 800; color: #1a2738; font-family: Georgia, serif; }
+    .streak-banner .streak-label { font-size: 0.85rem; color: #5a4a12; font-weight: 600; }
+    .daily-goal-ring { width: 64px; height: 64px; position: relative; flex-shrink: 0; }
+    .daily-goal-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .daily-goal-ring circle { fill: none; stroke-width: 6; }
+    .daily-goal-ring .ring-bg { stroke: rgba(255,255,255,0.4); }
+    .daily-goal-ring .ring-fill { stroke: #1a2738; stroke-linecap: round; transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+    .daily-goal-ring .ring-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.8rem; font-weight: 800; color: #1a2738; text-align: center; line-height: 1.2; }
+    .encouragement {
+      background: linear-gradient(145deg, var(--teal-bg), #f0fdfa);
+      border: 1px solid rgba(13, 148, 136, 0.2);
+      border-left: 4px solid var(--teal);
+      border-radius: var(--radius-md);
+      padding: 0.8rem 1.1rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.92rem;
+      color: var(--text);
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    .encouragement.show { display: block; }
+    .encouragement .enc-emoji { font-size: 1.3rem; margin-right: 0.3rem; }
+
     /* ===== ABOUT ME ===== */
     .aboutme-field {
       margin-bottom: 0.8rem;
@@ -1141,6 +1180,7 @@
 
     <!-- ===== LESSONS (MISTAKES) TAB ===== -->
     <div class="tab-content active" id="tab-lessons">
+      <div class="encouragement" id="encouragementBanner"></div>
       <div class="card">
         <h2>Common Mistakes</h2>
         <p style="color: var(--text-muted); margin-bottom: 1rem;">Browse error categories. Each shows the wrong way, the correct way, and the rule. Tap any phrase to hear it spoken.</p>
@@ -1642,8 +1682,8 @@
     // PROGRESS (localStorage)
     // ========================================================================
     function getProgress() {
-      try { return JSON.parse(localStorage.getItem('polishedEnglishProgress')) || {completedLessons:[],flashcardsReviewed:0,quizBestScore:null,voicePracticed:0,scenariosViewed:[]}; }
-      catch(e) { return {completedLessons:[],flashcardsReviewed:0,quizBestScore:null,voicePracticed:0,scenariosViewed:[]}; }
+      try { return JSON.parse(localStorage.getItem('polishedEnglishProgress')) || {completedLessons:[],flashcardsReviewed:0,quizBestScore:null,voicePracticed:0,scenariosViewed:[],streak:0,lastVisit:null,dailyPractice:0,dailyGoal:5},flashcardsReviewed:0,quizBestScore:null,voicePracticed:0,scenariosViewed:[]}; }
+      catch(e) { return {completedLessons:[],flashcardsReviewed:0,quizBestScore:null,voicePracticed:0,scenariosViewed:[],streak:0,lastVisit:null,dailyPractice:0,dailyGoal:5},flashcardsReviewed:0,quizBestScore:null,voicePracticed:0,scenariosViewed:[]}; }
     }
     function saveProgress(p) { try { localStorage.setItem('polishedEnglishProgress', JSON.stringify(p)); } catch(e) {} }
     function addFlashcardReview() { var p=getProgress(); p.flashcardsReviewed++; saveProgress(p); }
@@ -1758,7 +1798,8 @@
     function showLessonList() {
       document.getElementById('lessonDetail').classList.add('hidden');
       document.getElementById('lessonList').parentElement.style.display = '';
-      renderLessonList();
+      updateStreak();
+    renderLessonList();
     }
 
     function completeLesson() {
@@ -2011,8 +2052,21 @@
       Object.keys(SCENARIOS).forEach(function(k) { totalScenarios += SCENARIOS[k].length; });
       var lessonPct = Math.round((prog.completedLessons.length/totalLessons)*100);
       var scenarioPct = Math.round((prog.scenariosViewed.length/totalScenarios)*100);
+      var dailyPct = Math.round(((prog.dailyPractice||0)/(prog.dailyGoal||5))*100);
+      if(dailyPct>100) dailyPct = 100;
       var d = document.getElementById('progressDisplay');
-      d.innerHTML =
+      var streakHtml = '';
+      if((prog.streak||0) > 0) {
+        streakHtml = '<div class="streak-banner">' +
+          '<div class="streak-left"><span class="streak-flame">\uD83D\uDD25</span>' +
+          '<div><span class="streak-number">' + (prog.streak||0) + '</span><br><span class="streak-label">day streak</span></div></div>' +
+          '<div class="daily-goal-ring"><svg viewBox="0 0 64 64">' +
+          '<circle class="ring-bg" cx="32" cy="32" r="28"></circle>' +
+          '<circle class="ring-fill" cx="32" cy="32" r="28" stroke-dasharray="175.9" stroke-dashoffset="' + (175.9 - (175.9 * dailyPct / 100)) + '"></circle>' +
+          '</svg><div class="ring-text">' + (prog.dailyPractice||0) + '/' + (prog.dailyGoal||5) + '<br><span style="font-size:0.6rem;">today</span></div></div>' +
+        '</div>';
+      }
+      d.innerHTML = streakHtml +
         '<div class="progress-stat"><span class="ps-label">Lessons completed</span><span class="ps-value">' + prog.completedLessons.length + ' / ' + totalLessons + '</span></div>' +
         '<div class="progress-bar"><div class="progress-bar-fill" style="width:' + lessonPct + '%"></div></div>' +
         '<div class="progress-stat"><span class="ps-label">Flashcards reviewed</span><span class="ps-value">' + prog.flashcardsReviewed + '</span></div>' +
@@ -2376,6 +2430,39 @@
       rec.onerror = function(event) { resultEl.textContent = 'Error: ' + event.error; resultEl.style.color = 'var(--red)'; };
       rec.onend = function() { btn.classList.remove('recording'); btn.textContent = '\uD83C\uDF99\uFE0F Start speaking'; };
       try { rec.start(); } catch(e) { btn.classList.remove('recording'); btn.textContent = '\uD83C\uDF99\uFE0F Start speaking'; }
+    }
+
+    // ========================================================================
+    // STREAK TRACKING — daily practice streak
+    // ========================================================================
+    function updateStreak() {
+      var p = getProgress();
+      var today = new Date().toDateString();
+      if(p.lastVisit !== today) {
+        if(p.lastVisit) {
+          var yesterday = new Date();
+          yesterday.setDate(yesterday.getDate() - 1);
+          if(p.lastVisit === yesterday.toDateString()) { p.streak = (p.streak||0) + 1; }
+          else { p.streak = 1; }
+        } else { p.streak = 1; }
+        p.lastVisit = today;
+        p.dailyPractice = 0;
+        saveProgress(p);
+        showEncouragement(p.streak > 1 ? p.streak + ' day streak! Keep it going!' : 'Welcome! Let us practice today.');
+      }
+    }
+    function trackDailyPractice() {
+      var p = getProgress();
+      p.dailyPractice = (p.dailyPractice||0) + 1;
+      saveProgress(p);
+      if(p.dailyPractice === (p.dailyGoal||5)) { showEncouragement('You hit your daily goal of ' + (p.dailyGoal||5) + ' practices!'); }
+    }
+    function showEncouragement(msg) {
+      var el = document.getElementById('encouragementBanner');
+      if(!el) return;
+      el.innerHTML = '<span class="enc-emoji">\u2728</span> ' + escapeHtml(msg);
+      el.classList.add('show');
+      setTimeout(function() { el.classList.remove('show'); }, 5000);
     }
 
     // ========================================================================
