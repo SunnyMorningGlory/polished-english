@@ -1,4 +1,4 @@
-# Perfect English — Project Overview
+# Polished English — Project Overview
 
 ## Mission
 A conversational English tutor for proficient but non-native speakers who work in professional environments where small grammatical errors undermine credibility. The app targets people who learned English later in life and already communicate well but persistently make subtle mistakes — the kind that mark them as non-native and can affect workplace perception, tips, promotions, and client trust.
