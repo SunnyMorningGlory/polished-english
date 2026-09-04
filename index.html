@@ -280,9 +280,10 @@
       font-weight: 600;
       padding: 0.75rem 1.4rem;
       border: none;
+      border-bottom: 4px solid transparent;
       border-radius: var(--radius-md);
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -292,15 +293,14 @@
     }
     .btn-primary {
       background: linear-gradient(135deg, var(--navy), var(--navy-light));
-      color: white;
-      box-shadow: var(--shadow-md);
+      color: white; border-bottom-color: var(--navy-dark); box-shadow: var(--shadow-md);
     }
     .btn-primary:hover {
       background: linear-gradient(135deg, var(--navy-light), var(--navy-lighter));
-      transform: translateY(-2px);
+      transform: translateY(-1px);
       box-shadow: var(--shadow-lg);
     }
-    .btn-primary:active { transform: translateY(0); box-shadow: var(--shadow-sm); }
+    .btn-primary:active { transform: translateY(3px); border-bottom-width: 1px; box-shadow: var(--shadow-sm); }
     .btn-gold {
       background: var(--gold-gradient);
       color: #1a2738;
@@ -360,16 +360,17 @@
       background: var(--card-bg);
       border: 1px solid var(--border-light);
       border-radius: var(--radius-md);
-      padding: 1.2rem 1.4rem;
+      padding: 1.1rem 1.3rem;
       cursor: pointer;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.4rem;
     }
-    .lesson-item .lesson-icon {
-      display: block;
-      line-height: 1.2;
-    }
+    .lesson-item .lesson-icon { font-size: 1.6rem; line-height: 1; display: block; }
     .lesson-item h3 {
       display: block;
       margin-top: 0.3rem;
@@ -825,10 +826,14 @@
       background: var(--card-bg);
       border: 2px solid var(--border-light);
       border-radius: var(--radius-lg);
-      padding: 1.2rem 1rem;
+      padding: 1rem 0.8rem;
       cursor: pointer;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
     }
     .setting-card:hover {
       border-color: var(--navy-light);
@@ -840,7 +845,7 @@
       background: linear-gradient(145deg, var(--navy-bg), #f2f6fb);
       box-shadow: var(--shadow-md);
     }
-    .setting-card .sc-icon { font-size: 2.2rem; margin-bottom: 0.2rem; }
+    .setting-card .sc-icon { font-size: 2rem; display: block; }
     .setting-card h3 {
       color: var(--navy);
       margin: 0.3rem 0 0.15rem;
@@ -1168,418 +1173,269 @@
     <p style="margin-top: 0.3rem; font-size: 0.8rem;">Educational tool only. Does not guarantee fluency. Uses browser speech features (varies by device).</p>
   </footer>
 
+
   <script>
+<script>
     // ========================================================================
-    // DATA: ERROR CATEGORIES (LESSONS)
+    // DATA: ERROR CATEGORIES (13 categories)
     // ========================================================================
     var CATEGORIES = [
-      {
-        id: 'double-comparatives',
-        icon: '⚖️',
-        title: 'Double Comparatives',
-        description: 'The "more better" mistake — using two comparative forms when you only need one.',
-        errors: [
-          { wrong: 'This is more better.', right: 'This is better.', rule: '"Better" is already the comparative of "good." Never add "more."', context: 'General' },
-          { wrong: 'She is more smarter than me.', right: 'She is smarter than I am.', rule: 'Short adjectives that end in "-er" (smart→smarter) never take "more."', context: 'General' },
-          { wrong: 'This option is more cheaper.', right: 'This option is cheaper.', rule: 'Use "more" only with long adjectives (more expensive, more important).', context: 'Retail' },
-          { wrong: 'It is more hotter today.', right: 'It is hotter today.', rule: 'One comparative method per adjective — not two.', context: 'General' },
-          { wrong: 'He is more taller than his brother.', right: 'He is taller than his brother.', rule: '"Tall → taller" already has the comparative ending.', context: 'General' },
-        ]
-      },
-      {
-        id: 'articles',
-        icon: '🔤',
-        title: 'Articles (a, an, the)',
-        description: 'The most persistent error for speakers of languages without articles — adding, dropping, or misusing a/an/the.',
-        errors: [
-          { wrong: 'I went to store.', right: 'I went to the store.', rule: 'Specific noun → use "the."', context: 'General' },
-          { wrong: 'She is nurse.', right: 'She is a nurse.', rule: 'Singular profession → use "a."', context: 'General' },
-          { wrong: 'I read book yesterday.', right: 'I read a book yesterday.', rule: 'Singular countable noun → needs an article.', context: 'General' },
-          { wrong: 'I traveled to the Spain.', right: 'I traveled to Spain.', rule: 'Most country names take no article.', context: 'General' },
-          { wrong: 'The education is important.', right: 'Education is important.', rule: 'Uncountable nouns used generally → no article.', context: 'Office' },
-          { wrong: 'I have the headache.', right: 'I have a headache.', rule: 'Illnesses use "a," not "the."', context: 'General' },
-        ]
-      },
-      {
-        id: 'subject-verb-agreement',
-        icon: '👥',
-        title: 'Subject–Verb Agreement',
-        description: 'Missing the third-person singular "s" or mismatching singular/plural subjects with verbs.',
-        errors: [
-          { wrong: 'She go to the meeting.', right: 'She goes to the meeting.', rule: 'Third-person singular (he/she/it) adds "s" in present tense.', context: 'Office' },
-          { wrong: 'One of the planes are late.', right: 'One of the planes is late.', rule: 'The subject is "one" (singular), not "planes."', context: 'General' },
-          { wrong: 'Each of the cars are fast.', right: 'Each of the cars is fast.', rule: '"Each" is always singular.', context: 'Retail' },
-          { wrong: 'The list of factors are important.', right: 'The list of factors is important.', rule: 'The subject is "list," not "factors."', context: 'Office' },
-          { wrong: 'People is coming.', right: 'People are coming.', rule: '"People" is plural — use "are."', context: 'General' },
-          { wrong: 'The police is here.', right: 'The police are here.', rule: '"Police" is always plural.', context: 'General' },
-        ]
-      },
-      {
-        id: 'verb-tenses',
-        icon: '⏰',
-        title: 'Verb Tense Errors',
-        description: 'Confusing present perfect with past simple, mixing up "since" and "for," and other tense problems.',
-        errors: [
-          { wrong: 'I have seen him yesterday.', right: 'I saw him yesterday.', rule: 'Specific past time → use past simple, not present perfect.', context: 'General' },
-          { wrong: 'I am living here since five years.', right: 'I have been living here for five years.', rule: 'Duration from past to now → present perfect + "for."', context: 'General' },
-          { wrong: 'I\'ve been in America since 3 months.', right: 'I\'ve been in America for 3 months.', rule: '"Since" = point in time; "for" = duration.', context: 'General' },
-          { wrong: 'Tomorrow we go shopping.', right: 'Tomorrow we will go shopping.', rule: 'Future plans → use "will" or "going to."', context: 'General' },
-          { wrong: 'I am working here since 2019.', right: 'I have been working here since 2019.', rule: '"Since" + point in time → present perfect, not present continuous.', context: 'Office' },
-          { wrong: 'I have been knowing her for years.', right: 'I have known her for years.', rule: 'Stative verbs (know, like, want) don\'t use continuous form.', context: 'General' },
-        ]
-      },
-      {
-        id: 'prepositions',
-        icon: '📍',
-        title: 'Preposition Problems',
-        description: 'Adding unnecessary prepositions or using the wrong one — "discuss about," "married with," "different than."',
-        errors: [
-          { wrong: 'Let\'s discuss about the project.', right: 'Let\'s discuss the project.', rule: '"Discuss" takes a direct object — no "about."', context: 'Office' },
-          { wrong: 'We discussed about the results.', right: 'We discussed the results.', rule: 'Same rule — "discuss" never takes "about."', context: 'Office' },
-          { wrong: 'He married with a French girl.', right: 'He married a French girl.', rule: '"Marry" takes a direct object — no "with."', context: 'General' },
-          { wrong: 'I am good in English.', right: 'I am good at English.', rule: '"Good at" not "good in" for skills.', context: 'General' },
-          { wrong: 'Similar than the previous study.', right: 'Similar to the previous study.', rule: '"Similar to" not "similar than."', context: 'Office' },
-          { wrong: 'I am waiting him.', right: 'I am waiting for him.', rule: '"Wait" needs "for" before the object.', context: 'General' },
-          { wrong: 'She is on the car.', right: 'She is in the car.', rule: 'Inside a vehicle → "in." On top of it → "on."', context: 'General' },
-        ]
-      },
-      {
-        id: 'countable-uncountable',
-        icon: '📦',
-        title: 'Countable vs. Uncountable',
-        description: 'Adding "s" to uncountable nouns or using "much" with countable nouns.',
-        errors: [
-          { wrong: 'I need an advice.', right: 'I need some advice.', rule: '"Advice" is uncountable — no "an," no plural.', context: 'Office' },
-          { wrong: 'She gave me many informations.', right: 'She gave me a lot of information.', rule: '"Information" is uncountable.', context: 'Office' },
-          { wrong: 'I have many experiences in marketing.', right: 'I have a lot of experience in marketing.', rule: '"Experience" (general) is uncountable.', context: 'Office' },
-          { wrong: 'There were less people at the event.', right: 'There were fewer people at the event.', rule: '"Fewer" for countable; "less" for uncountable.', context: 'General' },
-          { wrong: 'We have many softwares.', right: 'We have a lot of software.', rule: '"Software" is uncountable.', context: 'Office' },
-          { wrong: 'Thank you for your hard works.', right: 'Thank you for your hard work.', rule: '"Work" is uncountable in this sense.', context: 'Office' },
-        ]
-      },
-      {
-        id: 'say-tell',
-        icon: '💬',
-        title: 'Say vs. Tell',
-        description: 'Mixing up "say" and "tell" — "tell" needs a person, "say" usually doesn\'t.',
-        errors: [
-          { wrong: 'She said me the answer.', right: 'She told me the answer.', rule: '"Tell" requires a person as object.', context: 'Office' },
-          { wrong: 'He told that he was tired.', right: 'He said that he was tired.', rule: '"Say" doesn\'t take a direct person object.', context: 'General' },
-          { wrong: 'Can you say me the time?', right: 'Can you tell me the time?', rule: 'Use "tell" when addressing a person directly.', context: 'Hospitality' },
-        ]
-      },
-      {
-        id: 'bored-boring',
-        icon: '😐',
-        title: 'Bored vs. Boring',
-        description: 'Confusing -ed and -ing adjectives — one describes how you feel, the other describes the thing.',
-        errors: [
-          { wrong: 'This movie is very bored.', right: 'This movie is very boring.', rule: '"-ing" describes the thing; "-ed" describes your feeling.', context: 'General' },
-          { wrong: 'I am so boring today.', right: 'I am so bored today.', rule: 'You feel "bored"; you are not "boring" (unless you\'re dull!).', context: 'General' },
-          { wrong: 'The meeting was very excited.', right: 'The meeting was very exciting.', rule: 'The meeting is exciting; the participants are excited.', context: 'Office' },
-          { wrong: 'I am very interesting in this.', right: 'I am very interested in this.', rule: 'You are "interested in" something; the thing is "interesting."', context: 'Office' },
-        ]
-      },
-      {
-        id: 'word-pairs',
-        icon: '🔀',
-        title: 'Word Confusion Pairs',
-        description: 'Commonly mixed-up words: borrow/lend, personal/personnel, comfortable/convenient, and more.',
-        errors: [
-          { wrong: 'I loaned the book from the library.', right: 'I borrowed the book from the library.', rule: '"Borrow" = take from someone; "lend" = give to someone.', context: 'General' },
-          { wrong: 'He took leave for personnel reasons.', right: 'He took leave for personal reasons.', rule: '"Personal" = private; "personnel" = staff.', context: 'Office' },
-          { wrong: 'Is that chair convenient for you?', right: 'Is that chair comfortable for you?', rule: '"Comfortable" = physically nice; "convenient" = suitable timing/location.', context: 'General' },
-          { wrong: 'Irregardless of what you want...', right: 'Regardless of what you want...', rule: '"Irregardless" is not standard English. Always use "regardless."', context: 'General' },
-          { wrong: 'Can I drive because I passed the test?', right: 'I can drive because I passed the test.', rule: '"Can" = ability; "may" = permission.', context: 'General' },
-        ]
-      },
-      {
-        id: 'politeness',
-        icon: '🤝',
-        title: 'Politeness: "Would You Like"',
-        description: 'The most impactful change in service English — replacing direct "you want" with polite "would you like."',
-        errors: [
-          { wrong: 'You want water?', right: 'Would you like some water?', rule: '"You want" sounds like an interrogation. "Would you like" is always polite.', context: 'Hospitality' },
-          { wrong: 'What you want?', right: 'What would you like?', rule: 'Add "would" for politeness in service situations.', context: 'Hospitality' },
-          { wrong: 'Give me your card.', right: 'May I take your card, please?', rule: 'Turn commands into questions + add "please."', context: 'Hospitality' },
-          { wrong: 'Sit here.', right: 'Please have a seat.', rule: 'Use "please" + soften commands into invitations.', context: 'Hospitality' },
-          { wrong: 'Wait.', right: 'One moment, please.', rule: '"Wait" sounds abrupt. "One moment" is professional.', context: 'Hospitality' },
-          { wrong: 'You want dessert?', right: 'Would you like to see the dessert menu?', rule: 'Always offer with "would you like" in service settings.', context: 'Hospitality' },
-        ]
-      },
-      {
-        id: 'business-english',
-        icon: '💼',
-        title: 'Business English Errors',
-        description: 'Workplace-specific mistakes: "presentate," "headquarters," "look forward to hearing," and more.',
-        errors: [
-          { wrong: 'I look forward to hear from you.', right: 'I look forward to hearing from you.', rule: '"Look forward to" is always followed by "-ing."', context: 'Office' },
-          { wrong: 'I will presentate the results.', right: 'I will present the results.', rule: '"Presentate" is not a word. The verb is "present."', context: 'Office' },
-          { wrong: 'Our headquarter is in Chicago.', right: 'Our headquarters is in Chicago.', rule: '"Headquarters" always has an "s" — it\'s still singular.', context: 'Office' },
-          { wrong: 'He is responsible of the project.', right: 'He is responsible for the project.', rule: '"Responsible for" not "responsible of."', context: 'Office' },
-          { wrong: 'Please revert back to me.', right: 'Please get back to me.', rule: '"Revert" means "return to a previous state" — not "reply."', context: 'Office' },
-          { wrong: 'Kindly do the needful.', right: 'Please take care of this.', rule: '"Do the needful" is outdated — use clear, modern English.', context: 'Office' },
-        ]
-      },
-      {
-        id: 'pronunciation',
-        icon: '🗣️',
-        title: 'Pronunciation Pitfalls',
-        description: 'Words that are often mispronounced, causing confusion — even when grammar is correct.',
-        errors: [
-          { wrong: 'DEZ-ert (meaning sweet food)', right: 'deh-ZERT (dessert)', rule: 'Stress the 2nd syllable for dessert; "DEZ-ert" = a sandy desert.', context: 'Hospitality' },
-          { wrong: 'men-OO (menu)', right: 'MEN-yoo (menu)', rule: 'Stress the 1st syllable: MEN-yoo.', context: 'Hospitality' },
-          { wrong: 're-ceipt (with "p")', right: 'reh-SEET (receipt)', rule: 'The "p" is silent in "receipt."', context: 'Retail' },
-          { wrong: 'sal-mon (with "l")', right: 'SAM-un (salmon)', rule: 'The "l" is silent in "salmon."', context: 'Hospitality' },
-          { wrong: 'e-xe-CU-tive', right: 'ig-ZEK-u-tive', rule: 'Stress the 2nd syllable, not the "u."', context: 'Office' },
-        ]
-      },
+      { id:'double-comparatives', icon:'⚖️', title:'Double Comparatives', description:'The "more better" mistake — using two comparative forms when you only need one.',
+        errors:[
+          {wrong:'This is more better.', right:'This is better.', rule:'"Better" is already the comparative of "good." Never add "more."'},
+          {wrong:'She is more smarter than me.', right:'She is smarter than I am.', rule:'Short adjectives ending in "-er" never take "more."'},
+          {wrong:'This option is more cheaper.', right:'This option is cheaper.', rule:'Use "more" only with long adjectives (more expensive).'},
+          {wrong:'It is more hotter today.', right:'It is hotter today.', rule:'One comparative method per adjective — not two.'},
+          {wrong:'He is more taller than his brother.', right:'He is taller than his brother.', rule:'"Tall → taller" already has the comparative ending.'},
+        ]},
+      { id:'articles', icon:'🔤', title:'Articles (a, an, the)', description:'The most persistent error — adding, dropping, or misusing a/an/the.',
+        errors:[
+          {wrong:'I went to store.', right:'I went to the store.', rule:'Specific noun → use "the."'},
+          {wrong:'She is nurse.', right:'She is a nurse.', rule:'Singular profession → use "a."'},
+          {wrong:'I read book yesterday.', right:'I read a book yesterday.', rule:'Singular countable noun → needs an article.'},
+          {wrong:'I traveled to the Spain.', right:'I traveled to Spain.', rule:'Most country names take no article.'},
+          {wrong:'The education is important.', right:'Education is important.', rule:'Uncountable nouns used generally → no article.'},
+          {wrong:'I have the headache.', right:'I have a headache.', rule:'Illnesses use "a," not "the."'},
+        ]},
+      { id:'subject-verb', icon:'👥', title:'Subject–Verb Agreement', description:'Missing the third-person singular "s" or mismatching subjects with verbs.',
+        errors:[
+          {wrong:'She go to the meeting.', right:'She goes to the meeting.', rule:'Third-person singular (he/she/it) adds "s" in present tense.'},
+          {wrong:'One of the planes are late.', right:'One of the planes is late.', rule:'The subject is "one" (singular), not "planes."'},
+          {wrong:'Each of the cars are fast.', right:'Each of the cars is fast.', rule:'"Each" is always singular.'},
+          {wrong:'The list of factors are important.', right:'The list of factors is important.', rule:'The subject is "list," not "factors."'},
+          {wrong:'People is coming.', right:'People are coming.', rule:'"People" is plural — use "are."'},
+          {wrong:'The police is here.', right:'The police are here.', rule:'"Police" is always plural.'},
+        ]},
+      { id:'verb-tenses', icon:'⏰', title:'Verb Tense Errors', description:'Confusing present perfect with past, mixing up "since" and "for."',
+        errors:[
+          {wrong:'I have seen him yesterday.', right:'I saw him yesterday.', rule:'Specific past time → past simple, not present perfect.'},
+          {wrong:'I am living here since five years.', right:'I have been living here for five years.', rule:'Duration from past to now → present perfect + "for."'},
+          {wrong:"I've been in America since 3 months.", right:"I've been in America for 3 months.", rule:'"Since" = point in time; "for" = duration.'},
+          {wrong:'Tomorrow we go shopping.', right:'Tomorrow we will go shopping.', rule:'Future plans → use "will" or "going to."'},
+          {wrong:'I am working here since 2019.', right:'I have been working here since 2019.', rule:'"Since" + point in time → present perfect.'},
+          {wrong:'I have been knowing her for years.', right:'I have known her for years.', rule:'Stative verbs (know, like, want) don\'t use continuous form.'},
+        ]},
+      { id:'prepositions', icon:'📍', title:'Preposition Problems', description:'Adding unnecessary prepositions or using the wrong one.',
+        errors:[
+          {wrong:"Let's discuss about the project.", right:"Let's discuss the project.", rule:'"Discuss" takes a direct object — no "about."'},
+          {wrong:'We discussed about the results.', right:'We discussed the results.', rule:'"Discuss" never takes "about."'},
+          {wrong:'He married with a French girl.', right:'He married a French girl.', rule:'"Marry" takes a direct object — no "with."'},
+          {wrong:'I am good in English.', right:'I am good at English.', rule:'"Good at" not "good in" for skills.'},
+          {wrong:'Similar than the previous study.', right:'Similar to the previous study.', rule:'"Similar to" not "similar than."'},
+          {wrong:'I am waiting him.', right:'I am waiting for him.', rule:'"Wait" needs "for" before the object.'},
+          {wrong:'She is on the car.', right:'She is in the car.', rule:'Inside a vehicle → "in." On top of it → "on."'},
+        ]},
+      { id:'countable', icon:'📦', title:'Countable vs. Uncountable', description:'Adding "s" to uncountable nouns or using "much" with countable nouns.',
+        errors:[
+          {wrong:'I need an advice.', right:'I need some advice.', rule:'"Advice" is uncountable — no "an," no plural.'},
+          {wrong:'She gave me many informations.', right:'She gave me a lot of information.', rule:'"Information" is uncountable.'},
+          {wrong:'I have many experiences in marketing.', right:'I have a lot of experience in marketing.', rule:'"Experience" (general) is uncountable.'},
+          {wrong:'There were less people at the event.', right:'There were fewer people at the event.', rule:'"Fewer" for countable; "less" for uncountable.'},
+          {wrong:'We have many softwares.', right:'We have a lot of software.', rule:'"Software" is uncountable.'},
+          {wrong:'Thank you for your hard works.', right:'Thank you for your hard work.', rule:'"Work" is uncountable in this sense.'},
+        ]},
+      { id:'say-tell', icon:'💬', title:'Say vs. Tell', description:'Mixing up "say" and "tell" — "tell" needs a person, "say" usually doesn\'t.',
+        errors:[
+          {wrong:'She said me the answer.', right:'She told me the answer.', rule:'"Tell" requires a person as object.'},
+          {wrong:'He told that he was tired.', right:'He said that he was tired.', rule:'"Say" doesn\'t take a direct person object.'},
+          {wrong:'Can you say me the time?', right:'Can you tell me the time?', rule:'Use "tell" when addressing a person directly.'},
+        ]},
+      { id:'bored-boring', icon:'😐', title:'Bored vs. Boring', description:'Confusing -ed and -ing adjectives — one describes feelings, the other describes things.',
+        errors:[
+          {wrong:'This movie is very bored.', right:'This movie is very boring.', rule:'"-ing" describes the thing; "-ed" describes your feeling.'},
+          {wrong:'I am so boring today.', right:'I am so bored today.', rule:'You feel "bored"; you are not "boring" (unless you\'re dull!).'},
+          {wrong:'The meeting was very excited.', right:'The meeting was very exciting.', rule:'The meeting is exciting; the participants are excited.'},
+          {wrong:'I am very interesting in this.', right:'I am very interested in this.', rule:'You are "interested in" something; the thing is "interesting."'},
+        ]},
+      { id:'word-pairs', icon:'🔀', title:'Word Confusion Pairs', description:'Commonly mixed-up words: borrow/lend, personal/personnel, comfortable/convenient.',
+        errors:[
+          {wrong:'I loaned the book from the library.', right:'I borrowed the book from the library.', rule:'"Borrow" = take from someone; "lend" = give to someone.'},
+          {wrong:'He took leave for personnel reasons.', right:'He took leave for personal reasons.', rule:'"Personal" = private; "personnel" = staff.'},
+          {wrong:'Is that chair convenient for you?', right:'Is that chair comfortable for you?', rule:'"Comfortable" = physically nice; "convenient" = suitable timing.'},
+          {wrong:'Irregardless of what you want...', right:'Regardless of what you want...', rule:'"Irregardless" is not standard English. Use "regardless."'},
+          {wrong:'Can I drive because I passed the test?', right:'I can drive because I passed the test.', rule:'"Can" = ability; "may" = permission.'},
+        ]},
+      { id:'politeness', icon:'🤝', title:'Politeness: "Would You Like"', description:'The most impactful change in service English — replacing "you want" with "would you like."',
+        errors:[
+          {wrong:'You want water?', right:'Would you like some water?', rule:'"You want" sounds like an interrogation. "Would you like" is always polite.'},
+          {wrong:'What you want?', right:'What would you like?', rule:'Add "would" for politeness in service situations.'},
+          {wrong:'Give me your card.', right:'May I take your card, please?', rule:'Turn commands into questions + add "please."'},
+          {wrong:'Sit here.', right:'Please have a seat.', rule:'Use "please" + soften commands into invitations.'},
+          {wrong:'Wait.', right:'One moment, please.', rule:'"Wait" sounds abrupt. "One moment" is professional.'},
+          {wrong:'You want dessert?', right:'Would you like to see the dessert menu?', rule:'Always offer with "would you like" in service settings.'},
+        ]},
+      { id:'business', icon:'💼', title:'Business English Errors', description:'Workplace-specific mistakes: "presentate," "headquarters," "look forward to hearing."',
+        errors:[
+          {wrong:'I look forward to hear from you.', right:'I look forward to hearing from you.', rule:'"Look forward to" is always followed by "-ing."'},
+          {wrong:'I will presentate the results.', right:'I will present the results.', rule:'"Presentate" is not a word. The verb is "present."'},
+          {wrong:'Our headquarter is in Chicago.', right:'Our headquarters is in Chicago.', rule:'"Headquarters" always has an "s."'},
+          {wrong:'He is responsible of the project.', right:'He is responsible for the project.', rule:'"Responsible for" not "responsible of."'},
+          {wrong:'Please revert back to me.', right:'Please get back to me.', rule:'"Revert" means "return to a previous state" — not "reply."'},
+          {wrong:'Kindly do the needful.', right:'Please take care of this.', rule:'"Do the needful" is outdated — use clear, modern English.'},
+        ]},
+      { id:'pronunciation', icon:'🗣️', title:'Pronunciation Pitfalls', description:'Words often mispronounced, causing confusion — even when grammar is correct.',
+        errors:[
+          {wrong:'DEZ-ert (meaning sweet food)', right:'deh-ZERT (dessert)', rule:'Stress the 2nd syllable for dessert; "DEZ-ert" = a sandy desert.'},
+          {wrong:'men-OO (menu)', right:'MEN-yoo (menu)', rule:'Stress the 1st syllable: MEN-yoo.'},
+          {wrong:'re-ceipt (with "p")', right:'reh-SEET (receipt)', rule:'The "p" is silent in "receipt."'},
+          {wrong:'sal-mon (with "l")', right:'SAM-un (salmon)', rule:'The "l" is silent in "salmon."'},
+          {wrong:'e-xe-CU-tive', right:'ig-ZEK-u-tive', rule:'Stress the 2nd syllable, not the "u."'},
+        ]},
+      { id:'small-talk', icon:'💬', title:'Small Talk & Conversation', description:'Common mistakes in casual workplace conversation — greetings, responses, and natural phrasing.',
+        errors:[
+          {wrong:'Where you from?', right:'Where are you from?', rule:'Use full question form — "Where are you from?" not "Where you from?"'},
+          {wrong:'I am fine, thanks.', right:"I'm doing well, thanks!", rule:'"I\'m doing well" sounds more natural and warm than "I am fine."'},
+          {wrong:'What do you do?', right:'What do you do for work?', rule:'Adding "for work?" clarifies the question and sounds more polite.'},
+          {wrong:'Nice to meet you.', right:"It's great to meet you!", rule:'"It\'s great to meet you" is warmer and more enthusiastic.'},
+          {wrong:'I am working as a manager.', right:'I work as a manager.', rule:'Use present simple ("I work") for your job, not present continuous.'},
+          {wrong:'See you later.', right:"See you later! / Take care!", rule:'Add an exclamation or "Take care!" for a warmer, natural closing.'},
+          {wrong:'Do you know about the meeting?', right:'Have you heard about the meeting?', rule:'"Have you heard about..." is softer and more conversational.'},
+          {wrong:'How are you?', right:"How's it going? / How are you doing?", rule:'"How\'s it going?" is more natural and casual in workplace conversation.'},
+        ]},
     ];
 
     // ========================================================================
-    // DATA: FLASHCARDS (derived from categories)
+    // FLASHCARDS (derived from categories)
     // ========================================================================
     var ALL_FLASHCARDS = [];
     CATEGORIES.forEach(function(cat) {
       cat.errors.forEach(function(e) {
-        ALL_FLASHCARDS.push({
-          wrong: e.wrong,
-          right: e.right,
-          rule: e.rule,
-          category: cat.title
-        });
+        ALL_FLASHCARDS.push({ wrong:e.wrong, right:e.right, rule:e.rule, category:cat.title });
       });
     });
 
     // ========================================================================
-    // DATA: QUIZ QUESTIONS
+    // QUIZ (30 questions)
     // ========================================================================
     var QUIZ_QUESTIONS = [
-      { question: 'Choose the correct sentence:', options: ['This is more better.', 'This is better.', 'This is more good.', 'This is best.'], answer: 1, explanation: '"Better" is already the comparative of "good" — never add "more."' },
-      { question: 'Choose the correct sentence:', options: ['Let\'s discuss about the project.', 'Let\'s discuss the project.', 'Let\'s discuss for the project.', 'Let\'s discuss on the project.'], answer: 1, explanation: '"Discuss" takes a direct object — no preposition needed.' },
-      { question: 'Choose the correct sentence:', options: ['I went to store.', 'I went to the store.', 'I went store.', 'I went to a store.'], answer: 1, explanation: 'Specific noun → use "the."' },
-      { question: 'Choose the correct sentence:', options: ['She go to the meeting.', 'She going to the meeting.', 'She goes to the meeting.', 'She gone to the meeting.'], answer: 2, explanation: 'Third-person singular needs "s": she goes.' },
-      { question: 'Choose the correct sentence:', options: ['I have seen him yesterday.', 'I seen him yesterday.', 'I saw him yesterday.', 'I was see him yesterday.'], answer: 2, explanation: 'Specific past time → past simple: "saw."' },
-      { question: 'Choose the correct sentence:', options: ['I am living here since five years.', 'I have been living here for five years.', 'I live here since five years.', 'I am living here for five years.'], answer: 1, explanation: 'Duration from past to now → present perfect + "for."' },
-      { question: 'Choose the correct sentence:', options: ['You want water?', 'Would you like some water?', 'Give me water.', 'You like water?'], answer: 1, explanation: '"Would you like" is polite; "You want" sounds rude.' },
-      { question: 'Choose the correct sentence:', options: ['This movie is very bored.', 'This movie is very boring.', 'This movie is very bore.', 'This movie is very boredom.'], answer: 1, explanation: '"-ing" describes the thing; the movie is boring, you are bored.' },
-      { question: 'Choose the correct sentence:', options: ['I need an advice.', 'I need some advice.', 'I need advices.', 'I need a advice.'], answer: 1, explanation: '"Advice" is uncountable — no "an," no plural.' },
-      { question: 'Choose the correct sentence:', options: ['She said me the answer.', 'She told me the answer.', 'She say me the answer.', 'She told to me the answer.'], answer: 1, explanation: '"Tell" requires a person as object: "told me."' },
-      { question: 'Choose the correct sentence:', options: ['I look forward to hear from you.', 'I look forward to hearing from you.', 'I look forward hearing from you.', 'I look forward to heard from you.'], answer: 1, explanation: '"Look forward to" is always followed by "-ing."' },
-      { question: 'Choose the correct sentence:', options: ['One of the planes are late.', 'One of the planes is late.', 'One of the plane is late.', 'One of the planes were late.'], answer: 1, explanation: 'The subject is "one" (singular) → "is."' },
-      { question: 'Choose the correct sentence:', options: ['I\'ve been in America since 3 months.', 'I\'ve been in America for 3 months.', 'I\'m in America since 3 months.', 'I was in America for 3 months.'], answer: 1, explanation: '"For" = duration; "since" = point in time.' },
-      { question: 'Choose the correct sentence:', options: ['There were less people at the event.', 'There were fewer people at the event.', 'There was fewer people at the event.', 'There were less persons at the event.'], answer: 1, explanation: '"Fewer" for countable nouns; "less" for uncountable.' },
-      { question: 'Choose the correct sentence:', options: ['He is responsible of the project.', 'He is responsible for the project.', 'He is responsible about the project.', 'He is responsible with the project.'], answer: 1, explanation: '"Responsible for" — not "of," "about," or "with."' },
-      { question: 'Choose the correct sentence:', options: ['I will presentate the results.', 'I will present the results.', 'I will presentation the results.', 'I will presenting the results.'], answer: 1, explanation: '"Presentate" is not a word. The verb is "present."' },
-      { question: 'Choose the correct sentence:', options: ['Irregardless of the cost...', 'Regardless of the cost...', 'Regardless of cost...', 'Both 1 and 2 are correct.'], answer: 1, explanation: '"Irregardless" is not standard English. Use "regardless."' },
-      { question: 'Choose the correct sentence:', options: ['I have many experiences in marketing.', 'I have a lot of experience in marketing.', 'I have much experiences in marketing.', 'I have many experience in marketing.'], answer: 1, explanation: '"Experience" (general) is uncountable.' },
-      { question: 'Choose the correct sentence:', options: ['Our headquarter is in Chicago.', 'Our headquarters is in Chicago.', 'Our headquarters are in Chicago.', 'Our headquarter are in Chicago.'], answer: 1, explanation: '"Headquarters" always has an "s" and is treated as singular.' },
-      { question: 'Choose the correct sentence:', options: ['I am waiting him.', 'I am waiting for him.', 'I am wait him.', 'I am awaiting him.'], answer: 1, explanation: '"Wait" needs "for" before its object.' },
+      {q:'Choose the correct sentence:', o:['This is more better.','This is better.','This is more good.','This is best.'], a:1, e:'"Better" is already the comparative of "good" — never add "more."'},
+      {q:'Choose the correct sentence:', o:["Let's discuss about the project.","Let's discuss the project.","Let's discuss for the project.","Let's discuss on the project."], a:1, e:'"Discuss" takes a direct object — no preposition needed.'},
+      {q:'Choose the correct sentence:', o:['I went to store.','I went to the store.','I went store.','I went to a store.'], a:1, e:'Specific noun → use "the."'},
+      {q:'Choose the correct sentence:', o:['She go to the meeting.','She going to the meeting.','She goes to the meeting.','She gone to the meeting.'], a:2, e:'Third-person singular needs "s": she goes.'},
+      {q:'Choose the correct sentence:', o:['I have seen him yesterday.','I seen him yesterday.','I saw him yesterday.','I was see him yesterday.'], a:2, e:'Specific past time → past simple: "saw."'},
+      {q:'Choose the correct sentence:', o:['I am living here since five years.','I have been living here for five years.','I live here since five years.','I am living here for five years.'], a:1, e:'Duration from past to now → present perfect + "for."'},
+      {q:'Choose the correct sentence:', o:['You want water?','Would you like some water?','Give me water.','You like water?'], a:1, e:'"Would you like" is polite; "You want" sounds rude.'},
+      {q:'Choose the correct sentence:', o:['This movie is very bored.','This movie is very boring.','This movie is very bore.','This movie is very boredom.'], a:1, e:'"-ing" describes the thing; the movie is boring, you are bored.'},
+      {q:'Choose the correct sentence:', o:['I need an advice.','I need some advice.','I need advices.','I need a advice.'], a:1, e:'"Advice" is uncountable — no "an," no plural.'},
+      {q:'Choose the correct sentence:', o:['She said me the answer.','She told me the answer.','She say me the answer.','She told to me the answer.'], a:1, e:'"Tell" requires a person as object: "told me."'},
+      {q:'Choose the correct sentence:', o:['I look forward to hear from you.','I look forward to hearing from you.','I look forward hearing from you.','I look forward to heard from you.'], a:1, e:'"Look forward to" is always followed by "-ing."'},
+      {q:'Choose the correct sentence:', o:['One of the planes are late.','One of the planes is late.','One of the plane is late.','One of the planes were late.'], a:1, e:'The subject is "one" (singular) → "is."'},
+      {q:"Choose the correct sentence:", o:["I've been in America since 3 months.","I've been in America for 3 months.","I'm in America since 3 months.","I was in America for 3 months."], a:1, e:'"For" = duration; "since" = point in time.'},
+      {q:'Choose the correct sentence:', o:['There were less people at the event.','There were fewer people at the event.','There was fewer people at the event.','There were less persons at the event.'], a:1, e:'"Fewer" for countable nouns; "less" for uncountable.'},
+      {q:'Choose the correct sentence:', o:['He is responsible of the project.','He is responsible for the project.','He is responsible about the project.','He is responsible with the project.'], a:1, e:'"Responsible for" — not "of," "about," or "with."'},
+      {q:'Choose the correct sentence:', o:['I will presentate the results.','I will present the results.','I will presentation the results.','I will presenting the results.'], a:1, e:'"Presentate" is not a word. The verb is "present."'},
+      {q:'Choose the correct sentence:', o:['Irregardless of the cost...','Regardless of the cost...','Regardless of cost...','Both 1 and 2 are correct.'], a:1, e:'"Irregardless" is not standard English. Use "regardless."'},
+      {q:'Choose the correct sentence:', o:['I have many experiences in marketing.','I have a lot of experience in marketing.','I have much experiences in marketing.','I have many experience in marketing.'], a:1, e:'"Experience" (general) is uncountable.'},
+      {q:'Choose the correct sentence:', o:['Our headquarter is in Chicago.','Our headquarters is in Chicago.','Our headquarters are in Chicago.','Our headquarter are in Chicago.'], a:1, e:'"Headquarters" always has an "s" and is treated as singular.'},
+      {q:'Choose the correct sentence:', o:['I am waiting him.','I am waiting for him.','I am wait him.','I am awaiting him.'], a:1, e:'"Wait" needs "for" before its object.'},
+      {q:'Choose the correct sentence:', o:["Where you from?",'Where are you from?','Where you are from?','From where you?'], a:1, e:'Use full question form: "Where are you from?"'},
+      {q:"Choose the correct sentence:", o:["I am fine, thanks.","I'm doing well, thanks!","I am fine, thank you.","I fine, thanks."], a:1, e:'"I\'m doing well" is more natural and warm than "I am fine."'},
+      {q:'Choose the correct sentence:', o:['What do you do?','What do you do for work?','What you do?','What is your job?'], a:1, e:'Adding "for work?" clarifies and sounds more polite.'},
+      {q:'Choose the correct sentence:', o:['I am working as a manager.','I work as a manager.','I working as a manager.','I am work as a manager.'], a:1, e:'Use present simple ("I work") for your job, not present continuous.'},
+      {q:'Choose the correct sentence:', o:['The police is here.','The police are here.','The police coming.','The polices are here.'], a:1, e:'"Police" is always plural — use "are."'},
+      {q:'Choose the correct sentence:', o:['He married with a French girl.','He married a French girl.','He married to a French girl.','He got marry with a French girl.'], a:1, e:'"Marry" takes a direct object — no "with."'},
+      {q:'Choose the correct sentence:', o:['I traveled to the Spain.','I traveled to Spain.','I traveled to a Spain.','I traveled Spain.'], a:1, e:'Most country names take no article.'},
+      {q:'Choose the correct sentence:', o:['I have the headache.','I have a headache.','I have headache.','I have headaches.'], a:1, e:'Illnesses use "a," not "the."'},
+      {q:'Choose the correct sentence:', o:['He told that he was tired.','He said that he was tired.','He say that he was tired.','He told to us he was tired.'], a:1, e:'"Say" doesn\'t take a direct person object; "tell" does.'},
+      {q:'Choose the correct sentence:', o:['This one is more cheaper.','This one is cheaper.','This one is more cheap.','This one is more cheaper than that.'], a:1, e:'Short adjectives ending in "-er" never take "more."'},
     ];
 
     // ========================================================================
-    // DATA: VOICE PRACTICE PHRASES
+    // VOICE PRACTICE (20 phrases)
     // ========================================================================
     var VOICE_PHRASES = [
-      { phrase: 'Would you like some water?', context: 'Hospitality — offering a drink' },
-      { phrase: 'Let me confirm your order.', context: 'Hospitality — confirming an order' },
-      { phrase: 'I look forward to hearing from you.', context: 'Office — email closing' },
-      { phrase: 'Could you elaborate on that?', context: 'Office — asking for clarification in a meeting' },
-      { phrase: 'I apologize for the inconvenience.', context: 'Retail — handling a complaint' },
-      { phrase: 'Would you like a bag?', context: 'Retail — checkout' },
-      { phrase: 'How is everything? Is the food to your liking?', context: 'Hospitality — checking back after serving' },
-      { phrase: 'I see your point, but I have a different perspective.', context: 'Office — disagreeing politely in a meeting' },
-      { phrase: 'Let me check if we have that in stock.', context: 'Retail — checking inventory' },
-      { phrase: 'While I can\'t process a refund, I can offer you store credit.', context: 'Retail — offering an alternative' },
-      { phrase: 'I have been working here for three years.', context: 'Office — talking about experience' },
-      { phrase: 'I\'m afraid we\'re currently out of stock on that item.', context: 'Retail — delivering bad news politely' },
+      {phrase:'Would you like some water?', context:'Hospitality — offering a drink'},
+      {phrase:'Let me confirm your order.', context:'Hospitality — confirming an order'},
+      {phrase:'I look forward to hearing from you.', context:'Office — email closing'},
+      {phrase:'Could you elaborate on that?', context:'Office — asking for clarification'},
+      {phrase:'I apologize for the inconvenience.', context:'Retail — handling a complaint'},
+      {phrase:'Would you like a bag?', context:'Retail — checkout'},
+      {phrase:'How is everything? Is the food to your liking?', context:'Hospitality — checking back'},
+      {phrase:"I see your point, but I have a different perspective.", context:'Office — disagreeing politely'},
+      {phrase:'Let me check if we have that in stock.', context:'Retail — checking inventory'},
+      {phrase:"While I can't process a refund, I can offer you store credit.", context:'Retail — offering an alternative'},
+      {phrase:'I have been working here for three years.', context:'Office — talking about experience'},
+      {phrase:"I'm afraid we're currently out of stock on that item.", context:'Retail — delivering bad news politely'},
+      {phrase:"How's it going? I'm doing well, thanks!", context:'Small talk — natural greeting'},
+      {phrase:"It's great to meet you! What do you do for work?", context:'Small talk — networking'},
+      {phrase:'See you later! Take care!', context:'Small talk — natural closing'},
+      {phrase:'Where are you from? I work as a project manager.', context:'Small talk — introductions'},
+      {phrase:'Have you heard about the new project?', context:'Office — softer question form'},
+      {phrase:'I am so sorry about that. Let me fix this right away.', context:'Hospitality — the 3-step complaint formula'},
+      {phrase:'I\'d like to start with something to drink, please.', context:'Hospitality — ordering politely'},
+      {phrase:'While I can\'t do that, I can offer you an alternative.', context:'Retail — softening a "no"'},
     ];
 
     // ========================================================================
-    // DATA: SCENARIOS
+    // SCENARIOS (20 per setting — hospitality, office, retail)
     // ========================================================================
+
     var SCENARIOS = {
       hospitality: [
-        {
-          id: 'h1',
-          title: 'Difficult Check-In',
-          setting: 'Hotel front desk, 10 PM',
-          description: 'A guest arrives with a reservation but the system shows no booking. The guest is tired and frustrated.',
-          roles: 'Role A: Front desk agent • Role B: Guest',
-          goals: 'Apologizing professionally, offering solutions, using "would" and "could" forms, staying calm under pressure.',
-          phrases: [
-            { label: 'Apologizing', text: 'I apologize for the confusion.' },
-            { label: 'Offering to help', text: 'Let me see what I can do.' },
-            { label: 'Asking to wait', text: 'Would you mind waiting a few minutes while I check with my manager?' },
-            { label: 'Offering a solution', text: 'I can offer you a complimentary upgrade for the inconvenience.' },
-            { label: 'Greeting (evening)', text: 'Good evening! Welcome to our hotel.' },
-            { label: 'Never say', text: 'It\'s not my fault. / I don\'t know.' },
-          ]
-        },
-        {
-          id: 'h2',
-          title: 'Food Allergy Question',
-          setting: 'Restaurant',
-          description: 'A customer asks if a dish contains dairy. You\'re not 100% sure and need to check with the kitchen.',
-          roles: 'Role A: Server • Role B: Customer with a dairy allergy',
-          goals: 'Admitting uncertainty professionally, using "let me check," confirming safety.',
-          phrases: [
-            { label: 'Admitting uncertainty', text: 'Let me double-check with the kitchen.' },
-            { label: 'Showing care', text: 'I want to make sure I give you the right information.' },
-            { label: 'Asking the chef', text: 'Would you like me to ask the chef about the ingredients?' },
-            { label: 'Offering an alternative', text: 'We also have several dairy-free options on the menu.' },
-            { label: 'Checking back', text: 'How is everything? Is the food to your liking?' },
-          ]
-        },
-        {
-          id: 'h3',
-          title: 'Handling a Complaint',
-          setting: 'Hotel or restaurant',
-          description: 'A guest complains that their room/service is unacceptable. Use the 3-step complaint formula.',
-          roles: 'Role A: Staff member • Role B: Upset guest',
-          goals: 'The 3-step formula: apologize, offer a solution, follow up.',
-          phrases: [
-            { label: 'Step 1: Apologize', text: 'I\'m so sorry about that. I understand how frustrating this is.' },
-            { label: 'Step 2: Offer a solution', text: 'Let me get this fixed right away. I\'ll send someone up immediately.' },
-            { label: 'Step 3: Follow up', text: 'Is everything okay now? Is there anything else I can do?' },
-            { label: 'Professional response', text: 'I apologize for the inconvenience. We\'ll fix this right away.' },
-            { label: 'Never say', text: 'That\'s not my fault. / That\'s how we make it.' },
-          ]
-        },
-        {
-          id: 'h4',
-          title: 'Taking an Order',
-          setting: 'Restaurant',
-          description: 'Take a party\'s order, confirm it, and handle special requests professionally.',
-          roles: 'Role A: Server • Role B: Customer',
-          goals: 'Using "would you like," confirming orders, handling dietary restrictions.',
-          phrases: [
-            { label: 'Offering', text: 'Would you like to start with something to drink?' },
-            { label: 'Asking preferences', text: 'How would you like your steak cooked?' },
-            { label: 'Confirming', text: 'Let me confirm your order. So that\'s one steak, medium-rare, with vegetables...' },
-            { label: 'Checking special requests', text: 'And no onions on the burger, correct?' },
-            { label: 'Wrapping up', text: 'Is that everything for now? I\'ll get that started for you.' },
-          ]
-        },
+        {id:'h1',title:'Difficult Check-In',setting:'Hotel front desk, 10 PM',description:'A guest arrives with a reservation but the system shows no booking. The guest is tired and frustrated.',roles:'Role A: Front desk agent • Role B: Guest',goals:'Apologizing professionally, offering solutions, using "would" and "could" forms.',phrases:[{l:'Apologizing',t:'I apologize for the confusion.'},{l:'Offering to help',t:'Let me see what I can do.'},{l:'Asking to wait',t:'Would you mind waiting a few minutes while I check with my manager?'},{l:'Offering a solution',t:'I can offer you a complimentary upgrade for the inconvenience.'},{l:'Never say',t:"It's not my fault. / I don't know."}]},
+        {id:'h2',title:'Food Allergy Question',setting:'Restaurant',description:'A customer asks if a dish contains dairy. You are not 100% sure.',roles:'Role A: Server • Role B: Customer with a dairy allergy',goals:'Admitting uncertainty professionally, confirming safety.',phrases:[{l:'Admitting uncertainty',t:'Let me double-check with the kitchen.'},{l:'Showing care',t:'I want to make sure I give you the right information.'},{l:'Asking the chef',t:'Would you like me to ask the chef about the ingredients?'},{l:'Offering alternatives',t:'We also have several dairy-free options on the menu.'}]},
+        {id:'h3',title:'Handling a Complaint',setting:'Hotel or restaurant',description:'A guest complains that their room or meal is unacceptable. Use the 3-step formula.',roles:'Role A: Staff member • Role B: Upset guest',goals:'The 3-step formula: apologize, offer a solution, follow up.',phrases:[{l:'Step 1: Apologize',t:"I'm so sorry about that. I understand how frustrating this is."},{l:'Step 2: Offer solution',t:'Let me get this fixed right away. I\'ll send someone up immediately.'},{l:'Step 3: Follow up',t:'Is everything okay now? Is there anything else I can do?'},{l:'Never say',t:"That's not my fault. / That's how we make it."}]},
+        {id:'h4',title:'Taking an Order',setting:'Restaurant',description:'Take a partys order, confirm it, and handle special requests professionally.',roles:'Role A: Server • Role B: Customer',goals:'Using "would you like," confirming orders, handling dietary restrictions.',phrases:[{l:'Offering',t:'Would you like to start with something to drink?'},{l:'Asking preferences',t:'How would you like your steak cooked?'},{l:'Confirming',t:'Let me confirm your order. So that\'s one steak, medium-rare...'},{l:'Checking requests',t:'And no onions on the burger, correct?'},{l:'Wrapping up',t:"Is that everything for now? I'll get that started for you."}]},
+        {id:'h5',title:'Recommending a Dish',setting:'Restaurant',description:'A guest asks for a recommendation. Suggest a dish without being pushy.',roles:'Role A: Server • Role B: Guest',goals:'Polite suggestion, highlighting popular dishes, describing flavors.',phrases:[{l:'Suggesting',t:'One of our most popular dishes is the salmon.'},{l:'Describing',t:'It comes with a seasonal vegetable and a light sauce.'},{l:'Offering',t:'Would you like me to describe any other dishes?'},{l:'No pressure',t:"Many guests love it, but it's entirely up to you."}]},
+        {id:'h6',title:'Managing a Wait List',setting:'Restaurant, busy Friday night',description:'The restaurant is full. Guests are waiting and getting impatient.',roles:'Role A: Host/hostess • Role B: Waiting guest',goals:'Managing expectations, giving time estimates, offering alternatives.',phrases:[{l:'Acknowledging',t:'Thank you for your patience. The wait is about 25 minutes.'},{l:'Offering options',t:'Would you like to wait at the bar, or I can take your number and call you?'},{l:'Apologizing',t:"I'm sorry for the wait. We're a bit short-staffed tonight."},{l:'Checking in',t:'Let me check on your table status right now.'}]},
+        {id:'h7',title:'Serving a Large Party',setting:'Restaurant',description:'A party of 8 needs to be served efficiently. Separate checks requested.',roles:'Role A: Server • Role B: Host of the party',goals:'Managing multiple orders, confirming separate checks, staying organized.',phrases:[{l:'Organizing',t:'Let me get everyone\'s drink orders first, then I\'ll come back for food.'},{l:'Confirming',t:'Just to confirm, would you like separate checks for the table?'},{l:'Checking',t:'Does anyone have any dietary restrictions I should know about?'},{l:'Serving',t:'I\'ll bring everything out as it\'s ready — is that okay?'}]},
+        {id:'h8',title:'Handling an Intoxicated Guest',setting:'Bar or restaurant',description:'A guest has had too much to drink. You need to stop service professionally.',roles:'Role A: Bartender/server • Role B: Intoxicated guest',goals:'De-escalation, refusing service politely, offering alternatives.',phrases:[{l:'Offering water',t:'Let me get you a glass of water and some bread on the house.'},{l:'Refusing service',t:"I'm not able to serve another drink right now, but I'd be happy to call you a ride."},{l:'Suggesting food',t:'Would you like to see our late-night menu instead?'},{l:'Safety first',t:'I want to make sure you get home safely.'}]},
+        {id:'h9',title:'Processing Payment',setting:'Restaurant or hotel',description:'A guest is ready to pay. Handle the transaction smoothly and professionally.',roles:'Role A: Server/cashier • Role B: Guest',goals:'Clear communication about totals, payment methods, and receipts.',phrases:[{l:'Presenting',t:'Here is your bill. Your total comes to $84.50.'},{l:'Asking method',t:'Would you like to pay with card or cash?'},{l:'Processing',t:'I\'ll run that right through for you. One moment, please.'},{l:'Closing',t:'Here\'s your receipt. Thank you so much — have a wonderful evening!'}]},
+        {id:'h10',title:'Handling a Spill',setting:'Restaurant',description:'A guest spills a drink. Handle it gracefully without making them feel bad.',roles:'Role A: Server • Role B: Guest who spilled',goals:'Reassurance, quick cleanup, minimizing embarrassment.',phrases:[{l:'Reassuring',t:"Don't worry at all — these things happen! Let me take care of that."},{l:'Acting quickly',t:"I'll have this cleaned up in just a moment."},{l:'Offering replacement',t:'Would you like me to bring you a fresh drink on the house?'},{l:'Checking others',t:'Is everyone else doing okay here?'}]},
+        {id:'h11',title:'Birthday Celebration',setting:'Restaurant',description:'A guest mentions it is someones birthday. Make it special.',roles:'Role A: Server • Role B: Guest celebrating',goals:'Warm congratulations, offering something special, creating a moment.',phrases:[{l:'Celebrating',t:'Happy birthday! We\'d love to make this special for you.'},{l:'Offering',t:'Would you like us to bring out a dessert with a candle?'},{l:'Singing',t:'I can have the team come sing — would you like that?'},{l:'Complimentary',t:"It's on the house — happy birthday from all of us!"}]},
+        {id:'h12',title:'Answering Menu Questions',setting:'Restaurant',description:'A guest asks detailed questions about dishes, ingredients, and preparation.',roles:'Role A: Server • Role B: Curious guest',goals:'Knowledgeable responses, offering to check, recommending.',phrases:[{l:'Explaining',t:'That dish is made with fresh local ingredients and a house sauce.'},{l:'Admitting uncertainty',t:"I'm not 100% sure about the exact spices — let me check with the chef."},{l:'Recommending',t:'If you enjoy spicy food, I\'d recommend the chicken over the fish.'},{l:'Offering',t:'Would you like a sample of the sauce before you decide?'}]},
+        {id:'h13',title:'Explaining the Wine List',setting:'Upscale restaurant',description:'A guest asks for wine recommendations to pair with their meal.',roles:'Role A: Server/sommelier • Role B: Guest',goals:'Describing wines, pairing suggestions, offering tastes.',phrases:[{l:'Recommending',t:'This Pinot Noir pairs beautifully with the salmon.'},{l:'Describing',t:"It's a light-bodied red with notes of cherry and a smooth finish."},{l:'Offering taste',t:'Would you like to try a glass before committing to a bottle?'},{l:'Alternative',t:"If you prefer white, I'd suggest the Sauvignon Blanc."}]},
+        {id:'h14',title:'Handling a Wrong Order',setting:'Restaurant',description:'The kitchen made the wrong dish. The guest is unhappy.',roles:'Role A: Server • Role B: Guest with wrong order',goals:'Apologizing, fixing immediately, following up.',phrases:[{l:'Apologizing',t:'I am so sorry about that. That\'s not what you ordered.'},{l:'Fixing',t:'Let me get this corrected right away — it should only take a few minutes.'},{l:'Compensating',t:"Would you like a complimentary appetizer while you wait?"},{l:'Following up',t:'Here\'s your correct order. Is everything to your liking now?'}]},
+        {id:'h15',title:'Busy Friday Night',setting:'Restaurant',description:'The restaurant is slammed. You have 6 tables and everyone needs something.',roles:'Role A: Server • Role B: Multiple impatient guests',goals:'Staying calm, managing priorities, setting expectations.',phrases:[{l:'Acknowledging',t:'Thank you for your patience — I\'ll be right with you.'},{l:'Prioritizing',t:'Let me get your drinks started first, then I\'ll take your order.'},{l:'Setting expectations',t:'The kitchen is running about 15 minutes behind tonight.'},{l:'Thanking',t:'I really appreciate your understanding — thank you!'}]},
+        {id:'h16',title:'VIP Guest Arrival',setting:'Hotel',description:'A VIP guest is arriving. Make them feel special from the moment they walk in.',roles:'Role A: Front desk • Role B: VIP guest',goals:'Warm welcome, anticipating needs, upgrading service.',phrases:[{l:'Welcoming',t:'Welcome back, Mr. Thompson! It\'s wonderful to have you with us again.'},{l:'Upgrading',t:"I've upgraded you to our executive suite — at no extra charge."},{l:'Anticipating',t:'Your usual morning newspaper will be delivered to your room.'},{l:'Closing',t:'If there\'s anything at all you need, don\'t hesitate to call.'}]},
+        {id:'h17',title:'Corporate Event Booking',setting:'Hotel',description:'A corporate client wants to book a large event. Discuss logistics and pricing.',roles:'Role A: Events coordinator • Role B: Corporate client',goals:'Professional negotiation, clear pricing, confirming details.',phrases:[{l:'Discussing',t:'We can accommodate up to 200 guests in our main ballroom.'},{l:'Pricing',t:'The package starts at $75 per person, which includes catering and AV.'},{l:'Clarifying',t:'Just to confirm — you\'re looking at a Saturday evening in October?'},{l:'Following up',t:"I'll send you a detailed proposal by end of day tomorrow."}]},
+        {id:'h18',title:'Explaining Ingredients',setting:'Restaurant',description:'A health-conscious guest asks about every ingredient in a dish.',roles:'Role A: Server • Role B: Health-conscious guest',goals:'Patience, detailed knowledge, offering to check.',phrases:[{l:'Listing',t:'That dish includes salmon, quinoa, spinach, and a lemon dressing.'},{l:'Checking',t:"I'm not sure if the dressing contains gluten — let me check with the kitchen."},{l:'Offering',t:'We can make it without the dressing if you\'d prefer.'},{l:'Alternative',t:'We also have a gluten-free menu I\'d be happy to show you.'}]},
+        {id:'h19',title:'Handling Lost Items',setting:'Hotel',description:'A guest reports a lost item in their room. Handle the report professionally.',roles:'Role A: Front desk • Role B: Guest',goals:'Taking the report seriously, offering to search, following up.',phrases:[{l:'Taking report',t:'I\'m sorry to hear that. Let me file a report right away.'},{l:'Searching',t:"I'll have housekeeping check your room immediately."},{l:'Following up',t:"I'll call you as soon as we have any information."},{l:'Closing',t:'If it doesn\'t turn up, I recommend filing a report with local police as well.'}]},
+        {id:'h20',title:'Saying Goodbye',setting:'Hotel checkout',description:'A guest is checking out. Leave a lasting positive impression.',roles:'Role A: Front desk • Role B: Departing guest',goals:'Warm farewell, requesting feedback, inviting return.',phrases:[{l:'Asking about stay',t:'How was everything during your stay with us?'},{l:'Thanking',t:'Thank you so much for choosing our hotel.'},{l:'Feedback',t:'Would you mind leaving a review on Google? It really helps us.'},{l:'Farewell',t:'We hope to see you again soon. Have a safe trip home!'}]},
       ],
       office: [
-        {
-          id: 'o1',
-          title: 'Status Update Meeting',
-          setting: 'Weekly team meeting',
-          description: 'Present your project status. You\'re behind schedule and need to explain why without sounding like you\'re making excuses.',
-          roles: 'Role A: You (team member) • Role B: Manager',
-          goals: 'Using present perfect, future tense, professional hedging, polite pushback.',
-          phrases: [
-            { label: 'Reporting status', text: 'Here\'s where we stand. We\'ve completed the first phase.' },
-            { label: 'Explaining delays', text: 'We\'ve run into a delay because of a supplier issue.' },
-            { label: 'Committing to a timeline', text: 'I\'ll have a revised timeline by end of day.' },
-            { label: 'Contributing to discussion', text: 'Can I add something here?' },
-            { label: 'Disagreeing politely', text: 'I see your point, but I have a different perspective.' },
-          ]
-        },
-        {
-          id: 'o2',
-          title: 'The Email Misunderstanding',
-          setting: 'Office',
-          description: 'You sent an email that a colleague interpreted as rude or aggressive. They\'ve mentioned it to your manager.',
-          roles: 'Role A: You • Role B: Colleague who felt offended',
-          goals: 'De-escalation, clarifying intent, apologizing for tone without apologizing for content.',
-          phrases: [
-            { label: 'Apologizing for tone', text: 'I\'m sorry if my email came across as harsh. That wasn\'t my intention at all.' },
-            { label: 'Clarifying', text: 'Let me clarify what I meant by that.' },
-            { label: 'De-escalating', text: 'I value our working relationship and I\'d like to make sure we\'re on the same page.' },
-            { label: 'Moving forward', text: 'Going forward, I\'ll make sure to be clearer in my communication.' },
-          ]
-        },
-        {
-          id: 'o3',
-          title: 'The Budget Request',
-          setting: 'Meeting with department head',
-          description: 'Request additional budget for your project. Present the case clearly and handle pushback.',
-          roles: 'Role A: You (project lead) • Role B: Department head (skeptical)',
-          goals: 'Structuring an argument, using evidence, handling pushback professionally.',
-          phrases: [
-            { label: 'Making the request', text: 'Based on the data, I\'d like to request additional budget for this project.' },
-            { label: 'Justifying', text: 'The ROI on this investment would be significant.' },
-            { label: 'Handling pushback', text: 'I understand the concern, but I believe this is the right approach.' },
-            { label: 'Offering compromise', text: 'If the full amount isn\'t possible, we could phase it over two quarters.' },
-          ]
-        },
-        {
-          id: 'o4',
-          title: 'The Networking Event',
-          setting: 'Office holiday party / industry event',
-          description: 'Meet new people, make small talk, and exchange contact information naturally.',
-          roles: 'Role A: You • Role B: New contact',
-          goals: 'Small talk, natural conversation flow, professional but casual register.',
-          phrases: [
-            { label: 'Opening', text: 'So, what do you do?' },
-            { label: 'Showing interest', text: 'That\'s fascinating — I\'d love to hear more about that.' },
-            { label: 'Connecting', text: 'I work in a related field. We should connect on LinkedIn.' },
-            { label: 'Closing', text: 'It was great meeting you. Let\'s stay in touch.' },
-          ]
-        },
+        {id:'o1',title:'Status Update Meeting',setting:'Weekly team meeting',description:'Present your project status. You are behind schedule and need to explain why.',roles:'Role A: You (team member) • Role B: Manager',goals:'Using present perfect, future tense, professional hedging.',phrases:[{l:'Reporting status',t:"Here's where we stand. We've completed the first phase."},{l:'Explaining delays',t:"We've run into a delay because of a supplier issue."},{l:'Committing',t:"I'll have a revised timeline by end of day."},{l:'Contributing',t:'Can I add something here?'},{l:'Disagreeing',t:'I see your point, but I have a different perspective.'}]},
+        {id:'o2',title:'The Email Misunderstanding',setting:'Office',description:'You sent an email that a colleague interpreted as rude. They mentioned it to your manager.',roles:'Role A: You • Role B: Colleague who felt offended',goals:'De-escalation, clarifying intent, apologizing for tone.',phrases:[{l:'Apologizing for tone',t:"I'm sorry if my email came across as harsh. That wasn't my intention."},{l:'Clarifying',t:'Let me clarify what I meant by that.'},{l:'De-escalating',t:'I value our working relationship and I want to make sure we are on the same page.'},{l:'Moving forward',t:'Going forward, I\'ll make sure to be clearer in my communication.'}]},
+        {id:'o3',title:'The Budget Request',setting:'Meeting with department head',description:'Request additional budget for your project. Present the case and handle pushback.',roles:'Role A: You (project lead) • Role B: Department head',goals:'Structuring an argument, using evidence, handling pushback.',phrases:[{l:'Making request',t:'Based on the data, I\'d like to request additional budget for this project.'},{l:'Justifying',t:'The ROI on this investment would be significant.'},{l:'Handling pushback',t:'I understand the concern, but I believe this is the right approach.'},{l:'Compromising',t:'If the full amount isn\'t possible, we could phase it over two quarters.'}]},
+        {id:'o4',title:'The Networking Event',setting:'Office holiday party',description:'Meet new people, make small talk, and exchange contact information.',roles:'Role A: You • Role B: New contact',goals:'Small talk, natural conversation flow, professional register.',phrases:[{l:'Opening',t:'So, what do you do for work?'},{l:'Showing interest',t:"That's fascinating — I'd love to hear more about that."},{l:'Connecting',t:'I work in a related field. We should connect on LinkedIn.'},{l:'Closing',t:"It was great meeting you. Let's stay in touch."}]},
+        {id:'o5',title:'Giving a Presentation',setting:'Conference room',description:'Present your projects results to a room of colleagues and leadership.',roles:'Role A: You (presenter) • Role B: Audience',goals:'Structuring a presentation, handling questions, clear delivery.',phrases:[{l:'Opening',t:'Good morning, everyone. Thank you for being here. Today I\'d like to walk you through our results.'},{l:'Structuring',t:"I'll start with an overview, then dive into the details."},{l:'Handling questions',t:"That's a great question. I don't have that data with me, but I can follow up."},{l:'Closing',t:'Thank you for your time. I\'m happy to answer any questions.'}]},
+        {id:'o6',title:'Difficult Client Call',setting:'Office phone call',description:'A client is upset about a delay. Handle the call professionally.',roles:'Role A: You • Role B: Upset client',goals:'De-escalation, taking responsibility, offering solutions.',phrases:[{l:'Listening',t:'I understand your frustration. Let me make sure I understand the full situation.'},{l:'Apologizing',t:'I apologize for the delay. That should not have happened.'},{l:'Solving',t:"Here's what I'm going to do right now to fix this."},{l:'Following up',t:'I\'ll send you an update by end of day today.'}]},
+        {id:'o7',title:'Negotiating a Deadline',setting:'Meeting with project manager',description:'You need more time on a deliverable. Negotiate a new deadline.',roles:'Role A: You • Role B: Project manager',goals:'Professional negotiation, offering alternatives, setting realistic expectations.',phrases:[{l:'Explaining',t:'I\'ve run into some unexpected complexity with the data migration.'},{l:'Proposing',t:'Would it be possible to move the deadline to next Friday?'},{l:'Offering',t:'I can deliver the first two modules by the original date, and the third the following week.'},{l:'Committing',t:'I\'ll send you a revised project plan by end of day.'}]},
+        {id:'o8',title:'Onboarding a New Employee',setting:'Office',description:'Welcome a new team member and explain their role and responsibilities.',roles:'Role A: You (manager) • Role B: New employee',goals:'Warm welcome, clear instructions, encouraging questions.',phrases:[{l:'Welcoming',t:'Welcome to the team! We\'re really glad to have you on board.'},{l:'Explaining',t:'Your main responsibility will be managing the client portfolio.'},{l:'Encouraging',t:'Don\'t hesitate to ask questions — everyone here is happy to help.'},{l:'Next steps',t:"I'll set you up with your email and show you around the office."}]},
+        {id:'o9',title:'Discussing Performance',setting:'One-on-one meeting',description:'Give constructive feedback to a team member about their recent work.',roles:'Role A: You (manager) • Role B: Team member',goals:'Specific feedback, encouragement, clear next steps.',phrases:[{l:'Positive',t:'I want to start by saying your work on the launch was excellent.'},{l:'Constructive',t:'One area for improvement is the frequency of your status updates.'},{l:'Encouraging',t:"I know you're capable of great things, and I'm here to support you."},{l:'Next steps',t:'Let\'s set up weekly check-ins so I can give you more regular feedback.'}]},
+        {id:'o10',title:'Conflict with a Coworker',setting:'Office',description:'You and a coworker disagree on how to approach a project. Address it directly.',roles:'Role A: You • Role B: Coworker',goals:'Active listening, finding common ground, professional communication.',phrases:[{l:'Opening',t:'I wanted to talk about the project approach. I think we have different perspectives.'},{l:'Listening',t:'Can you walk me through your thinking on this?'},{l:'Finding common ground',t:'I think we both want the same outcome — we just have different ideas on how to get there.'},{l:'Resolving',t:"Let's find a compromise that works for both of us."}]},
+        {id:'o11',title:'Presenting Budget Results',setting:'Leadership meeting',description:'Present quarterly budget results to the leadership team.',roles:'Role A: You (finance lead) • Role B: Leadership team',goals:'Clear data presentation, explaining variances, answering questions.',phrases:[{l:'Summarizing',t:'Overall, we came in 5% under budget for the quarter.'},{l:'Explaining',t:'The savings came primarily from reduced travel costs and vendor negotiations.'},{l:'Highlighting',t:'One area of concern is the IT spend, which was 15% over projection.'},{l:'Recommending',t:'I recommend we review the IT budget for next quarter.'}]},
+        {id:'o12',title:'Declining an Invitation',setting:'Office',description:'You are invited to a project you dont have time for. Decline professionally.',roles:'Role A: You • Role B: Colleague who invited you',goals:'Polite refusal, offering alternatives, preserving relationship.',phrases:[{l:'Thanking',t:'Thank you for thinking of me for this project.'},{l:'Declining',t:'Unfortunately, I don\'t have the bandwidth to take this on right now.'},{l:'Offering',t:'I\'d be happy to consult briefly or point you to someone who can help.'},{l:'Closing',t:'I hope it goes well — please keep me posted on the results.'}]},
+        {id:'o13',title:'Last-Minute Request',setting:'Office, 4 PM Friday',description:'Your boss asks for a report by end of day that normally takes two days.',roles:'Role A: You • Role B: Boss',goals:'Managing expectations, negotiating scope, delivering under pressure.',phrases:[{l:'Acknowledging',t:'I understand this is urgent. Let me see what I can do.'},{l:'Negotiating',t:'I can get you a summary by 5 PM, but the full report will need to wait until Monday.'},{l:'Clarifying',t:'Which part is most critical — the financials or the narrative?'},{l:'Committing',t:'I\'ll have the key numbers on your desk by end of day.'}]},
+        {id:'o14',title:'Constructive Feedback',setting:'One-on-one meeting',description:'Give feedback to a team member whose work has been slipping.',roles:'Role A: You (manager) • Role B: Team member',goals:'Direct but kind feedback, specific examples, actionable next steps.',phrases:[{l:'Opening',t:'I wanted to talk about the last few deliverables. I\'ve noticed a change in quality.'},{l:'Specific',t:'The last two reports had several data errors that we don\'t usually see.'},{l:'Supporting',t:'Is there anything going on that\'s affecting your work? I\'m here to help.'},{l:'Action plan',t:"Let's set up a review process for the next two weeks."}]},
+        {id:'o15',title:'Project Update',setting:'Stakeholder meeting',description:'Give a brief project update to stakeholders who want to know status.',roles:'Role A: You • Role B: Stakeholders',goals:'Concise summary, highlighting risks, next steps.',phrases:[{l:'Status',t:'We\'re on track to deliver by the original deadline.'},{l:'Risks',t:'One risk to flag — we\'re waiting on a vendor response that could delay us.'},{l:'Mitigation',t:'I\'ve already lined up a backup supplier just in case.'},{l:'Next steps',t:'I\'ll send a detailed update by Friday with the latest timeline.'}]},
+        {id:'o16',title:'Miscommunication',setting:'Office',description:'A colleague misunderstood your instructions and did the wrong work.',roles:'Role A: You • Role B: Colleague',goals:'Clarifying, taking shared responsibility, preventing recurrence.',phrases:[{l:'Acknowledging',t:'I think there was a miscommunication. Let me clarify what I meant.'},{l:'Taking responsibility',t:'I should have been clearer in my instructions. I apologize for that.'},{l:'Fixing',t:"Let's figure out how to adjust what's been done."},{l:'Preventing',t:'Going forward, I\'ll put instructions in writing to avoid confusion.'}]},
+        {id:'o17',title:'Networking at a Conference',setting:'Industry conference',description:'Meet new people at a conference reception and build professional connections.',roles:'Role A: You • Role B: New contact',goals:'Small talk, elevator pitch, exchanging contact info.',phrases:[{l:'Opening',t:'Hi, I\'m [name]. What brings you to the conference?'},{l:'Elevator pitch',t:'I work in marketing analytics, helping companies understand their customer data.'},{l:'Showing interest',t:'That sounds really interesting. How did you get into that field?'},{l:'Exchanging',t:'Let\'s exchange business cards. I\'d love to stay in touch.'}]},
+        {id:'o18',title:'Video Call Etiquette',setting:'Remote meeting',description:'Join a video call with external clients. Present yourself professionally.',roles:'Role A: You • Role B: Client team',goals:'Clear audio, professional background, engagement signals.',phrases:[{l:'Greeting',t:'Good morning, everyone. Can everyone hear me clearly?'},{l:'Introducing',t:'For those who don\'t know me, I\'m [name], the project lead on this engagement.'},{l:'Engaging',t:'That\'s a great point. Could you elaborate on that?'},{l:'Closing',t:'Thank you for your time. I\'ll send a follow-up email with the action items.'}]},
+        {id:'o19',title:'Urgent Email Response',setting:'Office, urgent situation',description:'A client sent an urgent email that needs an immediate response.',roles:'Role A: You • Role B: Client (via email/phone)',goals:'Quick acknowledgment, setting expectations, clear timeline.',phrases:[{l:'Acknowledging',t:'I\'ve received your email and I\'m looking into this right now.'},{l:'Setting expectations',t:'I\'ll have a full response to you within the hour.'},{l:'Clarifying',t:'Just to confirm — you need the sales figures for Q3, correct?'},{l:'Following up',t:'Here\'s the information you requested. Please let me know if you need anything else.'}]},
+        {id:'o20',title:'Team Disagreement',setting:'Team meeting',description:'Two team members disagree on the project approach. Mediate as the lead.',roles:'Role A: You (team lead) • Role B: Two disagreeing team members',goals:'Neutral facilitation, finding consensus, keeping meeting on track.',phrases:[{l:'Acknowledging',t:'I hear two different perspectives here. Both have merit.'},{l:'Facilitating',t:'Let\'s hear each option in full before we decide.'},{l:'Finding consensus',t:'Is there a way to combine elements of both approaches?'},{l:'Deciding',t:"Let's go with option B for now and revisit in two weeks."}]},
       ],
       retail: [
-        {
-          id: 'r1',
-          title: 'The Angry Return',
-          setting: 'Retail customer service desk',
-          description: 'A customer bought a product 3 weeks ago. It broke. They\'re angry and want a refund but don\'t have a receipt.',
-          roles: 'Role A: Customer (angry) • Role B: Sales associate',
-          goals: 'De-escalation, offering alternatives, using "I can" instead of "I can\'t."',
-          phrases: [
-            { label: 'Empathizing', text: 'I completely understand your frustration.' },
-            { label: 'Offering alternative', text: 'While I can\'t process a refund without a receipt, I can offer you store credit for the full amount.' },
-            { label: 'Softening "no"', text: 'While that\'s outside our return window, let me see what I can do.' },
-            { label: 'Never say', text: 'You\'re wrong. / That\'s not my department. / I can\'t help you.' },
-            { label: 'Professional close', text: 'Is there anything else I can help you with today?' },
-          ]
-        },
-        {
-          id: 'r2',
-          title: 'The Stock-Out',
-          setting: 'Retail store floor',
-          description: 'A customer came specifically for an advertised item. It\'s sold out. Offer alternatives without losing the sale.',
-          roles: 'Role A: Customer (disappointed) • Role B: Sales associate',
-          goals: 'Delivering bad news gracefully, offering multiple solutions.',
-          phrases: [
-            { label: 'Delivering news', text: 'I\'m afraid we\'re out of stock on that right now.' },
-            { label: 'Checking other stores', text: 'But I can check our other location for you.' },
-            { label: 'Offering notification', text: 'I\'d be happy to set up a notification for when it comes back in.' },
-            { label: 'Suggesting alternative', text: 'We also have a similar model that many customers prefer.' },
-            { label: 'Staying positive', text: 'Let me see what options we have for you.' },
-          ]
-        },
-        {
-          id: 'r3',
-          title: 'The Upsell',
-          setting: 'Electronics or department store',
-          description: 'A customer wants a basic product. Suggest a slightly better option without being pushy.',
-          roles: 'Role A: Customer • Role B: Sales associate',
-          goals: 'Polite suggestion, highlighting benefits, no pressure.',
-          phrases: [
-            { label: 'Suggesting', text: 'Would you like me to show you a model that\'s a bit more powerful?' },
-            { label: 'Highlighting benefits', text: 'Many customers find that the upgraded version lasts longer.' },
-            { label: 'No pressure', text: 'It\'s entirely up to you — both are great options.' },
-            { label: 'Explaining difference', text: 'The main difference is that this one has...' },
-          ]
-        },
-        {
-          id: 'r4',
-          title: 'The Phone Inquiry',
-          setting: 'Retail store phone call',
-          description: 'A customer calls to ask if a product is in stock and how much it costs.',
-          roles: 'Role A: Customer (on phone) • Role B: Employee',
-          goals: 'Phone etiquette, clear pronunciation, accurate information.',
-          phrases: [
-            { label: 'Answering', text: 'Thank you for calling [store name], this is [name]. How can I help you?' },
-            { label: 'Checking stock', text: 'Let me check on that for you. One moment, please.' },
-            { label: 'Confirming', text: 'Yes, we have that in stock. It\'s $49.99.' },
-            { label: 'Offering to hold', text: 'I\'d be happy to put that on hold for you.' },
-          ]
-        },
+        {id:'r1',title:'The Angry Return',setting:'Retail customer service desk',description:'A customer bought a product 3 weeks ago. It broke. They want a refund but have no receipt.',roles:'Role A: Customer (angry) • Role B: Sales associate',goals:'De-escalation, offering alternatives, using "I can" instead of "I can\'t."',phrases:[{l:'Empathizing',t:'I completely understand your frustration.'},{l:'Offering alternative',t:"While I can't process a refund without a receipt, I can offer you store credit for the full amount."},{l:'Softening',t:"While that's outside our return window, let me see what I can do."},{l:'Never say',t:"You're wrong. / That's not my department. / I can't help you."}]},
+        {id:'r2',title:'The Stock-Out',setting:'Retail store floor',description:'A customer came for an advertised item. It is sold out.',roles:'Role A: Customer (disappointed) • Role B: Sales associate',goals:'Delivering bad news gracefully, offering multiple solutions.',phrases:[{l:'Delivering news',t:"I'm afraid we're out of stock on that right now."},{l:'Checking other stores',t:'But I can check our other location for you.'},{l:'Offering notification',t:"I'd be happy to set up a notification for when it comes back in."},{l:'Alternative',t:'We also have a similar model that many customers prefer.'}]},
+        {id:'r3',title:'The Upsell',setting:'Electronics store',description:'A customer wants a basic product. Suggest a slightly better option without being pushy.',roles:'Role A: Customer • Role B: Sales associate',goals:'Polite suggestion, highlighting benefits, no pressure.',phrases:[{l:'Suggesting',t:'Would you like me to show you a model that\'s a bit more powerful?'},{l:'Highlighting',t:'Many customers find that the upgraded version lasts longer.'},{l:'No pressure',t:"It's entirely up to you — both are great options."},{l:'Explaining',t:'The main difference is that this one has a longer battery life.'}]},
+        {id:'r4',title:'The Phone Inquiry',setting:'Retail store phone call',description:'A customer calls to ask if a product is in stock and how much it costs.',roles:'Role A: Customer (on phone) • Role B: Employee',goals:'Phone etiquette, clear pronunciation, accurate information.',phrases:[{l:'Answering',t:'Thank you for calling [store name], this is [name]. How can I help you?'},{l:'Checking',t:'Let me check on that for you. One moment, please.'},{l:'Confirming',t:'Yes, we have that in stock. It\'s $49.99.'},{l:'Offering',t:"I'd be happy to put that on hold for you."}]},
+        {id:'r5',title:'Helping Find a Size',setting:'Retail clothing store',description:'A customer needs a specific size that is not on the floor.',roles:'Role A: Customer • Role B: Sales associate',goals:'Helpful service, checking back stock, offering alternatives.',phrases:[{l:'Helping',t:'Let me check if we have that in the back in your size.'},{l:'Checking',t:"I'll be right back — let me look in our back stock."},{l:'Offering',t:'We don\'t have that size, but I can check our online inventory for you.'},{l:'Alternative',t:'Would you like me to order it online and have it shipped to your home?'}]},
+        {id:'r6',title:'Price Match Request',setting:'Retail store',description:'A customer found a lower price online and wants you to match it.',roles:'Role A: Customer • Role B: Sales associate',goals:'Politely handling price match, explaining policy, offering options.',phrases:[{l:'Acknowledging',t:'I understand you found a better price. Let me see what I can do.'},{l:'Explaining policy',t:'We do offer price matching for identical items from authorized retailers.'},{l:'Processing',t:'Let me verify that price online and I can match it for you.'},{l:'Apologizing',t:"I'm sorry, but we can't match third-party marketplace prices."}]},
+        {id:'r7',title:'Loyalty Program',setting:'Retail checkout',description:'A customer is checking out. Offer the loyalty program naturally.',roles:'Role A: Customer • Role B: Cashier',goals:'Natural upsell, explaining benefits, no pressure.',phrases:[{l:'Offering',t:'Would you like to join our rewards program? It\'s free.'},{l:'Benefits',t:'You earn points on every purchase and get exclusive member discounts.'},{l:'Quick sign-up',t:'It only takes a minute — I just need your email.'},{l:'No pressure',t:'No worries if not — you can always sign up next time.'}]},
+        {id:'r8',title:'Damaged Product Return',setting:'Retail customer service',description:'A customer received a damaged product and wants a replacement.',roles:'Role A: Customer (frustrated) • Role B: Sales associate',goals:'Apologizing, quick resolution, preventing future issues.',phrases:[{l:'Apologizing',t:'I am so sorry that your item arrived damaged.'},{l:'Resolving',t:'I can send you a replacement right away at no charge.'},{l:'Returning',t:'Would you like a replacement or a full refund?'},{l:'Preventing',t:"I'll flag this with our warehouse so it doesn't happen again."}]},
+        {id:'r9',title:'Managing a Long Line',setting:'Busy retail checkout',description:'There is a long line and customers are getting impatient.',roles:'Role A: Waiting customers • Role B: Cashier',goals:'Efficiency, acknowledging wait, staying calm.',phrases:[{l:'Acknowledging',t:'Thank you for your patience — I\'ll get you through as quickly as I can.'},{l:'Efficiency',t:'I can help the next person in line.'},{l:'Apologizing',t:"I'm sorry for the wait — we're a bit backed up today."},{l:'Thanking',t:'Thank you so much for understanding!'}]},
+        {id:'r10',title:'Explaining a Sale',setting:'Retail store',description:'A customer is confused about which items are on sale and the discount amount.',roles:'Role A: Customer • Role B: Sales associate',goals:'Clear communication, patience, helping find deals.',phrases:[{l:'Clarifying',t:'The items with the red tags are all 30% off this week.'},{l:'Helping',t:'Would you like me to show you where the sale section is?'},{l:'Calculating',t:'With the additional 20% off at checkout, that comes to $40 total.'},{l:'Offering',t:'We also have a buy-one-get-one promotion on selected items.'}]},
+        {id:'r11',title:'Helping an Elderly Customer',setting:'Retail store',description:'An elderly customer needs extra help finding products and understanding prices.',roles:'Role A: Elderly customer • Role B: Sales associate',goals:'Patience, clear communication, going the extra mile.',phrases:[{l:'Greeting',t:'Good morning! How can I help you today?'},{l:'Helping',t:'Let me walk you over to that aisle — it\'s right this way.'},{l:'Clarifying',t:'This one is $12.99, and this one is $8.99.'},{l:'Offering',t:'Would you like me to carry that to your car for you?'}]},
+        {id:'r12',title:'Phone Order',setting:'Retail store phone call',description:'A customer calls to place an order for pickup.',roles:'Role A: Customer (on phone) • Role B: Employee',goals:'Accurate order taking, confirming details, setting pickup time.',phrases:[{l:'Greeting',t:'Thank you for calling [store name]. How can I help you?'},{l:'Taking order',t:'Let me get that ordered for you. Can I have your name and phone number?'},{l:'Confirming',t:'Just to confirm — that\'s one medium blue sweater and one large black one?'},{l:'Pickup',t:'Your order will be ready for pickup in about 2 hours.'}]},
+        {id:'r13',title:'Rude Customer',setting:'Retail store',description:'A customer is being rude and aggressive to you personally.',roles:'Role A: Rude customer • Role B: Sales associate',goals:'Staying calm, professional boundaries, escalating if needed.',phrases:[{l:'Staying calm',t:'I understand you\'re upset. Let me see how I can help.'},{l:'Setting boundaries',t:"I want to help you, but I'd appreciate it if we could keep this respectful."},{l:'Escalating',t:'Let me get my manager to assist you with this.'},{l:'Never say',t:'You are wrong. / Calm down. / You are being unreasonable.'}]},
+        {id:'r14',title:'Product Features',setting:'Retail store',description:'A customer wants to understand the differences between two similar products.',roles:'Role A: Customer • Role B: Sales associate',goals:'Clear comparison, highlighting key differences, honest recommendation.',phrases:[{l:'Comparing',t:'The main difference is that this model has WiFi and this one doesn\'t.'},{l:'Explaining',t:'This one is better for everyday use, while that one is designed for heavy-duty work.'},{l:'Recommending',t:'If you\'re using it at home, I\'d recommend this one.'},{l:'Demonstrating',t:'Would you like me to show you how it works?'}]},
+        {id:'r15',title:'Warranty Claim',setting:'Retail customer service',description:'A customer wants to use their warranty for a broken product.',roles:'Role A: Customer • Role B: Sales associate',goals:'Verifying warranty, explaining process, setting expectations.',phrases:[{l:'Checking',t:'Let me look up your warranty. Do you have your receipt or order number?'},{l:'Explaining',t:'Your warranty covers manufacturing defects for one year from purchase.'},{l:'Processing',t:'I can send this in for repair, which typically takes 2-3 weeks.'},{l:'Alternative',t:'Or I can offer you a replacement if we have it in stock.'}]},
+        {id:'r16',title:'Greeting at the Door',setting:'Retail store entrance',description:'Greet customers as they enter the store in a warm but non-intrusive way.',roles:'Role A: Customer • Role B: Greeter/sales associate',goals:'Warm greeting, offering help, giving space.',phrases:[{l:'Greeting',t:'Hi there! Welcome to [store name]. How are you doing today?'},{l:'Offering help',t:'Let me know if you need help finding anything.'},{l:'Giving space',t:'Take your time looking around — I\'m here if you need anything.'},{l:'Farewell',t:'Thanks for stopping in! Have a great day!'}]},
+        {id:'r17',title:'Complaint About Staff',setting:'Retail customer service',description:'A customer complains that another employee was rude to them.',roles:'Role A: Customer (upset) • Role B: Manager/supervisor',goals:'Taking it seriously, apologizing, following up internally.',phrases:[{l:'Listening',t:'I\'m sorry to hear that. Can you tell me what happened?'},{l:'Apologizing',t:'I apologize for the experience you had. That\'s not our standard.'},{l:'Taking action',t:"I'll speak with the team member and address this internally."},{l:'Following up',t:'Would you like me to follow up with you after I\'ve looked into it?'}]},
+        {id:'r18',title:'Complex Return',setting:'Retail customer service',description:'A customer wants to return items from multiple transactions with and without receipts.',roles:'Role A: Customer • Role B: Sales associate',goals:'Patience, clear policy explanation, finding solutions.',phrases:[{l:'Sorting',t:'Let me look up your purchases by your phone number.'},{l:'Explaining',t:'I can return the two items with receipts for a full refund.'},{l:'Offering',t:'For the items without receipts, I can offer store credit at the current price.'},{l:'Confirming',t:'So that\'s $45 back on your card and $30 in store credit. Does that work?'}]},
+        {id:'r19',title:'Holiday Rush',setting:'Retail store, December',description:'The store is packed with holiday shoppers. Keep things moving while staying cheerful.',roles:'Role A: Crowds of customers • Role B: Sales associate',goals:'Efficiency, staying positive, managing stress.',phrases:[{l:'Greeting',t:'Happy holidays! How can I help you today?'},{l:'Efficiency',t:"I'll get that wrapped for you right away."},{l:'Setting expectations',t:'The line is a bit long today — thank you for your patience!'},{l:'Closing',t:'Thank you and happy holidays! See you next time!'}]},
+        {id:'r20',title:'Thanking a Loyal Customer',setting:'Retail store',description:'A regular customer comes in for the 100th time. Make them feel appreciated.',roles:'Role A: Loyal customer • Role B: Sales associate',goals:'Recognition, appreciation, building loyalty.',phrases:[{l:'Recognizing',t:'Welcome back! It\'s great to see you again.'},{l:'Appreciating',t:'Thank you for being such a loyal customer — we really appreciate you.'},{l:'Offering',t:'I\'ve applied a 15% loyalty discount to your purchase today.'},{l:'Farewell',t:'See you next time! Take care!'}]},
       ],
     };
 
@@ -1592,122 +1448,73 @@
     var currentQuizQuestions = [];
     var currentQuizIdx = 0;
     var quizScore = 0;
-    var currentQuizCategory = 'all';
     var currentVoiceIdx = 0;
     var voiceRecognition = null;
     var voiceRecording = false;
     var currentScenarioSetting = 'hospitality';
-    var scenarioSpeakIdx = 0;
 
     // ========================================================================
     // PROGRESS (localStorage)
     // ========================================================================
     function getProgress() {
-      try {
-        return JSON.parse(localStorage.getItem('perfectEnglishProgress')) || {
-          completedLessons: [], flashcardsReviewed: 0, quizBestScore: null, voicePracticed: 0, scenariosViewed: []
-        };
-      } catch(e) {
-        return { completedLessons: [], flashcardsReviewed: 0, quizBestScore: null, voicePracticed: 0, scenariosViewed: [] };
-      }
+      try { return JSON.parse(localStorage.getItem('polishedEnglishProgress')) || {completedLessons:[],flashcardsReviewed:0,quizBestScore:null,voicePracticed:0,scenariosViewed:[]}; }
+      catch(e) { return {completedLessons:[],flashcardsReviewed:0,quizBestScore:null,voicePracticed:0,scenariosViewed:[]}; }
     }
-    function saveProgress(prog) {
-      try { localStorage.setItem('perfectEnglishProgress', JSON.stringify(prog)); } catch(e) {}
-    }
-    function addFlashcardReview() {
-      var p = getProgress(); p.flashcardsReviewed++; saveProgress(p);
-    }
-    function addVoicePractice() {
-      var p = getProgress(); p.voicePracticed++; saveProgress(p);
-    }
-    function setQuizBestScore(score) {
-      var p = getProgress();
-      if (p.quizBestScore === null || score > p.quizBestScore) {
-        p.quizBestScore = score; saveProgress(p);
-      }
-    }
-    function addScenarioViewed(scenarioId) {
-      var p = getProgress();
-      if (p.scenariosViewed.indexOf(scenarioId) < 0) {
-        p.scenariosViewed.push(scenarioId); saveProgress(p);
-      }
-    }
+    function saveProgress(p) { try { localStorage.setItem('polishedEnglishProgress', JSON.stringify(p)); } catch(e) {} }
+    function addFlashcardReview() { var p=getProgress(); p.flashcardsReviewed++; saveProgress(p); }
+    function addVoicePractice() { var p=getProgress(); p.voicePracticed++; saveProgress(p); }
+    function setQuizBestScore(s) { var p=getProgress(); if(p.quizBestScore===null||s>p.quizBestScore){p.quizBestScore=s;saveProgress(p);} }
+    function addScenarioViewed(id) { var p=getProgress(); if(p.scenariosViewed.indexOf(id)<0){p.scenariosViewed.push(id);saveProgress(p);} }
 
     // ========================================================================
     // FONT SIZE
     // ========================================================================
     function setFontSize(size) {
-      var html = document.documentElement;
-      html.classList.remove('large-font', 'extra-large-font', 'huge-font');
-      if (size === 'large') html.classList.add('large-font');
-      else if (size === 'huge') html.classList.add('huge-font');
-      else html.classList.add('extra-large-font');
-      try { localStorage.setItem('perfectEnglishFontSize', size); } catch(e) {}
+      var h = document.documentElement;
+      h.classList.remove('large-font','extra-large-font','huge-font');
+      if(size==='large')h.classList.add('large-font');
+      else if(size==='huge')h.classList.add('huge-font');
+      else h.classList.add('extra-large-font');
+      try { localStorage.setItem('polishedEnglishFontSize', size); } catch(e) {}
     }
 
     // ========================================================================
     // TAB SWITCHING
     // ========================================================================
-    function switchTab(tabName) {
-      document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
-      document.querySelectorAll('.tab-content').forEach(function(tc) { tc.classList.remove('active'); });
-      document.querySelector('[data-tab="' + tabName + '"]').classList.add('active');
-      document.getElementById('tab-' + tabName).classList.add('active');
-      if (tabName === 'progress') updateProgressDisplay();
-      if (tabName === 'flashcards') renderFlashcard();
-      if (tabName === 'voice') renderVoicePhrase();
-      if (tabName === 'scenarios') renderScenarios();
+    function switchTab(tab) {
+      document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+      document.querySelectorAll('.tab-content').forEach(function(tc){tc.classList.remove('active');});
+      document.querySelector('[data-tab="'+tab+'"]').classList.add('active');
+      document.getElementById('tab-'+tab).classList.add('active');
+      if(tab==='progress') updateProgressDisplay();
+      if(tab==='flashcards') renderFlashcard();
+      if(tab==='voice') renderVoicePhrase();
+      if(tab==='scenarios') renderScenarios();
     }
 
     // ========================================================================
-    // TEXT TO SPEECH
+    // TEXT TO SPEECH (with natural voice selection)
     // ========================================================================
-    // Cached preferred voice — picked once on load
     var _preferredVoice = null;
     function pickBestVoice() {
-      if (!('speechSynthesis' in window)) return;
+      if(!('speechSynthesis' in window)) return;
       var voices = speechSynthesis.getVoices();
-      if (!voices || voices.length === 0) return;
-      // Prefer high-quality natural English voices
-      var preferred = [
-        'Google US English', 'Samantha', 'Alex', 'Karen', 'Daniel',
-        'Microsoft Aria', 'Microsoft Jenny', 'Microsoft Guy',
-        'Google UK English Female', 'Google UK English Male'
-      ];
-      for (var i = 0; i < preferred.length; i++) {
-        for (var j = 0; j < voices.length; j++) {
-          if (voices[j].name === preferred[i]) {
-            _preferredVoice = voices[j];
-            return;
-          }
-        }
-      }
-      // Fallback: first en-US/en voice
-      for (var k = 0; k < voices.length; k++) {
-        if (voices[k].lang && voices[k].lang.indexOf('en') === 0) {
-          _preferredVoice = voices[k];
-          return;
-        }
-      }
+      if(!voices || voices.length === 0) return;
+      var preferred = ['Google US English','Samantha','Alex','Karen','Daniel','Microsoft Aria','Microsoft Jenny','Microsoft Guy','Google UK English Female','Google UK English Male'];
+      for(var i=0;i<preferred.length;i++){for(var j=0;j<voices.length;j++){if(voices[j].name===preferred[i]){_preferredVoice=voices[j];return;}}}
+      for(var k=0;k<voices.length;k++){if(voices[k].lang&&voices[k].lang.indexOf('en')===0){_preferredVoice=voices[k];return;}}
       _preferredVoice = voices[0];
     }
-    // Load voices (may be async in some browsers)
-    if ('speechSynthesis' in window) {
-      pickBestVoice();
-      speechSynthesis.onvoiceschanged = function() { pickBestVoice(); };
-    }
+    if('speechSynthesis' in window){pickBestVoice();speechSynthesis.onvoiceschanged=function(){pickBestVoice();};}
 
     function speak(text, opts) {
-      if ('speechSynthesis' in window) {
+      if('speechSynthesis' in window) {
         speechSynthesis.cancel();
-        var utter = new SpeechSynthesisUtterance(text);
-        utter.lang = 'en-US';
-        utter.rate = 0.95;   // natural pace — not too slow
-        utter.pitch = 1.0;
-        utter.volume = 1;
-        if (_preferredVoice) utter.voice = _preferredVoice;
-        if (opts && opts.onend) utter.onend = opts.onend;
-        speechSynthesis.speak(utter);
+        var u = new SpeechSynthesisUtterance(text);
+        u.lang = 'en-US'; u.rate = 0.95; u.pitch = 1.0; u.volume = 1;
+        if(_preferredVoice) u.voice = _preferredVoice;
+        if(opts && opts.onend) u.onend = opts.onend;
+        speechSynthesis.speak(u);
       } else {
         alert('Sorry, your browser does not support text-to-speech. Try Chrome, Edge, or Safari.');
       }
@@ -1716,6 +1523,8 @@
     // ========================================================================
     // LESSONS (MISTAKES)
     // ========================================================================
+    function escapeHtml(text) { var d=document.createElement('div'); d.textContent=text; return d.innerHTML; }
+
     function renderLessonList() {
       var list = document.getElementById('lessonList');
       var prog = getProgress();
@@ -1734,8 +1543,8 @@
     }
 
     function openLesson(catId) {
-      var cat = CATEGORIES.find(function(c) { return c.id === catId; });
-      if (!cat) return;
+      var cat = CATEGORIES.find(function(c){return c.id===catId;});
+      if(!cat) return;
       document.getElementById('lessonList').parentElement.style.display = 'none';
       document.getElementById('lessonDetail').classList.remove('hidden');
       document.getElementById('lessonTitle').textContent = cat.icon + ' ' + cat.title;
@@ -1752,12 +1561,7 @@
         var btn = document.createElement('button');
         btn.className = 'btn-gold ec-speak';
         btn.textContent = '🔊 Hear correct version';
-        (function(text) {
-          btn.addEventListener('click', function(ev) {
-            ev.stopPropagation();
-            speak(text);
-          });
-        })(e.right);
+        (function(text) { btn.addEventListener('click', function(ev) { ev.stopPropagation(); speak(text); }); })(e.right);
         div.appendChild(btn);
         content.appendChild(div);
       });
@@ -1771,188 +1575,118 @@
     }
 
     function completeLesson() {
-      var titleEl = document.getElementById('lessonTitle');
-      var title = titleEl.textContent.replace(/^[^\w]+\s/, '');
-      var cat = CATEGORIES.find(function(c) { return c.title === title; });
-      if (!cat) return;
+      var title = document.getElementById('lessonTitle').textContent.replace(/^[^\w]+\s/, '');
+      var cat = CATEGORIES.find(function(c){return c.title===title;});
+      if(!cat) return;
       var prog = getProgress();
-      if (prog.completedLessons.indexOf(cat.id) < 0) {
-        prog.completedLessons.push(cat.id);
-        saveProgress(prog);
-      }
+      if(prog.completedLessons.indexOf(cat.id)<0) { prog.completedLessons.push(cat.id); saveProgress(prog); }
       alert('Lesson completed! Great work! 🎉');
       showLessonList();
-    }
-
-    function escapeHtml(text) {
-      var div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
     }
 
     // ========================================================================
     // FLASHCARDS
     // ========================================================================
     function getFlashcardCards() {
-      if (currentFlashcardCategory === 'all') return ALL_FLASHCARDS;
-      return ALL_FLASHCARDS.filter(function(c) { return c.category === currentFlashcardCategory; });
+      if(currentFlashcardCategory==='all') return ALL_FLASHCARDS;
+      return ALL_FLASHCARDS.filter(function(c){return c.category===currentFlashcardCategory;});
     }
-
     function renderFlashcardFilters() {
-      var container = document.getElementById('flashcardFilters');
-      var cats = ['all'].concat(CATEGORIES.map(function(c) { return c.title; }));
-      container.innerHTML = '';
+      var c = document.getElementById('flashcardFilters');
+      var cats = ['all'].concat(CATEGORIES.map(function(x){return x.title;}));
+      c.innerHTML = '';
       cats.forEach(function(cat) {
         var btn = document.createElement('button');
-        btn.textContent = cat === 'all' ? 'All' : cat;
-        if (cat === currentFlashcardCategory) btn.classList.add('active');
+        btn.textContent = cat==='all'?'All':cat;
+        if(cat===currentFlashcardCategory) btn.classList.add('active');
         btn.onclick = function() { setFlashcardCategory(cat); };
-        container.appendChild(btn);
+        c.appendChild(btn);
       });
     }
-
-    function setFlashcardCategory(cat) {
-      currentFlashcardCategory = cat;
-      currentFlashcardIdx = 0;
-      flashcardFlipped = false;
-      renderFlashcardFilters();
-      renderFlashcard();
-    }
-
+    function setFlashcardCategory(cat) { currentFlashcardCategory=cat; currentFlashcardIdx=0; flashcardFlipped=false; renderFlashcardFilters(); renderFlashcard(); }
     function renderFlashcard() {
       var cards = getFlashcardCards();
-      if (currentFlashcardIdx >= cards.length) currentFlashcardIdx = 0;
-      if (currentFlashcardIdx < 0) currentFlashcardIdx = cards.length - 1;
+      if(currentFlashcardIdx>=cards.length) currentFlashcardIdx=0;
+      if(currentFlashcardIdx<0) currentFlashcardIdx=cards.length-1;
       var c = cards[currentFlashcardIdx];
-      if (!c) return;
-      var card = document.getElementById('flashcard');
-      card.classList.toggle('flipped', flashcardFlipped);
+      if(!c) return;
+      document.getElementById('flashcard').classList.toggle('flipped', flashcardFlipped);
       document.getElementById('fcCategory').textContent = c.category;
-      if (flashcardFlipped) {
+      if(flashcardFlipped) {
         document.getElementById('fcWrong').textContent = '';
         document.getElementById('fcRight').textContent = c.right;
         document.getElementById('fcRule').textContent = c.rule;
-        document.getElementById('fcHint').textContent = '🔊 Tap speaker to hear • Tap card to flip back';
       } else {
         document.getElementById('fcWrong').textContent = c.wrong;
         document.getElementById('fcRight').textContent = '';
         document.getElementById('fcRule').textContent = '';
-        document.getElementById('fcHint').textContent = 'Tap to flip and see the correction';
       }
-      document.getElementById('flashcardCounter').textContent = (currentFlashcardIdx + 1) + ' / ' + cards.length;
+      document.getElementById('flashcardCounter').textContent = (currentFlashcardIdx+1) + ' / ' + cards.length;
     }
-
-    function flipFlashcard() {
-      flashcardFlipped = !flashcardFlipped;
-      renderFlashcard();
-    }
-    function nextFlashcard() {
-      flashcardFlipped = false;
-      currentFlashcardIdx++;
-      addFlashcardReview();
-      renderFlashcard();
-    }
-    function prevFlashcard() {
-      flashcardFlipped = false;
-      currentFlashcardIdx--;
-      renderFlashcard();
-    }
-    function speakFlashcard() {
-      var cards = getFlashcardCards();
-      speak(cards[currentFlashcardIdx].right);
-    }
+    function flipFlashcard() { flashcardFlipped=!flashcardFlipped; renderFlashcard(); }
+    function nextFlashcard() { flashcardFlipped=false; currentFlashcardIdx++; addFlashcardReview(); renderFlashcard(); }
+    function prevFlashcard() { flashcardFlipped=false; currentFlashcardIdx--; renderFlashcard(); }
+    function speakFlashcard() { var cards=getFlashcardCards(); speak(cards[currentFlashcardIdx].right); }
 
     // ========================================================================
     // QUIZ
     // ========================================================================
-    function renderQuizFilters() {
-      var container = document.getElementById('quizFilters');
-      container.innerHTML = '';
-      var cats = [{key: 'all', label: 'All categories'}];
-      CATEGORIES.forEach(function(c) { cats.push({key: c.title, label: c.title}); });
-      cats.forEach(function(c) {
-        var btn = document.createElement('button');
-        btn.textContent = c.label;
-        if (c.key === currentQuizCategory) btn.classList.add('active');
-        btn.onclick = function() { setQuizCategory(c.key); };
-        container.appendChild(btn);
-      });
-    }
-
-    function setQuizCategory(cat) {
-      currentQuizCategory = cat;
-      renderQuizFilters();
-    }
-
     function startQuiz() {
-      var questions = QUIZ_QUESTIONS.slice();
-      // Shuffle
-      for (var i = questions.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = questions[i]; questions[i] = questions[j]; questions[j] = temp;
-      }
-      currentQuizQuestions = questions.slice(0, 10);
-      currentQuizIdx = 0;
-      quizScore = 0;
+      var qs = QUIZ_QUESTIONS.slice();
+      for(var i=qs.length-1;i>0;i--) { var j=Math.floor(Math.random()*(i+1)); var t=qs[i];qs[i]=qs[j];qs[j]=t; }
+      currentQuizQuestions = qs.slice(0, 10);
+      currentQuizIdx = 0; quizScore = 0;
       document.getElementById('quizStart').classList.add('hidden');
       document.getElementById('quizResults').classList.add('hidden');
       document.getElementById('quizArea').classList.remove('hidden');
       renderQuizQuestion();
     }
-
     function renderQuizQuestion() {
       var q = currentQuizQuestions[currentQuizIdx];
-      if (!q) { showQuizResults(); return; }
-      document.getElementById('quizProgressBar').style.width = ((currentQuizIdx / currentQuizQuestions.length) * 100) + '%';
-      document.getElementById('quizQuestion').textContent = q.question;
-      var optionsContainer = document.getElementById('quizOptions');
-      optionsContainer.innerHTML = '';
-      q.options.forEach(function(opt, i) {
+      if(!q) { showQuizResults(); return; }
+      document.getElementById('quizProgressBar').style.width = ((currentQuizIdx/currentQuizQuestions.length)*100)+'%';
+      document.getElementById('quizQuestion').textContent = q.q;
+      var oc = document.getElementById('quizOptions');
+      oc.innerHTML = '';
+      q.o.forEach(function(opt, i) {
         var btn = document.createElement('button');
         btn.className = 'quiz-option';
         btn.textContent = opt;
         btn.onclick = function() { answerQuiz(i); };
-        optionsContainer.appendChild(btn);
+        oc.appendChild(btn);
       });
-      document.getElementById('quizFeedback').classList.remove('show', 'correct', 'wrong');
+      document.getElementById('quizFeedback').classList.remove('show','correct','wrong');
       document.getElementById('quizNextRow').style.display = 'none';
     }
-
     function answerQuiz(idx) {
       var q = currentQuizQuestions[currentQuizIdx];
-      var options = document.querySelectorAll('.quiz-option');
-      options.forEach(function(o) { o.classList.add('disabled'); });
-      if (idx === q.answer) {
-        options[idx].classList.add('correct');
+      var opts = document.querySelectorAll('.quiz-option');
+      opts.forEach(function(o){o.classList.add('disabled');});
+      if(idx===q.a) {
+        opts[idx].classList.add('correct');
         quizScore++;
         var fb = document.getElementById('quizFeedback');
-        fb.textContent = '✓ Correct! ' + q.explanation;
-        fb.classList.add('show', 'correct');
+        fb.textContent = '✓ Correct! ' + q.e;
+        fb.classList.add('show','correct');
       } else {
-        options[idx].classList.add('wrong');
-        options[q.answer].classList.add('correct');
+        opts[idx].classList.add('wrong');
+        opts[q.a].classList.add('correct');
         var fb2 = document.getElementById('quizFeedback');
-        fb2.textContent = '✗ Not quite. ' + q.explanation;
-        fb2.classList.add('show', 'wrong');
+        fb2.textContent = 'Almost! ' + q.e;
+        fb2.classList.add('show','wrong');
       }
       document.getElementById('quizNextRow').style.display = '';
     }
-
     function nextQuizQuestion() {
       currentQuizIdx++;
-      if (currentQuizIdx >= currentQuizQuestions.length) {
-        showQuizResults();
-      } else {
-        renderQuizQuestion();
-      }
+      if(currentQuizIdx>=currentQuizQuestions.length) showQuizResults();
+      else renderQuizQuestion();
     }
-
     function showQuizResults() {
       document.getElementById('quizArea').classList.add('hidden');
       document.getElementById('quizResults').classList.remove('hidden');
-      var pct = Math.round((quizScore / currentQuizQuestions.length) * 100);
-      document.getElementById('quizScore').innerHTML =
-        'You scored ' + quizScore + ' / ' + currentQuizQuestions.length + ' (' + pct + '%)';
+      var pct = Math.round((quizScore/currentQuizQuestions.length)*100);
+      document.getElementById('quizScore').innerHTML = 'You scored ' + quizScore + ' / ' + currentQuizQuestions.length + ' (' + pct + '%)';
       setQuizBestScore(pct);
     }
 
@@ -1961,28 +1695,20 @@
     // ========================================================================
     function renderVoicePhrase() {
       var p = VOICE_PHRASES[currentVoiceIdx];
-      if (!p) return;
+      if(!p) return;
       document.getElementById('voiceTargetPhrase').textContent = p.phrase;
       document.getElementById('voiceTargetContext').textContent = p.context;
       document.getElementById('voiceStatus').textContent = 'Tap "Start speaking" to practice';
       document.getElementById('voiceResult').textContent = '';
       document.getElementById('voiceRecognized').classList.remove('show');
     }
-
-    function speakVoiceTarget() {
-      var p = VOICE_PHRASES[currentVoiceIdx];
-      if (p) speak(p.phrase);
-    }
-
+    function speakVoiceTarget() { var p=VOICE_PHRASES[currentVoiceIdx]; if(p) speak(p.phrase); }
     function startVoicePractice() {
       var p = VOICE_PHRASES[currentVoiceIdx];
-      if (!p) return;
+      if(!p) return;
       var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SR) {
-        alert('Voice recognition is not available in this browser. Please use Chrome or Edge.');
-        return;
-      }
-      if (voiceRecognition) { try { voiceRecognition.stop(); } catch(e) {} }
+      if(!SR) { alert('Voice recognition is not available in this browser. Please use Chrome or Edge.'); return; }
+      if(voiceRecognition) { try{voiceRecognition.stop();}catch(e){} }
       voiceRecognition = new SR();
       voiceRecognition.lang = 'en-US';
       voiceRecognition.interimResults = false;
@@ -1993,73 +1719,46 @@
       document.getElementById('voiceStatus').textContent = 'Speak now: "' + p.phrase + '"';
       voiceRecognition.onresult = function(event) {
         var heard = event.results[0][0].transcript.toLowerCase().trim();
-        var target = p.phrase.toLowerCase().replace(/[^\w\s]/g, '').trim();
-        var heardClean = heard.replace(/[^\w\s]/g, '').trim();
+        var target = p.phrase.toLowerCase().replace(/[^\w\s]/g,'').trim();
+        var heardClean = heard.replace(/[^\w\s]/g,'').trim();
         document.getElementById('voiceRecognized').textContent = 'Heard: "' + heard + '"';
         document.getElementById('voiceRecognized').classList.add('show');
-        // Simple word-by-word comparison
         var targetWords = target.split(/\s+/);
         var heardWords = heardClean.split(/\s+/);
         var matchCount = 0;
-        targetWords.forEach(function(w) {
-          if (heardWords.indexOf(w) >= 0) matchCount++;
-        });
-        var accuracy = Math.round((matchCount / targetWords.length) * 100);
+        targetWords.forEach(function(w) { if(heardWords.indexOf(w)>=0) matchCount++; });
+        var accuracy = Math.round((matchCount/targetWords.length)*100);
         var resultEl = document.getElementById('voiceResult');
-        if (accuracy >= 70) {
-          resultEl.textContent = '✓ Great! ' + accuracy + '% match';
-          resultEl.style.color = 'var(--green)';
-        } else if (accuracy >= 40) {
-          resultEl.textContent = '~ Close! ' + accuracy + '% match — try again';
-          resultEl.style.color = 'var(--gold)';
-        } else {
-          resultEl.textContent = '✗ ' + accuracy + '% match — listen and try again';
-          resultEl.style.color = 'var(--red)';
-        }
+        if(accuracy>=70) { resultEl.textContent='✓ Great! '+accuracy+'% match'; resultEl.style.color='var(--green)'; }
+        else if(accuracy>=40) { resultEl.textContent='~ Close! '+accuracy+'% match — try again'; resultEl.style.color='var(--gold)'; }
+        else { resultEl.textContent='✗ '+accuracy+'% match — listen and try again'; resultEl.style.color='var(--red)'; }
         addVoicePractice();
         btn.classList.remove('recording');
         btn.textContent = '🎤 Start speaking';
-        document.getElementById('voiceStatus').textContent = 'Tap "Listen first" to hear it again, or "Next" for another phrase';
       };
       voiceRecognition.onerror = function(event) {
-        document.getElementById('voiceStatus').textContent = 'Voice recognition error: ' + event.error + '. Please try again.';
+        document.getElementById('voiceStatus').textContent = 'Error: ' + event.error + '. Please try again.';
         btn.classList.remove('recording');
         btn.textContent = '🎤 Start speaking';
       };
-      voiceRecognition.onend = function() {
-        btn.classList.remove('recording');
-        btn.textContent = '🎤 Start speaking';
-      };
-      try {
-        voiceRecognition.start();
-      } catch(e) {
-        document.getElementById('voiceStatus').textContent = 'Could not start voice recognition. Please try again.';
-        btn.classList.remove('recording');
-        btn.textContent = '🎤 Start speaking';
+      voiceRecognition.onend = function() { btn.classList.remove('recording'); btn.textContent = '🎤 Start speaking'; };
+      try { voiceRecognition.start(); } catch(e) {
+        document.getElementById('voiceStatus').textContent = 'Could not start. Please try again.';
+        btn.classList.remove('recording'); btn.textContent = '🎤 Start speaking';
       }
     }
-
-    function nextVoicePhrase() {
-      currentVoiceIdx++;
-      if (currentVoiceIdx >= VOICE_PHRASES.length) currentVoiceIdx = 0;
-      renderVoicePhrase();
-    }
-    function prevVoicePhrase() {
-      currentVoiceIdx--;
-      if (currentVoiceIdx < 0) currentVoiceIdx = VOICE_PHRASES.length - 1;
-      renderVoicePhrase();
-    }
+    function nextVoicePhrase() { currentVoiceIdx++; if(currentVoiceIdx>=VOICE_PHRASES.length) currentVoiceIdx=0; renderVoicePhrase(); }
+    function prevVoicePhrase() { currentVoiceIdx--; if(currentVoiceIdx<0) currentVoiceIdx=VOICE_PHRASES.length-1; renderVoicePhrase(); }
 
     // ========================================================================
     // SCENARIOS
     // ========================================================================
     function setScenarioSetting(setting) {
       currentScenarioSetting = setting;
-      document.querySelectorAll('.setting-card').forEach(function(c) { c.classList.remove('active'); });
-      document.getElementById('set' + setting.charAt(0).toUpperCase() + setting.slice(1)).classList.add('active');
+      document.querySelectorAll('.setting-card').forEach(function(c){c.classList.remove('active');});
+      document.getElementById('set'+setting.charAt(0).toUpperCase()+setting.slice(1)).classList.add('active');
       renderScenarios();
     }
-
     function renderScenarios() {
       var list = document.getElementById('scenarioList');
       var detail = document.getElementById('scenarioDetail');
@@ -2072,18 +1771,17 @@
         card.className = 'scenario-card';
         card.onclick = function() { openScenario(s.id); };
         card.innerHTML =
-          '<h3>🎭 ' + escapeHtml(s.title) + '</h3>' +
+          '<h3>' + escapeHtml(s.title) + '</h3>' +
           '<div class="sc-setting">' + escapeHtml(s.setting) + '</div>' +
           '<div class="sc-roles">' + escapeHtml(s.roles) + '</div>' +
-          '<div class="sc-goals">Language goals: ' + escapeHtml(s.goals) + '</div>';
+          '<div class="sc-goals">Goals: ' + escapeHtml(s.goals) + '</div>';
         list.appendChild(card);
       });
     }
-
     function openScenario(scenarioId) {
       var scenarios = SCENARIOS[currentScenarioSetting] || [];
-      var s = scenarios.find(function(x) { return x.id === scenarioId; });
-      if (!s) return;
+      var s = scenarios.find(function(x){return x.id===scenarioId;});
+      if(!s) return;
       document.getElementById('scenarioList').style.display = 'none';
       document.getElementById('scenarioDetail').classList.remove('hidden');
       document.getElementById('scenarioTitle').textContent = '🎭 ' + s.title;
@@ -2091,58 +1789,28 @@
       document.getElementById('scenarioDesc').textContent = s.description;
       var content = document.getElementById('scenarioContent');
       content.innerHTML = '';
-      // Add roles
-      var rolesDiv = document.createElement('div');
-      rolesDiv.className = 'rule-box';
-      rolesDiv.innerHTML = '<strong>Roles:</strong> ' + escapeHtml(s.roles) + '<br><strong>Goals:</strong> ' + escapeHtml(s.goals);
-      content.appendChild(rolesDiv);
-      // Add key phrases
+      var rb = document.createElement('div');
+      rb.className = 'rule-box';
+      rb.innerHTML = '<strong>Roles:</strong> ' + escapeHtml(s.roles) + '<br><strong>Goals:</strong> ' + escapeHtml(s.goals);
+      content.appendChild(rb);
       s.phrases.forEach(function(p) {
         var div = document.createElement('div');
         div.className = 'scenario-phrases';
-        div.innerHTML =
-          '<div class="sp-label">' + escapeHtml(p.label) + '</div>' +
-          '<div class="sp-phrase">' + escapeHtml(p.text) + '</div>';
+        div.innerHTML = '<div class="sp-label">' + escapeHtml(p.l) + '</div><div class="sp-phrase">' + escapeHtml(p.t) + '</div>';
         var btn = document.createElement('button');
         btn.className = 'btn-gold ec-speak';
         btn.textContent = '🔊 Hear';
-        (function(text) {
-          btn.addEventListener('click', function(ev) {
-            ev.stopPropagation();
-            speak(text);
-          });
-        })(p.text);
+        (function(text) { btn.addEventListener('click', function(ev) { ev.stopPropagation(); speak(text); }); })(p.t);
         div.appendChild(btn);
         content.appendChild(div);
       });
       addScenarioViewed(scenarioId);
       window.scrollTo(0, 0);
     }
-
     function showScenarioList() {
       document.getElementById('scenarioDetail').classList.add('hidden');
       document.getElementById('scenarioList').style.display = '';
       renderScenarios();
-    }
-
-    function speakScenario() {
-      var scenarios = SCENARIOS[currentScenarioSetting] || [];
-      var title = document.getElementById('scenarioTitle').textContent.replace(/^[^\w]+\s/, '');
-      var s = scenarios.find(function(x) { return x.title === title; });
-      if (!s) return;
-      // Queue phrases so each starts after the previous ends (no canceling)
-      s.phrases.forEach(function(p, i) {
-        setTimeout(function() {
-          if ('speechSynthesis' in window) {
-            speechSynthesis.cancel();
-            var utter = new SpeechSynthesisUtterance(p.text);
-            utter.lang = 'en-US';
-            utter.rate = 0.95;
-            if (_preferredVoice) utter.voice = _preferredVoice;
-            speechSynthesis.speak(utter);
-          }
-        }, i * 4000);
-      });
     }
 
     // ========================================================================
@@ -2154,39 +1822,34 @@
       var totalFlashcards = ALL_FLASHCARDS.length;
       var totalScenarios = 0;
       Object.keys(SCENARIOS).forEach(function(k) { totalScenarios += SCENARIOS[k].length; });
-      var lessonPct = Math.round((prog.completedLessons.length / totalLessons) * 100);
-      var scenarioPct = Math.round((prog.scenariosViewed.length / totalScenarios) * 100);
-      var display = document.getElementById('progressDisplay');
-      display.innerHTML =
+      var lessonPct = Math.round((prog.completedLessons.length/totalLessons)*100);
+      var scenarioPct = Math.round((prog.scenariosViewed.length/totalScenarios)*100);
+      var d = document.getElementById('progressDisplay');
+      d.innerHTML =
         '<div class="progress-stat"><span class="ps-label">Lessons completed</span><span class="ps-value">' + prog.completedLessons.length + ' / ' + totalLessons + '</span></div>' +
-        '<div class="progress-bar"><div class="progress-bar-fill" style="width: ' + lessonPct + '%"></div></div>' +
-        '<div style="height: 1rem;"></div>' +
+        '<div class="progress-bar"><div class="progress-bar-fill" style="width:' + lessonPct + '%"></div></div>' +
         '<div class="progress-stat"><span class="ps-label">Flashcards reviewed</span><span class="ps-value">' + prog.flashcardsReviewed + '</span></div>' +
-        '<div class="progress-stat" style="margin-top: 0.75rem;"><span class="ps-label">Best quiz score</span><span class="ps-value">' + (prog.quizBestScore !== null ? prog.quizBestScore + '%' : '—') + '</span></div>' +
+        '<div class="progress-stat"><span class="ps-label">Best quiz score</span><span class="ps-value">' + (prog.quizBestScore!==null ? prog.quizBestScore+'%' : '—') + '</span></div>' +
         '<div class="progress-stat"><span class="ps-label">Voice phrases practiced</span><span class="ps-value">' + prog.voicePracticed + '</span></div>' +
         '<div class="progress-stat"><span class="ps-label">Scenarios explored</span><span class="ps-value">' + prog.scenariosViewed.length + ' / ' + totalScenarios + '</span></div>' +
-        '<div class="progress-bar"><div class="progress-bar-fill" style="width: ' + scenarioPct + '%"></div></div>';
+        '<div class="progress-bar"><div class="progress-bar-fill" style="width:' + scenarioPct + '%"></div></div>';
     }
-
     function resetProgress() {
-      if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
-        try { localStorage.removeItem('perfectEnglishProgress'); } catch(e) {}
-        updateProgressDisplay();
-        renderLessonList();
+      if(confirm('Reset all progress? This cannot be undone.')) {
+        try { localStorage.removeItem('polishedEnglishProgress'); } catch(e) {}
+        updateProgressDisplay(); renderLessonList();
         alert('Progress has been reset.');
       }
     }
 
     // ========================================================================
-    // INITIALIZATION
+    // INIT
     // ========================================================================
     renderLessonList();
     renderFlashcardFilters();
     renderFlashcard();
-    renderQuizFilters();
     renderVoicePhrase();
     renderScenarios();
-
   </script>
 </body>
 </html>
