@@ -15,7 +15,7 @@
   <meta name="twitter:description" content="Free, offline English tutor for non-native professionals in hospitality, office, and retail settings.">
 
   <!-- ===== SECURITY HEADERS ===== -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self' https://hacker-news.firebaseio.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none';">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="referrer" content="no-referrer">
@@ -951,6 +951,121 @@
     }
     .rule-box strong { color: var(--navy); }
 
+    /* ===== ABOUT ME ===== */
+    .aboutme-field {
+      margin-bottom: 0.8rem;
+    }
+    .aboutme-field label {
+      display: block;
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+      font-family: Georgia, serif;
+    }
+    .aboutme-field textarea {
+      width: 100%;
+      min-height: 60px;
+      padding: 0.6rem 0.8rem;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      font-family: -apple-system, sans-serif;
+      line-height: 1.6;
+      resize: vertical;
+      background: var(--card-bg);
+      color: var(--text);
+      transition: border-color 0.2s;
+    }
+    .aboutme-field textarea:focus {
+      outline: none;
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(22, 45, 77, 0.08);
+    }
+    .aboutme-piece {
+      background: var(--card-bg);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .aboutme-piece::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+      background: var(--teal); opacity: 0; transition: opacity 0.25s;
+    }
+    .aboutme-piece:hover::before { opacity: 1; }
+    .aboutme-piece .ap-label {
+      font-weight: 700; color: var(--teal); font-size: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.2rem;
+    }
+    .aboutme-piece .ap-text {
+      font-size: 1.05rem; color: var(--text); line-height: 1.6;
+      margin-bottom: 0.4rem;
+    }
+    .aboutme-piece .ap-corrected {
+      background: var(--teal-bg); border-left: 3px solid var(--teal);
+      border-radius: var(--radius-sm); padding: 0.5rem 0.8rem;
+      font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.4rem;
+    }
+    .aboutme-piece .ap-corrected-label {
+      font-weight: 700; color: var(--teal); font-size: 0.72rem;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .aboutme-piece .ap-test {
+      display: none; margin-top: 0.5rem;
+      background: var(--navy-bg); border-radius: var(--radius-sm);
+      padding: 0.5rem 0.8rem;
+    }
+    .aboutme-piece .ap-test.show { display: block; animation: fadeIn 0.3s ease; }
+    .aboutme-piece .ap-test-status { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.2rem; }
+    .aboutme-piece .ap-test-result { font-weight: 700; font-size: 0.9rem; }
+
+    /* ===== CURRENT EVENTS ===== */
+    .currents-story {
+      background: var(--card-bg);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 1.1rem 1.2rem;
+      margin-bottom: 0.6rem;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative; overflow: hidden;
+    }
+    .currents-story::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+      background: var(--teal); opacity: 0; transition: opacity 0.25s;
+    }
+    .currents-story:hover { border-color: var(--teal); box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+    .currents-story:hover::before { opacity: 1; }
+    .currents-story .cs-headline {
+      font-size: 1.1rem; font-weight: 700; color: var(--navy);
+      font-family: Georgia, serif; margin-bottom: 0.3rem; line-height: 1.5;
+    }
+    .currents-story .cs-meta { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 0.5rem; }
+    .currents-story .cs-prompt {
+      background: var(--teal-bg); border-left: 3px solid var(--teal);
+      border-radius: var(--radius-sm); padding: 0.5rem 0.8rem;
+      font-size: 0.88rem; color: var(--text); margin-bottom: 0.4rem;
+    }
+    .currents-story .cs-prompt-label {
+      font-weight: 700; color: var(--teal); font-size: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.1rem;
+    }
+    .currents-story .cs-speak {
+      display: inline-flex; min-height: 36px; padding: 0.25rem 0.7rem;
+      font-size: 0.82rem; border-radius: var(--radius-sm); margin-top: 0.3rem;
+    }
+    .currents-story .cs-voice {
+      display: none; margin-top: 0.5rem;
+      background: var(--navy-bg); border-radius: var(--radius-sm);
+      padding: 0.5rem 0.8rem; font-size: 0.85rem;
+    }
+    .currents-story .cs-voice.show { display: block; animation: fadeIn 0.3s ease; }
+    .currents-story .cs-voice-status { color: var(--text-muted); margin-bottom: 0.2rem; }
+    .currents-story .cs-voice-result { font-weight: 700; }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 600px) {
       :root { --large-text: 18px; --heading-size: 28px; }
@@ -1008,6 +1123,12 @@
       </button>
       <button class="tab" data-tab="scenarios" onclick="switchTab('scenarios')">
         <span class="tab-icon">🎭</span> Scenarios
+      </button>
+      <button class="tab" data-tab="currents" onclick="switchTab('currents')">
+        <span class="tab-icon">📰</span> Current
+      </button>
+      <button class="tab" data-tab="aboutme" onclick="switchTab('aboutme')">
+        <span class="tab-icon">👤</span> About Me
       </button>
       <button class="tab" data-tab="progress" onclick="switchTab('progress')">
         <span class="tab-icon">📊</span> Progress
@@ -1156,7 +1277,67 @@
     </div>
 
     <!-- ===== PROGRESS TAB ===== -->
-    <div class="tab-content" id="tab-progress">
+    <div class="tab-content" id="tab-currents">
+      <div class="card">
+        <h2>📰 Current Events</h2>
+        <p style="color: var(--text-muted); margin-bottom: 0.8rem; font-size: 0.95rem;">Today's top stories — refreshed every time you open the app. Practice discussing current events and expressing opinions respectfully.</p>
+        <div id="currentsLoading" style="text-align: center; padding: 2rem; color: var(--text-muted);">
+          <p style="font-size: 1.2rem;">Loading today's top stories...</p>
+        </div>
+        <div id="currentsError" class="hidden" style="text-align: center; padding: 1.5rem; color: var(--text-muted);">
+          <p>Could not load live stories. Showing example topics below.</p>
+        </div>
+        <div id="currentsList"></div>
+      </div>
+      <div class="card">
+        <h2>How to Express Opinions Respectfully</h2>
+        <p style="color: var(--text-muted); margin-bottom: 0.8rem; font-size: 0.95rem;">Use these phrases to share your views while being considerate of others' perspectives.</p>
+        <h3 style="color: var(--navy); font-size: 1.1rem; margin-bottom: 0.4rem;">Agreeing</h3>
+        <div class="scenario-phrases"><div class="sp-phrase">I completely agree with that.</div></div>
+        <div class="scenario-phrases"><div class="sp-phrase">That's a great point — I couldn't agree more.</div></div>
+        <div class="scenario-phrases"><div class="sp-phrase">You make a good case for that.</div></div>
+        <h3 style="color: var(--navy); font-size: 1.1rem; margin: 0.8rem 0 0.4rem;">Disagreeing Respectfully</h3>
+        <div class="scenario-phrases"><div class="sp-phrase">I see it differently, but I understand your perspective.</div></div>
+        <div class="scenario-phrases"><div class="sp-phrase">That's an interesting take. I hadn't considered it from that angle.</div></div>
+        <div class="scenario-phrases"><div class="sp-phrase">I can see why you'd say that, but I think...</div></div>
+        <div class="scenario-phrases"><div class="sp-phrase">I respect your opinion, though I have a different view.</div></div>
+        <div class="scenario-phrases"><div class="sp-phrase">I understand where you're coming from, but...</div></div>
+        <h3 style="color: var(--navy); font-size: 1.1rem; margin: 0.8rem 0 0.4rem;">Expressing Uncertainty</h3>
+        <div class="scenario-phrases"><div class="sp-phrase">I'm not sure I agree, but I can see the reasoning.</div></div>
+        <div class="scenario-phrases"><div class="sp-phrase">I don't have a strong opinion on this, but...</div></div>
+        <div class="scenario-phrases"><div class="sp-phrase">I'd need to think about that more before forming an opinion.</div></div>
+        <h3 style="color: var(--navy); font-size: 1.1rem; margin: 0.8rem 0 0.4rem;">Building on Others' Points</h3>
+        <div class="scenario-phrases"><div class="sp-phrase">Building on what you said, I'd also add that...</div></div>
+        <div class="scenario-phrases"><div class="sp-phrase">To piggyback on that point...</div></div>
+        <div class="scenario-phrases"><div class="sp-phrase">That reminds me of something similar I read about...</div></div>
+        <h3 style="color: var(--navy); font-size: 1.1rem; margin: 0.8rem 0 0.4rem;">Asking for Others' Opinions</h3>
+        <div class="scenario-phrases"><div class="sp-phrase">What's your take on this?</div></div>
+        <div class="scenario-phrases"><div class="sp-phrase">How do you see this playing out?</div></div>
+        <div class="scenario-phrases"><div class="sp-phrase">I'd be curious to hear your perspective on this.</div></div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-aboutme">
+      <div class="card" id="aboutmeFormCard">
+        <h2>👤 About Me — Conversation Pieces</h2>
+        <p style="color: var(--text-muted); margin-bottom: 0.8rem; font-size: 0.95rem;">Answer questions about yourself. The app fixes your grammar and creates perfect conversation pieces you can memorize and practice. Save them so they're ready when you need them.</p>
+        <div id="aboutmeForm"></div>
+        <div class="button-row" style="margin-top: 1rem;">
+          <button class="btn-primary" id="aboutmeGenerateBtn" onclick="generateAboutMe()">✦ Create My Conversation Pieces</button>
+          <button class="btn-secondary" id="aboutmeClearBtn" onclick="clearAboutMe()">Clear</button>
+        </div>
+      </div>
+      <div class="card hidden" id="aboutmeResultsCard">
+        <h2>Your Conversation Pieces</h2>
+        <p style="color: var(--text-muted); margin-bottom: 0.8rem; font-size: 0.95rem;">These are your ready-to-use answers. Practice saying them out loud with the speaker button. Tap "Test me" to check if you can recite them from memory.</p>
+        <div id="aboutmeResults"></div>
+        <div class="button-row" style="margin-top: 1rem;">
+          <button class="btn-primary" onclick="switchTab('aboutme')">← Edit my answers</button>
+        </div>
+      </div>
+    </div>
+
+        <div class="tab-content" id="tab-progress">
       <div class="card">
         <h2>📊 Your Progress</h2>
         <div id="progressDisplay"></div>
@@ -1490,6 +1671,8 @@
       if(tab==='flashcards') renderFlashcard();
       if(tab==='voice') renderVoicePhrase();
       if(tab==='scenarios') renderScenarios();
+      if(tab==='currents') loadCurrentEvents();
+      if(tab==='aboutme') renderAboutMeForm();
     }
 
     // ========================================================================
@@ -1840,6 +2023,355 @@
         updateProgressDisplay(); renderLessonList();
         alert('Progress has been reset.');
       }
+    }
+
+    // ========================================================================
+    // ABOUT ME — personal conversation pieces
+    // ========================================================================
+    var ABOUT_ME_QUESTIONS = [
+      {id:'name', label:'What is your name?', placeholder:'e.g., My name is Maria and I go by Mari.', sample:'My name is Maria, but most people call me Mari.'},
+      {id:'origin', label:'Where are you from?', placeholder:'e.g., I am from Brazil, originally from Sao Paulo.', sample:'I am originally from São Paulo, Brazil, but I have been living in the United States for five years.'},
+      {id:'work', label:'What do you do for work?', placeholder:'e.g., I work as a software developer at a tech company.', sample:'I work as a software developer at a mid-size tech company in Chicago.'},
+      {id:'experience', label:'How long have you been in your field?', placeholder:'e.g., I have been working in marketing for three years.', sample:'I have been working in marketing for about three years now, and I really enjoy it.'},
+      {id:'hobby', label:'What do you enjoy outside of work?', placeholder:'e.g., I enjoy hiking, reading, and cooking.', sample:'Outside of work, I really enjoy hiking on the weekends and trying out new recipes at home.'},
+      {id:'language', label:'What languages do you speak?', placeholder:'e.g., I speak Portuguese, English, and some Spanish.', sample:'I speak Portuguese as my first language, English fluently, and I am currently learning Spanish.'},
+      {id:'goal', label:'What are you working toward right now?', placeholder:'e.g., I am studying for my MBA and improving my English.', sample:'Right now I am working toward my MBA and focusing on improving my professional English.'},
+      {id:'interest', label:'What is something you are passionate about?', placeholder:'e.g., I am passionate about sustainable energy and climate solutions.', sample:'I am really passionate about renewable energy and finding practical solutions to climate challenges.'},
+    ];
+
+    function renderAboutMeForm() {
+      var container = document.getElementById('aboutmeForm');
+      if(!container) return;
+      container.innerHTML = '';
+      var saved = getAboutMeData();
+      ABOUT_ME_QUESTIONS.forEach(function(q) {
+        var div = document.createElement('div');
+        div.className = 'aboutme-field';
+        div.innerHTML =
+          '<label for="am-' + q.id + '">' + escapeHtml(q.label) + '</label>' +
+          '<textarea id="am-' + q.id + '" placeholder="' + escapeHtml(q.placeholder) + '" rows="2">' +
+          (saved[q.id] ? escapeHtml(saved[q.id]) : '') + '</textarea>';
+        container.appendChild(div);
+      });
+    }
+
+    function getAboutMeData() {
+      try { return JSON.parse(localStorage.getItem('polishedEnglishAboutMe')) || {}; }
+      catch(e) { return {}; }
+    }
+    function saveAboutMeData(data) {
+      try { localStorage.setItem('polishedEnglishAboutMe', JSON.stringify(data)); } catch(e) {}
+    }
+
+    function generateAboutMe() {
+      var data = {};
+      var hasAny = false;
+      ABOUT_ME_QUESTIONS.forEach(function(q) {
+        var el = document.getElementById('am-' + q.id);
+        if(el && el.value.trim()) {
+          data[q.id] = el.value.trim();
+          hasAny = true;
+        }
+      });
+      if(!hasAny) {
+        alert('Please answer at least one question so we can create your conversation pieces.');
+        return;
+      }
+      saveAboutMeData(data);
+      renderAboutMeResults(data);
+      document.getElementById('aboutmeFormCard').classList.add('hidden');
+      document.getElementById('aboutmeResultsCard').classList.remove('hidden');
+      window.scrollTo(0, 0);
+    }
+
+    function renderAboutMeResults(data) {
+      var container = document.getElementById('aboutmeResults');
+      if(!container) return;
+      container.innerHTML = '';
+      var pieces = buildAboutMePieces(data);
+      pieces.forEach(function(piece) {
+        var div = document.createElement('div');
+        div.className = 'aboutme-piece';
+        var correctionHtml = '';
+        if(piece.correction && piece.correction !== piece.text) {
+          correctionHtml =
+            '<div class="ap-corrected"><div class="ap-corrected-label">✓ Corrected version</div>' +
+            escapeHtml(piece.correction) + '</div>';
+        }
+        div.innerHTML =
+          '<div class="ap-label">' + escapeHtml(piece.label) + '</div>' +
+          '<div class="ap-text">' + escapeHtml(piece.text) + '</div>' +
+          correctionHtml;
+        // Speak button
+        var speakBtn = document.createElement('button');
+        speakBtn.className = 'btn-gold ec-speak';
+        speakBtn.textContent = '🔊 Hear it';
+        (function(text) {
+          speakBtn.addEventListener('click', function(ev) {
+            ev.stopPropagation();
+            speak(text);
+          });
+        })(piece.correction || piece.text);
+        div.appendChild(speakBtn);
+
+        // Test me button
+        var testBtn = document.createElement('button');
+        testBtn.className = 'btn-secondary ec-speak';
+        testBtn.style.marginLeft = '0.5rem';
+        testBtn.textContent = '🎯 Test me';
+        (function(text, pieceDiv) {
+          testBtn.addEventListener('click', function(ev) {
+            ev.stopPropagation();
+            var testArea = pieceDiv.querySelector('.ap-test');
+            if(!testArea) {
+              testArea = document.createElement('div');
+              testArea.className = 'ap-test';
+              testArea.innerHTML =
+                '<div class="ap-test-status">Say the sentence from memory. Then check how you did.</div>' +
+                '<button class="btn-voice ap-test-btn">🎤 Say it</button>' +
+                '<div class="ap-test-result"></div>';
+              pieceDiv.appendChild(testArea);
+              var tb = testArea.querySelector('.ap-test-btn');
+              (function(tb2, ta2) {
+                tb2.addEventListener('click', function(e2) {
+                  e2.stopPropagation();
+                  startAboutMeTest(tb2, ta2, text);
+                });
+              })(tb, testArea);
+            }
+            testArea.classList.toggle('show');
+          });
+        })(piece.correction || piece.text, div);
+        div.appendChild(testBtn);
+
+        container.appendChild(div);
+      });
+    }
+
+    function startAboutMeTest(btn, testArea, targetText) {
+      var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if(!SR) { alert('Voice recognition is not available in this browser. Please use Chrome or Edge.'); return; }
+      var rec = new SR();
+      rec.lang = 'en-US'; rec.interimResults = false; rec.maxAlternatives = 5;
+      btn.classList.add('recording');
+      btn.textContent = '🔴 Listening...';
+      var resultEl = testArea.querySelector('.ap-test-result');
+      rec.onresult = function(event) {
+        var heard = event.results[0][0].transcript.toLowerCase().replace(/[^\w\s]/g, '').trim();
+        var target = targetText.toLowerCase().replace(/[^\w\s]/g, '').trim();
+        var targetWords = target.split(/\s+/);
+        var heardWords = heard.split(/\s+/);
+        var matchCount = 0;
+        targetWords.forEach(function(w) { if(heardWords.indexOf(w) >= 0) matchCount++; });
+        var accuracy = Math.round((matchCount / targetWords.length) * 100);
+        if(accuracy >= 80) {
+          resultEl.textContent = '✓ Excellent! ' + accuracy + '% match — you've got it!';
+          resultEl.style.color = 'var(--green)';
+        } else if(accuracy >= 50) {
+          resultEl.textContent = '~ Good effort! ' + accuracy + '% match — try again!';
+          resultEl.style.color = 'var(--gold)';
+        } else {
+          resultEl.textContent = '✗ ' + accuracy + '% match — listen and try again!';
+          resultEl.style.color = 'var(--red)';
+        }
+        addVoicePractice();
+      };
+      rec.onerror = function(event) {
+        resultEl.textContent = 'Error: ' + event.error;
+        resultEl.style.color = 'var(--red)';
+      };
+      rec.onend = function() {
+        btn.classList.remove('recording');
+        btn.textContent = '🎤 Say it';
+      };
+      try { rec.start(); } catch(e) {
+        btn.classList.remove('recording');
+        btn.textContent = '🎤 Say it';
+      }
+    }
+
+    function clearAboutMe() {
+      if(!confirm('Clear all your answers?')) return;
+      try { localStorage.removeItem('polishedEnglishAboutMe'); } catch(e) {}
+      renderAboutMeForm();
+      document.getElementById('aboutmeResultsCard').classList.add('hidden');
+      document.getElementById('aboutmeFormCard').classList.remove('hidden');
+    }
+
+    // Build polished conversation pieces from user input
+    // Applies common grammar fixes to the user's text
+    function buildAboutMePieces(data) {
+      var pieces = [];
+      ABOUT_ME_QUESTIONS.forEach(function(q) {
+        if(!data[q.id]) return;
+        var raw = data[q.id];
+        var corrected = fixGrammar(raw);
+        pieces.push({
+          label: q.label,
+          text: raw,
+          correction: (corrected !== raw) ? corrected : '',
+        });
+      });
+      return pieces;
+    }
+
+    // Simple grammar fixer — corrects common non-native English mistakes
+    function fixGrammar(text) {
+      var t = text;
+      // Double comparatives: "more better" -> "better"
+      t = t.replace(/\bmore better\b/gi, 'better');
+      t = t.replace(/\bmore best\b/gi, 'best');
+      t = t.replace(/\bmore easier\b/gi, 'easier');
+      t = t.replace(/\bmore cheaper\b/gi, 'cheaper');
+      t = t.replace(/\bmore faster\b/gi, 'faster');
+      // "since" -> "for" with durations
+      t = t.replace(/\bsince ([0-9]+) (year|month|week|day)s?\b/gi, 'for $1 $2s');
+      // Present continuous for job: "I am working as" -> "I work as"
+      t = t.replace(/\bI am working as\b/gi, 'I work as');
+      t = t.replace(/\bI am living here since\b/gi, 'I have been living here for');
+      // "discuss about" -> "discuss"
+      t = t.replace(/\bdiscuss about\b/gi, 'discuss');
+      // Articles: "I am engineer" -> "I am an engineer" (before professions)
+      var professions = ['engineer','accountant','teacher','manager','developer','designer','analyst','assistant','doctor','nurse','lawyer','chef','writer','artist','consultant','architect'];
+      professions.forEach(function(p) {
+        t = t.replace(new RegExp('\\bI am ' + p + '\\b', 'gi'), 'I am a ' + p);
+        t = t.replace(new RegExp('\\bI work as ' + p + '\\b', 'gi'), 'I work as a ' + p);
+      });
+      // "I am from [country]" is already correct; "I am from the [country]" for some countries
+      // "much" -> "many" for countable
+      t = t.replace(/\bmuch friends\b/gi, 'many friends');
+      t = t.replace(/\bmuch years\b/gi, 'many years');
+      // "have been [verb]ing" is fine; fix stative: "I have been knowing" -> "I have known"
+      t = t.replace(/\bI have been knowing\b/gi, 'I have known');
+      // Capitalize first letter
+      t = t.charAt(0).toUpperCase() + t.slice(1);
+      return t;
+    }
+
+    // ========================================================================
+    // CURRENT EVENTS (fetches live top stories from Hacker News API)
+    // ========================================================================
+    var FALLBACK_TOPICS = [
+      {title:"Climate change summit reaches historic agreement"},
+      {title:"New AI technology transforms healthcare diagnostics"},
+      {title:"Global economy faces uncertainty as interest rates rise"},
+      {title:"Breakthrough in renewable energy storage announced"},
+      {title:"Remote work continues to reshape corporate culture"},
+      {title:"Space exploration mission reaches new milestone"},
+      {title:"Education reform debated in national parliament"},
+      {title:"Trade negotiations between major economies stall"},
+    ];
+
+    function loadCurrentEvents() {
+      var loading = document.getElementById('currentsLoading');
+      var errorEl = document.getElementById('currentsError');
+      var list = document.getElementById('currentsList');
+      if(loading) loading.classList.remove('hidden');
+      if(list) list.innerHTML = '';
+
+      fetch('https://hacker-news.firebaseio.com/v0/topstories.json')
+        .then(function(r) { return r.json(); })
+        .then(function(ids) {
+          var topIds = ids.slice(0, 8);
+          return Promise.all(topIds.map(function(id) {
+            return fetch('https://hacker-news.firebaseio.com/v0/item/' + id + '.json').then(function(r) { return r.json(); });
+          }));
+        })
+        .then(function(stories) {
+          if(loading) loading.classList.add('hidden');
+          var valid = stories.filter(function(s) { return s && s.title; });
+          if(valid.length === 0) { if(errorEl) errorEl.classList.remove('hidden'); renderFallbackTopics(); return; }
+          if(errorEl) errorEl.classList.add('hidden');
+          valid.forEach(function(story) {
+            var div = document.createElement('div');
+            div.className = 'currents-story';
+            var meta = '';
+            if(story.score) meta += escapeHtml(story.score) + ' points';
+            if(story.by) { if(meta) meta += ' \u00b7 '; meta += 'by ' + escapeHtml(story.by); }
+            if(story.descendants) { if(meta) meta += ' \u00b7 '; meta += escapeHtml(story.descendants) + ' comments'; }
+            div.innerHTML =
+              '<div class="cs-headline">' + escapeHtml(story.title) + '</div>' +
+              '<div class="cs-meta">' + meta + '</div>' +
+              '<div class="cs-prompt"><div class="cs-prompt-label">Discussion Prompt</div>What is your take on this story? How might it affect you or your industry?</div>' +
+              '<div class="cs-prompt"><div class="cs-prompt-label">Respectful Opinion</div>I see where you\'re coming from, but I have a slightly different perspective on this...</div>' +
+              '<div class="cs-prompt"><div class="cs-prompt-label">Ask Others</div>What\'s your take on this? I\'d be curious to hear your perspective.</div>';
+            var btn = document.createElement('button');
+            btn.className = 'btn-gold cs-speak';
+            btn.textContent = '\uD83D\uDD0A Practice speaking about this';
+            (function(text, storyDiv) {
+              btn.addEventListener('click', function(ev) {
+                ev.stopPropagation();
+                var voiceArea = storyDiv.querySelector('.cs-voice');
+                if(!voiceArea) {
+                  voiceArea = document.createElement('div');
+                  voiceArea.className = 'cs-voice';
+                  voiceArea.innerHTML =
+                    '<div class="cs-voice-status">Speak about this topic for 30 seconds. Try using the respectful opinion phrases above.</div>' +
+                    '<button class="btn-voice cs-voice-btn">\uD83C\uDF99\uFE0F Start speaking</button>' +
+                    '<div class="cs-voice-result"></div>';
+                  storyDiv.appendChild(voiceArea);
+                  var vb = voiceArea.querySelector('.cs-voice-btn');
+                  (function(vb2, va2) {
+                    vb2.addEventListener('click', function(e2) {
+                      e2.stopPropagation();
+                      startCurrentEventsVoice(vb2, va2);
+                    });
+                  })(vb, voiceArea);
+                }
+                voiceArea.classList.toggle('show');
+                speak(text);
+              });
+            })(story.title, div);
+            div.appendChild(btn);
+            list.appendChild(div);
+          });
+        })
+        .catch(function(err) {
+          if(loading) loading.classList.add('hidden');
+          if(errorEl) errorEl.classList.remove('hidden');
+          renderFallbackTopics();
+        });
+    }
+
+    function renderFallbackTopics() {
+      var list = document.getElementById('currentsList');
+      if(!list) return;
+      list.innerHTML = '';
+      FALLBACK_TOPICS.forEach(function(topic) {
+        var div = document.createElement('div');
+        div.className = 'currents-story';
+        div.innerHTML =
+          '<div class="cs-headline">' + escapeHtml(topic.title) + '</div>' +
+          '<div class="cs-meta">Example topic for practice</div>' +
+          '<div class="cs-prompt"><div class="cs-prompt-label">Discussion Prompt</div>What is your take on this story? How might it affect you or your industry?</div>' +
+          '<div class="cs-prompt"><div class="cs-prompt-label">Respectful Opinion</div>I see where you\'re coming from, but I have a slightly different perspective on this...</div>' +
+          '<div class="cs-prompt"><div class="cs-prompt-label">Ask Others</div>What\'s your take on this? I\'d be curious to hear your perspective.</div>';
+        var btn = document.createElement('button');
+        btn.className = 'btn-gold cs-speak';
+        btn.textContent = '\uD83D\uDD0A Practice speaking about this';
+        (function(text) { btn.addEventListener('click', function(ev) { ev.stopPropagation(); speak(text); }); })(topic.title);
+        div.appendChild(btn);
+        list.appendChild(div);
+      });
+    }
+
+    function startCurrentEventsVoice(btn, voiceArea) {
+      var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if(!SR) { alert('Voice recognition is not available in this browser. Please use Chrome or Edge.'); return; }
+      var rec = new SR();
+      rec.lang = 'en-US'; rec.interimResults = false; rec.maxAlternatives = 5;
+      btn.classList.add('recording');
+      btn.textContent = '\uD83D\uDD34 Listening...';
+      var resultEl = voiceArea.querySelector('.cs-voice-result');
+      rec.onresult = function(event) {
+        var heard = event.results[0][0].transcript;
+        resultEl.textContent = 'Heard: "' + heard + '"';
+        resultEl.style.color = 'var(--green)';
+        addVoicePractice();
+      };
+      rec.onerror = function(event) { resultEl.textContent = 'Error: ' + event.error; resultEl.style.color = 'var(--red)'; };
+      rec.onend = function() { btn.classList.remove('recording'); btn.textContent = '\uD83C\uDF99\uFE0F Start speaking'; };
+      try { rec.start(); } catch(e) { btn.classList.remove('recording'); btn.textContent = '\uD83C\uDF99\uFE0F Start speaking'; }
     }
 
     // ========================================================================
